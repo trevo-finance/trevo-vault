@@ -12,11 +12,11 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
 	defaultConfig {
-		applicationId "io.parity.signer"
+		applicationId "tech.trait.vault"
 		minSdk 23
-		targetSdk 35
-		versionCode 70300
-		versionName "7.3.0"
+		targetSdk 34
+		versionCode 1
+		versionName "0.0.1"
 		ndk {
 			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
 		}

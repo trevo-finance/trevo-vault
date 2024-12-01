@@ -5,5 +5,5 @@ dependencyResolutionManagement {
 		mavenCentral()
 	}
 }
-rootProject.name = "Polkadot Vault"
+rootProject.name = "TRAIT Vault"
 include ':android'
