@@ -88,12 +88,12 @@ internal fun HowUpdateMetadata(
 						color = MaterialTheme.colors.primary,
 						modifier = Modifier.padding(end = 12.dp)
 					)
-					Text(
-						text = getDescriptionForLinks(),
-						style = SignerTypeface.BodyM,
-						color = MaterialTheme.colors.textSecondary,
-						modifier = Modifier.padding(end = 12.dp)
-					)
+//					Text(
+//						text = getDescriptionForLinks(),
+//						style = SignerTypeface.BodyM,
+//						color = MaterialTheme.colors.textSecondary,
+//						modifier = Modifier.padding(end = 12.dp)
+//					)
 				}
 			}
 
