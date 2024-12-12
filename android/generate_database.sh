@@ -7,7 +7,10 @@ set -e
 
 pushd ../rust/generate_message
 
+# Create cold database
 cargo run --locked make-cold-release
+# Move metadata to cold database
+cargo run transfer-meta
 
 popd
 
