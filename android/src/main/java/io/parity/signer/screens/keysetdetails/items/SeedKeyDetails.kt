@@ -73,20 +73,20 @@ fun SeedKeyDetails(
 				tint = MaterialTheme.colors.textSecondary
 			)
 		}
-		Text(
-			model.base58.abbreviateString(BASE58_STYLE_ABBREVIATE),
-			color = MaterialTheme.colors.textTertiary,
-			style = SignerTypeface.BodyM,
-			maxLines = 1,
-			modifier = Modifier
-				.padding(top = 8.dp)
-				.clickable(onClick = onShowRoot)
-				.background(
-					MaterialTheme.colors.fill12,
-					RoundedCornerShape(dimensionResource(id = R.dimen.innerFramesCornerRadius))
-				)
-				.padding(horizontal = 16.dp, vertical = 4.dp)
-		)
+//		Text(
+//			model.base58.abbreviateString(BASE58_STYLE_ABBREVIATE),
+//			color = MaterialTheme.colors.textTertiary,
+//			style = SignerTypeface.BodyM,
+//			maxLines = 1,
+//			modifier = Modifier
+//				.padding(top = 8.dp)
+//				.clickable(onClick = onShowRoot)
+//				.background(
+//					MaterialTheme.colors.fill12,
+//					RoundedCornerShape(dimensionResource(id = R.dimen.innerFramesCornerRadius))
+//				)
+//				.padding(horizontal = 16.dp, vertical = 4.dp)
+//		)
 	}
 }
 

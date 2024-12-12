@@ -81,10 +81,10 @@ val Colors.accentGreen: Color
 
 
 val Colors.pink500: Color
-	get() = Color(0xFFE6007A)
+	get() = if (isLight) Color(0xFF000000) else Color(0xFF555555)
 
 val Colors.pink300: Color
-	get() = Color(0xFFF272B6)
+	get() = if (isLight) Color(0xB3000000) else Color(0xB3FFFFFF)
 
 val Colors.backgroundDanger: Color
 	get() = Color(0x1FF272B6)
@@ -110,8 +110,8 @@ val Colors.red500fill12: Color
 
 
 val Colors.primaryButtonDisabledBackground: Color
-	get() = if (isLight) Color(0xFFF7A8D2) else Color(0xFF521B37)
+	get() = if (isLight) Color(0xB3000000) else Color(0xB3555555)
 
 val Colors.primaryButtonDisabledText: Color
-	get() = if (isLight) Color(0xFFFBD2E7) else Color(0xFF543747)
+	get() = Color(0xB3FFFFFF)
 

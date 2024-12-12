@@ -86,10 +86,12 @@ pub use error::{Error, Result};
 ///
 /// To be used in [`VerifierValue`] for general verifier in default cold
 /// database
-pub const DEFAULT_VERIFIER_PUBLIC: [u8; 32] = [
-    0xc4, 0x6a, 0x22, 0xb9, 0xda, 0x19, 0x54, 0x0a, 0x77, 0xcb, 0xde, 0x23, 0x19, 0x7e, 0x5f, 0xd9,
-    0x04, 0x85, 0xc7, 0x2b, 0x4e, 0xcf, 0x3c, 0x59, 0x9e, 0xcc, 0xa6, 0x99, 0x8f, 0x39, 0xbd, 0x57,
-];
+// pub const DEFAULT_VERIFIER_PUBLIC: [u8; 32] = [
+//     0xc4, 0x6a, 0x22, 0xb9, 0xda, 0x19, 0x54, 0x0a, 0x77, 0xcb, 0xde, 0x23, 0x19, 0x7e, 0x5f, 0xd9,
+//     0x04, 0x85, 0xc7, 0x2b, 0x4e, 0xcf, 0x3c, 0x59, 0x9e, 0xcc, 0xa6, 0x99, 0x8f, 0x39, 0xbd, 0x57,
+// ];
+pub const DEFAULT_VERIFIER_PUBLIC: [u8; 32] = [212 as u8, 53 as u8, 147 as u8, 199 as u8, 21 as u8, 253 as u8, 211 as u8, 28 as u8, 97 as u8, 20 as u8, 26 as u8, 189 as u8, 4 as u8, 169 as u8, 159 as u8, 214 as u8, 130 as u8, 44 as u8, 133 as u8, 88 as u8, 133 as u8, 76 as u8, 205 as u8, 227 as u8, 154 as u8, 86 as u8, 132 as u8, 231 as u8, 165 as u8, 109 as u8, 162 as u8, 125 as u8];
+// 212, 53, 147, 199, 21, 253, 211, 28, 97, 20, 26, 189, 4, 169, 159, 214, 130, 44, 133, 88, 133, 76, 205, 227, 154, 86, 132, 231, 165, 109, 162, 125
 
 /// Generate default general verifier [`Verifier`], with Parity public key
 /// inside.
@@ -122,61 +124,83 @@ struct DefaultNetworkInfo {
 
 /// Populate `DefaultNetworkInfo` for default networks
 #[cfg(feature = "active")]
-fn default_network_info() -> [DefaultNetworkInfo; 3] {
+// fn default_network_info() -> [DefaultNetworkInfo; 3] {
+//     [
+//         DefaultNetworkInfo {
+//             address: String::from("wss://kusama-rpc.polkadot.io"),
+//             base58prefix: 2,
+//             color: String::from("#000"),
+//             decimals: 12,
+//             encryption: Encryption::Sr25519,
+//             genesis_hash: H256::from_str(
+//                 "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
+//             )
+//             .expect("known value"),
+//             logo: String::from("kusama"),
+//             name: String::from("kusama"),
+//             order: 1,
+//             path_id: String::from("//kusama"),
+//             secondary_color: String::from("#262626"),
+//             title: String::from("Kusama"),
+//             unit: String::from("KSM"),
+//         },
+//         DefaultNetworkInfo {
+//             address: String::from("wss://rpc.polkadot.io"),
+//             base58prefix: 0,
+//             color: String::from("#E6027A"),
+//             decimals: 10,
+//             encryption: Encryption::Sr25519,
+//             genesis_hash: H256::from_str(
+//                 "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
+//             )
+//             .expect("known value"),
+//             logo: String::from("polkadot"),
+//             name: String::from("polkadot"),
+//             order: 0,
+//             path_id: String::from("//polkadot"),
+//             secondary_color: String::from("#262626"),
+//             title: String::from("Polkadot"),
+//             unit: String::from("DOT"),
+//         },
+//         DefaultNetworkInfo {
+//             address: String::from("wss://westend-rpc.polkadot.io"),
+//             base58prefix: 42,
+//             color: String::from("#660D35"),
+//             decimals: 12,
+//             encryption: Encryption::Sr25519,
+//             genesis_hash: H256::from_str(
+//                 "e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e",
+//             )
+//             .expect("known value"),
+//             logo: String::from("westend"),
+//             name: String::from("westend"),
+//             order: 2,
+//             path_id: String::from("//westend"),
+//             secondary_color: String::from("#262626"),
+//             title: String::from("Westend"),
+//             unit: String::from("WND"),
+//         },
+//     ]
+// }
+fn default_network_info() -> [DefaultNetworkInfo; 1] {
     [
         DefaultNetworkInfo {
-            address: String::from("wss://kusama-rpc.polkadot.io"),
-            base58prefix: 2,
+            address: String::from("wss://rpc-1.trait.tech"),
+            base58prefix: 5335,
             color: String::from("#000"),
             decimals: 12,
             encryption: Encryption::Sr25519,
             genesis_hash: H256::from_str(
-                "b0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
+                "1117c62f5da0a0ffd855ba9bd5fa7f8ca14200c2163dedc2de36d8f549915ce2",
             )
             .expect("known value"),
-            logo: String::from("kusama"),
-            name: String::from("kusama"),
+            logo: String::from("trait"),
+            name: String::from("trait-asset-hub-runtime"),
             order: 1,
-            path_id: String::from("//kusama"),
+            path_id: String::from("//trait-asset-hub-runtime"),
             secondary_color: String::from("#262626"),
-            title: String::from("Kusama"),
-            unit: String::from("KSM"),
-        },
-        DefaultNetworkInfo {
-            address: String::from("wss://rpc.polkadot.io"),
-            base58prefix: 0,
-            color: String::from("#E6027A"),
-            decimals: 10,
-            encryption: Encryption::Sr25519,
-            genesis_hash: H256::from_str(
-                "91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
-            )
-            .expect("known value"),
-            logo: String::from("polkadot"),
-            name: String::from("polkadot"),
-            order: 0,
-            path_id: String::from("//polkadot"),
-            secondary_color: String::from("#262626"),
-            title: String::from("Polkadot"),
-            unit: String::from("DOT"),
-        },
-        DefaultNetworkInfo {
-            address: String::from("wss://westend-rpc.polkadot.io"),
-            base58prefix: 42,
-            color: String::from("#660D35"),
-            decimals: 12,
-            encryption: Encryption::Sr25519,
-            genesis_hash: H256::from_str(
-                "e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e",
-            )
-            .expect("known value"),
-            logo: String::from("westend"),
-            name: String::from("westend"),
-            order: 2,
-            path_id: String::from("//westend"),
-            secondary_color: String::from("#262626"),
-            title: String::from("Westend"),
-            unit: String::from("WND"),
+            title: String::from("Trait"),
+            unit: String::from("TRAIT"),
         },
     ]
 }

@@ -87,7 +87,7 @@
 	<string name="log_message_network_custom">custom</string>
 	<string name="menu_option_add_note">Add Note</string>
 	<string name="menu_option_clear_logs">Clear Logs</string>
-	<string name="unlock_device_title">Unlock Polkadot Vault</string>
+	<string name="unlock_device_title">Unlock TRAIT Vault</string>
 	<string name="unlock_device_subtitle">Please authenticate yourself</string>
 	<string name="auth_error_message">Authentication error: %s</string>
 	<string name="auth_failed_message">Authentication failed</string>
@@ -126,9 +126,9 @@
 	<string name="camera_no_permission_text">Camera permission not granted</string>
 	<string name="general_got_it">Got it</string>
 	<string name="exposed_now_title">Network Connected</string>
-	<string name="exposed_now_message">Polkadot Vault detects currently connected network; please enable airplane mode, disable Wifi and BT, disconnect all cables and handle security breach according with your security protocol.</string>
+	<string name="exposed_now_message">TRAIT Vault detects currently connected network; please enable airplane mode, disable Wifi and BT, disconnect all cables and handle security breach according with your security protocol.</string>
 	<string name="exposed_past_title">Network Was Connected!</string>
-	<string name="exposed_past_message">Your Polkadot Vault device has connected to a mobile, WIFI, tether or Bluetooth network since your last acknowledgement and should be considered unsafe to use.</string>
+	<string name="exposed_past_message">Your TRAIT Vault device has connected to a mobile, WIFI, tether or Bluetooth network since your last acknowledgement and should be considered unsafe to use.</string>
 	<string name="exposed_before_cancel_button">Go Back</string>
 	<string name="exposed_before_proceed_button">Acknowledge and Proceed</string>
 	<string name="settings_title">Settings</string>
@@ -138,7 +138,7 @@
 	<string name="settings_backup_keys">Backup keys</string>
 	<string name="settings_wipe_data">Wipe all Data</string>
 	<string name="settings_hardware_key">Hardware seed protection: %1$s</string>
-	<string name="settings_version">Polkadot Vault version: %1$s</string>
+	<string name="settings_version">TRAIT Vault version: %1$s</string>
 	<string name="button_next">Next</string>
 	<string name="new_key_set_backup_subtitle">Write down your Secret Recovery Phrase</string>
 	<string name="new_key_set_backup_warning_message">Write it down on a paper and keep  it in a safe place. </string>
@@ -226,7 +226,7 @@
 	<string name="derivation_help_methods_title">Derivation Methods</string>
 	<string name="derivation_help_keys_title">Derived Keys</string>
 	<string name="button_label_got_it">Got It</string>
-	<string name="derivation_help_path_message">If you would like to create and manage several accounts on the network using the same seed, you can use derivation paths. We can think of the derived accounts as child accounts of the root account created using the original mnemonic seed phrase. Many Polkadot key generation tools support hard and soft derivation. For instance, if you intend to create an account to be used on the Polkadot chain, you can derive a hard key child account using // after the mnemonic phrase.</string>
+	<string name="derivation_help_path_message">If you would like to create and manage several accounts on the network using the same seed, you can use derivation paths. We can think of the derived accounts as child accounts of the root account created using the original mnemonic seed phrase. Many TRAIT key generation tools support hard and soft derivation. For instance, if you intend to create an account to be used on the TRAIT chain, you can derive a hard key child account using // after the mnemonic phrase.</string>
 	<string name="derivation_help_path_header1">/ Soft derivation</string>
 	<string name="derivation_help_path_header2">// Hard derivation</string>
 	<string name="derivation_help_path_header3">/// Password derivation</string>
@@ -275,7 +275,7 @@
 	<string name="create_derivations_empty">All derived keys already added</string>
 	<string name="create_derivations_failure">Derivation key failure: %1$s</string>
 	<string name="unlock_screen_title">Please Unlock the App</string>
-	<string name="unlock_screen_description">The device has been locked because of failed authentication, please unlock the device to keep using the Polkadot Vault</string>
+	<string name="unlock_screen_description">The device has been locked because of failed authentication, please unlock the device to keep using the TRAIT Vault</string>
 	<string name="key_set_details_no_keys_title">Key Set Don\'t Have Any Derived Keys</string>
 	<string name="key_sets_empty_title">You Don\'t Have Any Key Sets</string>
 	<string name="key_sets_empty_message">Add a new Key Set to Store Keys and Sign Transactions</string>
@@ -303,14 +303,14 @@
 	<string name="settings_confirmation_wipe_all_title">Wipe All Data?</string>
 	<string name="settings_confirmation_wipe_all_message_yes_label">I Understand, Remove all Data</string>
 	<string name="derivation_key_empty_path_placeholder">Derivation Path is Empty</string>
-	<string name="navigation_error_general_message">Please restart Polkadot Vault app and try again.\nInternal error description: %1$s</string>
+	<string name="navigation_error_general_message">Please restart TRAIT Vault app and try again.\nInternal error description: %1$s</string>
 	<string name="general_error_link_clicked_on_airgap_device">No internet! Use different device.</string>
 	<string name="transaction_error_steps_1">Go to Portal where your network is stored</string>
 	<string name="transaction_error_steps_2_url_core_networks">metadata.parity.io</string>
 	<string name="transaction_error_steps_2_core_networks_description">" for Polkadot, Kusama, and Westend"</string>
 	<string name="transaction_error_steps_3_url_parachains">metadata.novasama.io</string>
 	<string name="transaction_error_steps_3_description_parachains">" for Parachains and Solochains"</string>
-	<string name="transaction_error_steps_4_notes_for_other_networks">ask network\'s developers directly if you haven’t found it in the portals</string>
+	<string name="transaction_error_steps_4_notes_for_other_networks">Ask network\'s developers directly if you haven’t found it in the portals</string>
 	<string name="transaction_error_steps_choose_network">Choose the network you need</string>
 	<string name="transaction_error_steps_scan_qr_code">Scan \"Chain spec\" QR to add the missing network</string>
 	<string name="transaction_error_generic_title">Something has gone wrong</string>
@@ -387,7 +387,7 @@
 	<string name="network_help_metadata_go_scan">Go to “Update Metadata” Tab and Scan the Metadata Animated QR Code</string>
 	<string name="network_help_metadata_scan_cta">Scan Metadata</string>
 	<string name="onboarding_skip">Skip</string>
-	<string name="onboarding_welcome">Welcome to Polkadot Vault</string>
+	<string name="onboarding_welcome">Welcome to TRAIT Vault</string>
 	<string name="onboarding_header_1">Turn Your Smartphone Into a Hardware Wallet</string>
 	<string name="onboarding_header_2">Generate and Store Multiple Private Keys</string>
 	<string name="onboarding_header_3">Sign Transactions While Keeping Your Private Keys Offline</string>
@@ -442,11 +442,11 @@
 	<string name="description_scan_icon">Scan icon</string>
   <string name="derivation_create_fast_cta">Create Key</string>
 	<string name="derivation_create_advanced_cta">Add Custom Derivation Path</string>
-	<string name="error_wrong_version_title">Upgrade your Polkadot Vault according the requirements</string>
-	<string name="error_wrong_version_description">"The new version has been installed with the air gap break. Your keys are safe, to continue using Polkadot Vault, you must upgrade your app according to the requirements. "</string>
+	<string name="error_wrong_version_title">Upgrade your TRAIT Vault according the requirements</string>
+	<string name="error_wrong_version_description">"The new version has been installed with the air gap break. Your keys are safe, to continue using TRAIT Vault, you must upgrade your app according to the requirements. "</string>
 	<string name="error_wrong_version_backup_cta">Backup Secret Phrase</string>
 	<string name="error_version_helper_link">paritytech.github.io/parity-signer/tutorials/Upgrading.html</string>
-	<string name="error_version_helper_description">"Find the latest Polkadot Vault upgrade information here "</string>
+	<string name="error_version_helper_description">"Find the latest TRAIT Vault upgrade information here "</string>
 	<string name="fallback_recovery_phrase_title">Select Key Set</string>
 	<string name="fallback_recovery_phrase_description">Select a key set you want to Expose a Secret Recovery Phrase for</string>
 	<string name="initial_screen_outdated_os_title">Please update your operation system for higher security</string>

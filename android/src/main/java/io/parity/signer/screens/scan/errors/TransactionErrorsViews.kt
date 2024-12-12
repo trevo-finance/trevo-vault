@@ -165,36 +165,37 @@ fun LocalErrorBottomSheet(
 @Composable
 @OptIn(ExperimentalTextApi::class)
 private fun getDescriptionForUpdateMetadata(): List<AnnotatedString> {
-	val context = LocalContext.current
-	val firstStringElement = buildAnnotatedString {
-		append(stringResource(R.string.transaction_error_steps_1))
-		append("\n\n")
-		withStyle(SpanStyle(color = MaterialTheme.colors.pink300)) {
-			withAnnotation(
-				COMPOSE_URL_TAG_ANNOTATION,
-				"https://${context.getString(R.string.transaction_error_steps_2_url_core_networks)}"
-			) {
-				append(context.getString(R.string.transaction_error_steps_2_url_core_networks))
-			}
-		}
-		append(stringResource(R.string.transaction_error_steps_2_core_networks_description))
-		append("\n\n")
-		withStyle(SpanStyle(color = MaterialTheme.colors.pink300)) {
-			withAnnotation(
-				COMPOSE_URL_TAG_ANNOTATION,
-				"https://${context.getString(R.string.transaction_error_steps_3_url_parachains)}"
-			) {
-				append(context.getString(R.string.transaction_error_steps_3_url_parachains))
-			}
-		}
-		append(stringResource(R.string.transaction_error_steps_3_description_parachains))
-		append("\n\n")
-		withStyle(SpanStyle(color = MaterialTheme.colors.textTertiary)) {
-			append(stringResource(R.string.transaction_error_steps_4_notes_for_other_networks))
-		}
-	}
+//	val context = LocalContext.current
+//	val firstStringElement = buildAnnotatedString {
+//		append(stringResource(R.string.transaction_error_steps_1))
+//		append("\n\n")
+//		withStyle(SpanStyle(color = MaterialTheme.colors.pink300)) {
+//			withAnnotation(
+//				COMPOSE_URL_TAG_ANNOTATION,
+//				"https://${context.getString(R.string.transaction_error_steps_2_url_core_networks)}"
+//			) {
+//				append(context.getString(R.string.transaction_error_steps_2_url_core_networks))
+//			}
+//		}
+//		append(stringResource(R.string.transaction_error_steps_2_core_networks_description))
+//		append("\n\n")
+//		withStyle(SpanStyle(color = MaterialTheme.colors.pink300)) {
+//			withAnnotation(
+//				COMPOSE_URL_TAG_ANNOTATION,
+//				"https://${context.getString(R.string.transaction_error_steps_3_url_parachains)}"
+//			) {
+//				append(context.getString(R.string.transaction_error_steps_3_url_parachains))
+//			}
+//		}
+//		append(stringResource(R.string.transaction_error_steps_3_description_parachains))
+//		append("\n\n")
+//		withStyle(SpanStyle(color = MaterialTheme.colors.textTertiary)) {
+//			append(stringResource(R.string.transaction_error_steps_4_notes_for_other_networks))
+//		}
+//	}
+
 	return listOf<AnnotatedString>(
-		firstStringElement,
+		AnnotatedString(stringResource(R.string.transaction_error_steps_4_notes_for_other_networks)),
 		AnnotatedString(stringResource(R.string.transaction_error_steps_choose_network)),
 		AnnotatedString(stringResource(R.string.transaction_error_steps_scan_qr_code))
 	)
