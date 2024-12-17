@@ -90,8 +90,7 @@ pub use error::{Error, Result};
 //     0xc4, 0x6a, 0x22, 0xb9, 0xda, 0x19, 0x54, 0x0a, 0x77, 0xcb, 0xde, 0x23, 0x19, 0x7e, 0x5f, 0xd9,
 //     0x04, 0x85, 0xc7, 0x2b, 0x4e, 0xcf, 0x3c, 0x59, 0x9e, 0xcc, 0xa6, 0x99, 0x8f, 0x39, 0xbd, 0x57,
 // ];
-pub const DEFAULT_VERIFIER_PUBLIC: [u8; 32] = [212 as u8, 53 as u8, 147 as u8, 199 as u8, 21 as u8, 253 as u8, 211 as u8, 28 as u8, 97 as u8, 20 as u8, 26 as u8, 189 as u8, 4 as u8, 169 as u8, 159 as u8, 214 as u8, 130 as u8, 44 as u8, 133 as u8, 88 as u8, 133 as u8, 76 as u8, 205 as u8, 227 as u8, 154 as u8, 86 as u8, 132 as u8, 231 as u8, 165 as u8, 109 as u8, 162 as u8, 125 as u8];
-// 212, 53, 147, 199, 21, 253, 211, 28, 97, 20, 26, 189, 4, 169, 159, 214, 130, 44, 133, 88, 133, 76, 205, 227, 154, 86, 132, 231, 165, 109, 162, 125
+pub const DEFAULT_VERIFIER_PUBLIC: [u8; 32] = [36 as u8, 5 as u8, 173 as u8, 38 as u8, 154 as u8, 208 as u8, 230 as u8, 202 as u8, 80 as u8, 247 as u8, 66 as u8, 38 as u8, 241 as u8, 147 as u8, 215 as u8, 191 as u8, 209 as u8, 181 as u8, 30 as u8, 244 as u8, 6 as u8, 68 as u8, 147 as u8, 196 as u8, 138 as u8, 153 as u8, 248 as u8, 42 as u8, 90 as u8, 155 as u8, 83 as u8, 116 as u8];
 
 /// Generate default general verifier [`Verifier`], with Parity public key
 /// inside.
@@ -191,13 +190,13 @@ fn default_network_info() -> [DefaultNetworkInfo; 1] {
             decimals: 12,
             encryption: Encryption::Sr25519,
             genesis_hash: H256::from_str(
-                "1117c62f5da0a0ffd855ba9bd5fa7f8ca14200c2163dedc2de36d8f549915ce2",
+                "78ada7fa8d566f46af4094584205e95bb3a6e40e24c95ef2fbae95a574764b9f",
             )
             .expect("known value"),
             logo: String::from("trait"),
-            name: String::from("trait-asset-hub-runtime"),
+            name: String::from("trait-asset-hub"),
             order: 1,
-            path_id: String::from("//trait-asset-hub-runtime"),
+            path_id: String::from("//trait-asset-hub"),
             secondary_color: String::from("#262626"),
             title: String::from("Trait"),
             unit: String::from("TRAIT"),
