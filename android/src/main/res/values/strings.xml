@@ -305,13 +305,13 @@
 	<string name="derivation_key_empty_path_placeholder">Derivation Path is Empty</string>
 	<string name="navigation_error_general_message">Please restart TRAIT Vault app and try again.\nInternal error description: %1$s</string>
 	<string name="general_error_link_clicked_on_airgap_device">No internet! Use different device.</string>
-	<string name="transaction_error_steps_1">Go to Portal where your network is stored</string>
-	<string name="transaction_error_steps_2_url_core_networks">metadata.parity.io</string>
+	<string name="transaction_error_steps_1">Navigate to the TRAIT Docs portal</string>
+	<string name="transaction_error_steps_2_url_core_networks">https://docs.trait.tech/trait-apps/trait-vault</string>
 	<string name="transaction_error_steps_2_core_networks_description">" for Polkadot, Kusama, and Westend"</string>
 	<string name="transaction_error_steps_3_url_parachains">metadata.novasama.io</string>
 	<string name="transaction_error_steps_3_description_parachains">" for Parachains and Solochains"</string>
 	<string name="transaction_error_steps_4_notes_for_other_networks">Ask network\'s developers directly if you haven’t found it in the portals</string>
-	<string name="transaction_error_steps_choose_network">Choose the network you need</string>
+	<string name="transaction_error_steps_choose_network">Follow the instruction to update TRAIT Vault</string>
 	<string name="transaction_error_steps_scan_qr_code">Scan \"Chain spec\" QR to add the missing network</string>
 	<string name="transaction_error_generic_title">Something has gone wrong</string>
 	<string name="transaction_error_generic_subtitle">View the details below to find out more.</string>
