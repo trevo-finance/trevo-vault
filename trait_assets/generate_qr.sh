@@ -40,4 +40,4 @@ cd ../rust/generate_message
 # generate_chain_qr "trait-relay" $RELAY_RPC "1000"
 
 # Generate QRs for asset-hub chain
-generate_chain_qr "trait-asset-hub" $ASSET_HUB_RPC "1001" 
+generate_chain_qr "trait-asset-hub" $ASSET_HUB_RPC "1002" 
