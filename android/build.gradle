@@ -9,7 +9,7 @@ apply plugin: 'kotlin-android'
 
 android {
 	defaultConfig {
-		applicationId "tech.trait.vault"
+		applicationId "finance.trevo.vault"
 		minSdk 23
 		targetSdk 34
 		versionCode 4

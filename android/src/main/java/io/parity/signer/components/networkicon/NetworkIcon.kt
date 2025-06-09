@@ -98,6 +98,7 @@ private fun getResourceIdForNetwork(networkName: String) =
 		"composable" -> R.drawable.network_composable
 		"mangata-parachain" -> R.drawable.network_mangata_parachain
 		"trait" -> R.drawable.network_trait
+		"trevo" -> R.drawable.network_trevo
 		//svgs below
 		"acala" -> R.drawable.network_acala
 		"acala_testnet" -> R.drawable.network_acala_testnet

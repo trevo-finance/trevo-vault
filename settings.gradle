@@ -5,5 +5,5 @@ dependencyResolutionManagement {
 		mavenCentral()
 	}
 }
-rootProject.name = "TRAIT Vault"
+rootProject.name = "Trevo Vault"
 include ':android'

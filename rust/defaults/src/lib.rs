@@ -184,22 +184,22 @@ struct DefaultNetworkInfo {
 fn default_network_info() -> [DefaultNetworkInfo; 1] {
     [
         DefaultNetworkInfo {
-            address: String::from("wss://rpc-1.trait.tech"),
+            address: String::from("wss://rpc.api.trevo.finance"),
             base58prefix: 5335,
             color: String::from("#000"),
             decimals: 12,
             encryption: Encryption::Sr25519,
             genesis_hash: H256::from_str(
-                "78ada7fa8d566f46af4094584205e95bb3a6e40e24c95ef2fbae95a574764b9f",
+                "147f6c6f6bd937610cabfc2b91a520694aa545c4f451cb56eace5a3d6b386746",
             )
             .expect("known value"),
-            logo: String::from("trait"),
-            name: String::from("trait-asset-hub"),
+            logo: String::from("trevo"),
+            name: String::from("trevo-asset-hub"),
             order: 1,
-            path_id: String::from("//trait-asset-hub"),
+            path_id: String::from("//trevo-asset-hub"),
             secondary_color: String::from("#262626"),
-            title: String::from("Trait"),
-            unit: String::from("TRAIT"),
+            title: String::from("Trevo"),
+            unit: String::from("TREVO"),
         },
     ]
 }
