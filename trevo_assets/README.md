@@ -1,4 +1,4 @@
-## How to generate QR codes for the trait assets
+## How to generate QR codes for the trevo assets
 
 1. Modify the `generate_qr.sh` script to use the correct RPC URL and runtime version.
 

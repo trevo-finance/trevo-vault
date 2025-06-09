@@ -12,7 +12,7 @@ class AllNetworksUseCase(val uniffiInteractor: UniffiInteractor) {
 	fun getAllNetworks(): List<NetworkModel> = runBlocking { getNetworks() }
 
 //	private val preselectedkeys = listOf<String>("Polkadot", "Kusama", "Westend")
-	private val preselectedkeys = listOf<String>("Trait-asset-hub")
+	private val preselectedkeys = listOf<String>("Trevo-asset-hub")
 
 	fun getDefaultPreselectedNetworks(): List<NetworkModel> = getAllNetworks()
 		.filter { preselectedkeys.contains(it.title) }
