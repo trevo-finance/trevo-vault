@@ -190,7 +190,7 @@ fn default_network_info() -> [DefaultNetworkInfo; 1] {
             decimals: 12,
             encryption: Encryption::Sr25519,
             genesis_hash: H256::from_str(
-                "147f6c6f6bd937610cabfc2b91a520694aa545c4f451cb56eace5a3d6b386746",
+                "977630d34363c8b118147fe7deb58118fa1f75197d036071572e9a3698bee56d",
             )
             .expect("known value"),
             logo: String::from("trevo"),
@@ -338,7 +338,7 @@ pub fn nav_test_metadata() -> Result<Vec<MetaValues>> {
 /// Read metadata set for release cold database from `release_metadata` folder
 #[cfg(feature = "active")]
 pub fn release_metadata() -> Result<Vec<MetaValues>> {
-    Ok(vec![])
+    metadata("../defaults/release_metadata")
 }
 
 #[cfg(feature = "active")]

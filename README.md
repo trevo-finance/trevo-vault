@@ -157,11 +157,45 @@ Enable "Show package details" checkmark to select specific version.
 ### Troubleshooting
 
 #### "no such file or directory" error when invoking cargo/rustc/uniffi-bindgen
-1. Ensure rust and uniffi-bindgen are installed
-2. Sometimes launching Android Studio from the Finder might result in Android Studio not seeing all env needed variables
-Try launching Studio from the shell (command assumes you are in the "Applications" folder)
-```shell
-./Android\ Studio.app/Contents/MacOS/studio
+
+This error occurs when Android Studio can't find Rust tools in PATH. Here are several solutions:
+
+**Solution 1: Use the launch script (Recommended)**
+```bash
+# From project root, run the provided script:
+./launch_android_studio.sh
+```
+
+**Solution 2: Launch from terminal**
+```bash
+# Navigate to Applications folder and launch with environment
+cd /Applications
+PATH="$PATH" CARGO_HOME="$HOME/.cargo" RUSTUP_HOME="$HOME/.rustup" "./Android Studio.app/Contents/MacOS/studio" &
+```
+
+**Solution 3: Use alias (one-time setup)**
+```bash
+# Add to your ~/.zshrc or ~/.bash_profile:
+alias android-studio='PATH="$PATH" CARGO_HOME="$HOME/.cargo" RUSTUP_HOME="$HOME/.rustup" "/Applications/Android Studio.app/Contents/MacOS/studio" &'
+
+# Then just run:
+android-studio
+```
+
+**Solution 4: Configure local.properties**
+Create/update `android/local.properties` with:
+```properties
+sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
+rust.pythonCommand=python3
+rust.cargoCommand=/Users/YOUR_USERNAME/.cargo/bin/cargo
+rust.uniffiBindgenCommand=/Users/YOUR_USERNAME/.cargo/bin/uniffi-bindgen
+```
+
+**Verification:**
+Before opening the project, verify tools are available:
+```bash
+which cargo          # Should show: /Users/YOUR_USERNAME/.cargo/bin/cargo
+which uniffi-bindgen # Should show: /Users/YOUR_USERNAME/.cargo/bin/uniffi-bindgen
 ```
 
 # Release Android
