@@ -26,9 +26,28 @@ generate_chain_qr() {
     rm -rf "sign_me_load_metadata_${CHAIN_NAME}V${RUNTIME_VERSION}"
 }
 
-# Common variables
-SIGNER_URI="dwarf split orange teach electric flower way theme popular economy force collect"
-VERIFIER_HEX="0x2405ad269ad0e6ca50f74226f193d7bfd1b51ef4064493c48a99f82a5a9b5374"
+# Load environment variables
+if [ -f ".env" ]; then
+    source .env
+elif [ -f "env.local" ]; then
+    source env.local
+else
+    echo "Error: Environment file not found!"
+    echo "Please create .env or env.local file with SIGNER_URI and VERIFIER_HEX variables"
+    echo "You can use env.example as a template"
+    exit 1
+fi
+
+# Check if required variables are set
+if [ -z "$SIGNER_URI" ]; then
+    echo "Error: SIGNER_URI is not set in environment file"
+    exit 1
+fi
+
+if [ -z "$VERIFIER_HEX" ]; then
+    echo "Error: VERIFIER_HEX is not set in environment file"
+    exit 1
+fi
 
 # Chain-specific configurations
 # RELAY_RPC="ws://51.91.74.113:15260"
@@ -40,4 +59,4 @@ cd ../rust/generate_message
 # generate_chain_qr "trevo-relay" $RELAY_RPC "1000"
 
 # Generate QRs for asset-hub chain
-generate_chain_qr "trevo-asset-hub" $ASSET_HUB_RPC "1003" 
+generate_chain_qr "trevo-asset-hub" $ASSET_HUB_RPC "1005" 

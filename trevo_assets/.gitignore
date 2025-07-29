@@ -1,0 +1,3 @@
+# Environment variables file
+.env
+env.local 
