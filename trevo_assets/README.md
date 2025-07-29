@@ -1,39 +1,68 @@
-## How to generate QR codes for the trevo assets
+# Trevo Assets - Метаданные и QR коды
 
-### Prerequisites
+## Файлы в этой папке
 
-Before running the script, you need to set up environment variables:
+- `generate_qr.sh` - Скрипт для генерации QR кодов с метаданными
+- `update_metadata.sh` - **АВТОМАТИЧЕСКИЙ СКРИПТ** для обновления метаданных в базе данных
+- `update_metadata.md` - Подробная документация по обновлению метаданных
+- `QUICK_START.md` - Краткая инструкция для быстрого обновления
+- `env.example` - Пример файла с переменными окружения
+- `.env` - Ваш файл с переменными (не коммитится в git)
 
-1. Copy the example environment file:
+## 🚀 Быстрое обновление метаданных
+
+**Самый простой способ обновить метаданные до последней версии:**
+
+```bash
+# Из корневой папки проекта
+./trevo_assets/update_metadata.sh
+```
+
+Этот скрипт автоматически:
+- ✅ Загрузит новые метаданные с RPC узла
+- ✅ Обновит базу данных приложения  
+- ✅ Сгенерирует новый QR код
+- ✅ Создаст backup старых данных
+
+**Подробности**: См. `QUICK_START.md` или `update_metadata.md`
+
+## 📱 Генерация QR кодов
+
+### Настройка переменных окружения
+
+1. Скопируйте пример файла:
 ```bash
 cp env.example .env
 ```
 
-2. Edit the `.env` file and set your actual values:
+2. Отредактируйте `.env` файл:
 ```bash
 # Signer URI for QR code generation
 SIGNER_URI="your_actual_signer_uri_here"
 
-# Verifier hex for QR code generation
+# Verifier hex for QR code generation  
 VERIFIER_HEX="0x2405ad269ad0e6ca50f74226f193d7bfd1b51ef4064493c48a99f82a5a9b5374"
 ```
 
-**Important**: The `.env` file is excluded from git commits for security reasons. Never commit your actual signer URI to version control.
+⚠️ **Важно**: Файл `.env` не коммитится в git по соображениям безопасности.
 
-### Generating QR Codes
+### Генерация QR кода
 
-1. Modify the `generate_qr.sh` script to use the correct RPC URL and runtime version if needed.
-
-2. Run the script:
 ```bash
 ./generate_qr.sh
 ```
 
-3. QR codes will be generated in the `trevo_assets` folder.
+QR код будет создан в папке `trevo_assets`.
 
-### Security Notes
+## 🔧 Безопасность
 
-- The `SIGNER_URI` contains sensitive information and should never be committed to git
-- The `.env` file is automatically ignored by git
-- You can also use `env.local` as an alternative filename for environment variables
+- `SIGNER_URI` содержит конфиденциальную информацию и никогда не должен коммититься в git
+- Файл `.env` автоматически игнорируется git
+- Можно использовать `env.local` как альтернативное имя файла для переменных окружения
+
+## 📚 Дополнительная документация
+
+- **Для разработчиков**: `update_metadata.md` - полная техническая документация
+- **Для быстрого старта**: `QUICK_START.md` - краткие инструкции
+- **Для troubleshooting**: См. раздел "Troubleshooting" в `update_metadata.md`
 
