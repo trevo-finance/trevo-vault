@@ -11,9 +11,9 @@ android {
 	defaultConfig {
 		applicationId "finance.trevo.vault"
 		minSdk 23
-		targetSdk 34
-		versionCode 5
-		versionName "1.0.1"
+		targetSdk 35
+		versionCode 7
+		versionName "1.0.3"
 		ndk {
 			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
 		}
@@ -39,6 +39,7 @@ android {
 	}
 	buildFeatures {
 		compose true
+		buildConfig true
 	}
 	composeOptions {
 		kotlinCompilerExtensionVersion compose_compiler_version
@@ -51,7 +52,7 @@ android {
 			pickFirsts += ['lib/armeabi-v7a/libc++_shared.so', 'lib/arm64-v8a/libc++_shared.so', 'lib/x86/libc++_shared.so', 'lib/x86_64/libc++_shared.so']
 		}
 	}
-	compileSdk 34
+	compileSdk 35
 	ndkVersion '24.0.8215888'
     namespace 'io.parity.signer'
 }
@@ -93,7 +94,7 @@ task buildDB (type: Exec) {
 dependencies {
 	implementation "androidx.core:core-ktx:1.12.0"
 	implementation 'androidx.appcompat:appcompat:1.6.1'
-	implementation 'com.google.android.material:material:1.9.0'
+	implementation 'com.google.android.material:material:1.11.0'
 	implementation 'androidx.activity:activity-compose:1.8.2'
 	implementation 'androidx.biometric:biometric:1.1.0'
 	implementation "androidx.compose.ui:ui:$compose_libs_version"
