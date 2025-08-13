@@ -63,7 +63,7 @@ fun AutoSizeText(
 					color = color,
 					fontSize = shrunkFontSize,
 					fontWeight = fontWeight,
-					textAlign = textAlign,
+					textAlign = textAlign ?: TextAlign.Start,
 					lineHeight = lineHeight,
 					fontFamily = fontFamily,
 					textDecoration = textDecoration,
