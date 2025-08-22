@@ -1,0 +1,1925 @@
+diff --git a/docs/ios_trevo_mapping.md b/docs/ios_trevo_mapping.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..35aa7706a183c89ab3908e9431d846e5f611b305
+--- /dev/null
++++ b/docs/ios_trevo_mapping.md
+@@ -0,0 +1,11 @@
++# Android → iOS Trevo Mapping
++
++| Category | Android files | iOS files | Notes |
++| --- | --- | --- | --- |
++| Branding/Identity | `android/build.gradle`, `android/src/main/res/values/strings.xml` | `ios/PolkadotVault/Info.plist`, `ios/PolkadotVault/Configuration/*.xcconfig`, `ios/PolkadotVault/Resources/en.lproj/Localizable.strings`, `ios/PolkadotVault/Stubs/Stubs+Signer.swift`, `ios/PolkadotVault/Previews/Stubs+Signer.swift` | Renamed app and updated bundle ID and user-facing strings |
++| Network/Metadata | `android/src/main/res/drawable/network_trevo.png`, `rust/defaults/release_metadata/trevo-asset-hub1005` | `ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset` | Added Trevo network icon |
++| Texts (EULA/Privacy) | `android/src/main/java/io/parity/signer/components/documents/PP.kt`, `android/src/main/java/io/parity/signer/components/documents/TOS.kt` | `ios/PolkadotVault/Resources/Docs/privacy-policy.txt`, `ios/PolkadotVault/Resources/Docs/terms-and-conditions.txt` | Copied Trevo legal texts |
++| Styles/Palette | `android/src/main/java/io/parity/signer/ui/theme/Color.kt` | `ios/PolkadotVault/Resources/Assets.xcassets/*accent_pink*.colorset`, `ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink*.colorset` | Recolored accent palette to black |
++| Strings/Links | `android/src/main/res/values/strings.xml` | `ios/PolkadotVault/Resources/en.lproj/Localizable.strings` | Updated links to Trevo resources |
++
++*App icons for Trevo were not available in the repository and remain unchanged.*
+diff --git a/ios/CHANGELOG.md b/ios/CHANGELOG.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..2043bab535fc3f9ff8f683e3547d94b9e822619c
+--- /dev/null
++++ b/ios/CHANGELOG.md
+@@ -0,0 +1,8 @@
++# Trevo Vault iOS Changelog
++
++## Unreleased
++- Rename app display name and bundle identifier to Trevo Vault (`finance.trevo.vault`).
++- Replace user-facing strings and links with Trevo resources.
++- Add Trevo network icon.
++- Update privacy policy and terms of service.
++- Apply Trevo dark palette with black accents.
+diff --git a/ios/PolkadotVault-Bridging-Header.h b/ios/PolkadotVault-Bridging-Header.h
+index 92ff75b56c0ddd5c306cc053ece398a19ae77d2b..d3c1039a9df4f74d0d86f47f692704d0a60d9642 100644
+--- a/ios/PolkadotVault-Bridging-Header.h
++++ b/ios/PolkadotVault-Bridging-Header.h
+@@ -1,13 +1,13 @@
+ //
+ // PolkadotVault-Bridging-Header.h
+-//  Polkadot Vault
++//  Trevo Vault
+ //
+ //  Created by Alexander Slesarev on 22.7.2021.
+ //
+ 
+ #ifndef PolkadotVault_Bridging_Header_h
+ #define PolkadotVault_Bridging_Header_h
+ 
+ #import "signerFFI.h"
+ 
+ #endif /* PolkadotVault_Bridging_Header_h */
+diff --git a/ios/PolkadotVault.xcodeproj/project.pbxproj b/ios/PolkadotVault.xcodeproj/project.pbxproj
+index bafd877cd2a2250661e73a7d76fae3ab6e9b1c09..61e2d3e8fd312a7aaf88bb0ab938c865c8693147 100644
+--- a/ios/PolkadotVault.xcodeproj/project.pbxproj
++++ b/ios/PolkadotVault.xcodeproj/project.pbxproj
+@@ -3185,133 +3185,133 @@
+ 			isa = XCBuildConfiguration;
+ 			baseConfigurationReference = 6D06CD2A2AFD2F1900FAB275 /* Debug.xcconfig */;
+ 			buildSettings = {
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				ENABLE_BITCODE = NO;
+ 				ENABLE_PREVIEWS = YES;
+ 				INFOPLIST_FILE = PolkadotVault/Info.plist;
+ 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+ 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.8.1;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+ 				LIBRARY_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"$(PROJECT_DIR)/PolkadotVault",
+ 				);
+ 				MARKETING_VERSION = 6.3.2;
+-				PRODUCT_BUNDLE_IDENTIFIER = io.parity.NativeSigner;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
+ 				PRODUCT_MODULE_NAME = PolkadotVault;
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/PolkadotVault-Bridging-Header.h";
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				VALID_ARCHS = "arm64 arm64e x86_64";
+ 			};
+ 			name = Debug;
+ 		};
+ 		2DE72BE526A588C9002BB752 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			baseConfigurationReference = 6D06CD282AFD2F0500FAB275 /* Production.xcconfig */;
+ 			buildSettings = {
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				ENABLE_BITCODE = NO;
+ 				ENABLE_PREVIEWS = YES;
+ 				INFOPLIST_FILE = PolkadotVault/Info.plist;
+ 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+ 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.8.1;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+ 				LIBRARY_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"$(PROJECT_DIR)/PolkadotVault",
+ 				);
+ 				MARKETING_VERSION = 6.3.2;
+-				PRODUCT_BUNDLE_IDENTIFIER = io.parity.NativeSigner;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
+ 				PRODUCT_MODULE_NAME = PolkadotVault;
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/PolkadotVault-Bridging-Header.h";
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				VALID_ARCHS = "arm64 arm64e x86_64";
+ 			};
+ 			name = Release;
+ 		};
+ 		2DE72BE726A588C9002BB752 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ 				BUNDLE_LOADER = "$(TEST_HOST)";
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CODE_SIGN_STYLE = Automatic;
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				INFOPLIST_FILE = PolkadotVaultTests/Info.plist;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 					"@loader_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = parity.NativeSignerTests;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vaultTests;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "PolkadotVaultTests/PolkadotVaultTests-Bridging-Header.h";
+ 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+ 				SWIFT_VERSION = 5.0;
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vault Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vault Dev";
+ 			};
+ 			name = Debug;
+ 		};
+ 		2DE72BE826A588C9002BB752 /* Release */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ 				BUNDLE_LOADER = "$(TEST_HOST)";
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CODE_SIGN_STYLE = Automatic;
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				INFOPLIST_FILE = PolkadotVaultTests/Info.plist;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 					"@loader_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = parity.NativeSignerTests;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vaultTests;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "PolkadotVaultTests/PolkadotVaultTests-Bridging-Header.h";
+ 				SWIFT_VERSION = 5.0;
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vault Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vault Dev";
+ 			};
+ 			name = Release;
+ 		};
+ 		6D06CD2B2AFD305A00FAB275 /* QA */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_SEARCH_USER_PATHS = NO;
+ 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS = SwiftUI;
+ 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+ 				CLANG_ANALYZER_NONNULL = YES;
+ 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+ 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+ 				CLANG_CXX_LIBRARY = "libc++";
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CLANG_ENABLE_OBJC_ARC = YES;
+ 				CLANG_ENABLE_OBJC_WEAK = YES;
+ 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+ 				CLANG_WARN_BOOL_CONVERSION = YES;
+ 				CLANG_WARN_COMMA = YES;
+ 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+@@ -3362,74 +3362,74 @@
+ 			isa = XCBuildConfiguration;
+ 			baseConfigurationReference = 6D06CD292AFD2F0F00FAB275 /* QA.xcconfig */;
+ 			buildSettings = {
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
+ 				CODE_SIGN_IDENTITY = "Apple Development";
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				ENABLE_BITCODE = NO;
+ 				ENABLE_PREVIEWS = YES;
+ 				INFOPLIST_FILE = PolkadotVault/Info.plist;
+ 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+ 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.8.1;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+ 				LIBRARY_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"$(PROJECT_DIR)/PolkadotVault",
+ 				);
+ 				MARKETING_VERSION = 6.3.2;
+-				PRODUCT_BUNDLE_IDENTIFIER = io.parity.NativeSigner;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
+ 				PRODUCT_MODULE_NAME = PolkadotVault;
+ 				PROVISIONING_PROFILE_SPECIFIER = "";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/PolkadotVault-Bridging-Header.h";
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				VALID_ARCHS = "arm64 arm64e x86_64";
+ 			};
+ 			name = QA;
+ 		};
+ 		6D06CD2D2AFD305A00FAB275 /* QA */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+ 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ 				BUNDLE_LOADER = "$(TEST_HOST)";
+ 				CLANG_ENABLE_MODULES = YES;
+ 				CODE_SIGN_STYLE = Automatic;
+ 				DEVELOPMENT_TEAM = QXCVVJ6654;
+ 				INFOPLIST_FILE = PolkadotVaultTests/Info.plist;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 					"@loader_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = parity.NativeSignerTests;
++				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vaultTests;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "PolkadotVaultTests/PolkadotVaultTests-Bridging-Header.h";
+ 				SWIFT_VERSION = 5.0;
+ 				TARGETED_DEVICE_FAMILY = "1,2";
+ 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vault Dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vault Dev";
+ 			};
+ 			name = QA;
+ 		};
+ /* End XCBuildConfiguration section */
+ 
+ /* Begin XCConfigurationList section */
+ 		2DE72BB926A588C7002BB752 /* Build configuration list for PBXProject "PolkadotVault" */ = {
+ 			isa = XCConfigurationList;
+ 			buildConfigurations = (
+ 				2DE72BE126A588C9002BB752 /* Debug */,
+ 				2DE72BE226A588C9002BB752 /* Release */,
+ 				6D06CD2B2AFD305A00FAB275 /* QA */,
+ 			);
+ 			defaultConfigurationIsVisible = 0;
+ 			defaultConfigurationName = Release;
+ 		};
+ 		2DE72BE326A588C9002BB752 /* Build configuration list for PBXNativeTarget "PolkadotVault" */ = {
+ 			isa = XCConfigurationList;
+ 			buildConfigurations = (
+ 				2DE72BE426A588C9002BB752 /* Debug */,
+diff --git a/ios/PolkadotVault/Configuration/Debug.xcconfig b/ios/PolkadotVault/Configuration/Debug.xcconfig
+index 0687878b8b092b32c6efca6fc73639320e5263f5..fb7d52b4b21e8df49ead8102d2401a3cfcf53f03 100644
+--- a/ios/PolkadotVault/Configuration/Debug.xcconfig
++++ b/ios/PolkadotVault/Configuration/Debug.xcconfig
+@@ -1,11 +1,11 @@
+ //
+ //  Debug.xcconfig
+ //  PolkadotVault
+ //
+ //  Created by Krzysztof Rodak on 09/11/2023.
+ //
+ 
+ APP_RUNTIME_MODE = debug
+ DYNAMIC_DERIVATIONS_ENABLED = true
+-PRODUCT_NAME = Vault Dev
++PRODUCT_NAME = Trevo Vault Dev
+ PRODUCT_MODULE_NAME = PolkadotVault
+diff --git a/ios/PolkadotVault/Configuration/Production.xcconfig b/ios/PolkadotVault/Configuration/Production.xcconfig
+index 79b4964e30527abde7e96dfa56f2f82174a0b341..821b3ad7ca59d6c97515bc2c3ede95b3a7035a12 100644
+--- a/ios/PolkadotVault/Configuration/Production.xcconfig
++++ b/ios/PolkadotVault/Configuration/Production.xcconfig
+@@ -1,11 +1,11 @@
+ //
+ //  Production.xcconfig
+ //  PolkadotVault
+ //
+ //  Created by Krzysztof Rodak on 09/11/2023.
+ //
+ 
+ APP_RUNTIME_MODE = production
+ DYNAMIC_DERIVATIONS_ENABLED = true
+-PRODUCT_NAME = Vault
++PRODUCT_NAME = Trevo Vault
+ PRODUCT_MODULE_NAME = PolkadotVault
+diff --git a/ios/PolkadotVault/Configuration/QA.xcconfig b/ios/PolkadotVault/Configuration/QA.xcconfig
+index b77ed01c1a94f8b03450eda5a1a7fbba46ca36a8..44d16516dbb566a9886dea8067a73aed2856953d 100644
+--- a/ios/PolkadotVault/Configuration/QA.xcconfig
++++ b/ios/PolkadotVault/Configuration/QA.xcconfig
+@@ -1,11 +1,11 @@
+ //
+ //  QA.xcconfig
+ //  PolkadotVault
+ //
+ //  Created by Krzysztof Rodak on 09/11/2023.
+ //
+ 
+ APP_RUNTIME_MODE = qa
+ DYNAMIC_DERIVATIONS_ENABLED = true
+-PRODUCT_NAME = Vault QA
++PRODUCT_NAME = Trevo Vault QA
+ PRODUCT_MODULE_NAME = PolkadotVault
+diff --git a/ios/PolkadotVault/Info.plist b/ios/PolkadotVault/Info.plist
+index 60ae4104ad7cd014bea2d16abdbbafbddb968f8d..85b297c01f21c70a058eaa65c88abac87ca262ba 100644
+--- a/ios/PolkadotVault/Info.plist
++++ b/ios/PolkadotVault/Info.plist
+@@ -1,43 +1,43 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+ <dict>
+ 	<key>AppRuntimeMode</key>
+ 	<string>$(APP_RUNTIME_MODE)</string>
+ 	<key>CFBundleDevelopmentRegion</key>
+ 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+-	<key>CFBundleDisplayName</key>
+-	<string>$(PRODUCT_NAME)</string>
++        <key>CFBundleDisplayName</key>
++        <string>Trevo Vault</string>
+ 	<key>CFBundleExecutable</key>
+ 	<string>$(EXECUTABLE_NAME)</string>
+ 	<key>CFBundleIdentifier</key>
+ 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+ 	<key>CFBundleInfoDictionaryVersion</key>
+ 	<string>6.0</string>
+-	<key>CFBundleName</key>
+-	<string>$(PRODUCT_NAME)</string>
++        <key>CFBundleName</key>
++        <string>Trevo Vault</string>
+ 	<key>CFBundlePackageType</key>
+ 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+ 	<key>CFBundleShortVersionString</key>
+ 	<string>$(MARKETING_VERSION)</string>
+ 	<key>CFBundleVersion</key>
+ 	<string>$(CURRENT_PROJECT_VERSION)</string>
+ 	<key>DynamicDerivationsEnabled</key>
+ 	<string>$(DYNAMIC_DERIVATIONS_ENABLED)</string>
+ 	<key>ITSAppUsesNonExemptEncryption</key>
+ 	<false/>
+ 	<key>LSApplicationCategoryType</key>
+ 	<string>public.app-category.finance</string>
+ 	<key>LSMinimumSystemVersion</key>
+ 	<string>13.0</string>
+ 	<key>LSRequiresIPhoneOS</key>
+ 	<true/>
+ 	<key>NSCameraUsageDescription</key>
+ 	<string>Use camera to scan QR codes</string>
+ 	<key>UIAppFonts</key>
+ 	<array>
+ 		<string>Unbounded-Black.ttf</string>
+ 		<string>Unbounded-Bold.ttf</string>
+ 		<string>Unbounded-Regular.ttf</string>
+ 		<string>Inter-Bold.otf</string>
+ 		<string>Inter-Medium.otf</string>
+diff --git a/ios/PolkadotVault/PolkadotVaultApp.swift b/ios/PolkadotVault/PolkadotVaultApp.swift
+index f7b2125f279229b7b01b7bf28f0a19864b5f0d32..1afafe7499ecfad6580692e86233ce7344440723 100644
+--- a/ios/PolkadotVault/PolkadotVaultApp.swift
++++ b/ios/PolkadotVault/PolkadotVaultApp.swift
+@@ -1,28 +1,28 @@
+ //
+ // PolkadotVaultApp.swift
+-//  Polkadot Vault
++//  Trevo Vault
+ //
+ //  Created by Alexander Slesarev on 19.7.2021.
+ //
+ 
+ import SwiftUI
+ 
+ @main
+ struct PolkadotVaultApp: App {
+     @StateObject var navigation = NavigationCoordinator()
+     @StateObject var jailbreakDetectionPublisher = JailbreakDetectionPublisher()
+     @StateObject var applicationStatePublisher = ApplicationStatePublisher()
+     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+ 
+     var body: some Scene {
+         WindowGroup {
+             if RuntimePropertiesProvider().isRunningTests {
+                 EmptyView()
+             } else if jailbreakDetectionPublisher.isJailbroken {
+                 JailbreakDetectedView()
+             } else {
+                 MainScreenContainer(
+                     viewModel: .init(),
+                     onboarding: OnboardingStateMachine()
+                 )
+                 .font(PrimaryFont.bodyL.font)
+diff --git a/ios/PolkadotVault/Previews/Stubs+Signer.swift b/ios/PolkadotVault/Previews/Stubs+Signer.swift
+index 02f6a6a1a05662d45e6612929b5c2663418e3d67..c1af42bca4c7dfabe5dd85b74f908753b6493a60 100644
+--- a/ios/PolkadotVault/Previews/Stubs+Signer.swift
++++ b/ios/PolkadotVault/Previews/Stubs+Signer.swift
+@@ -1,40 +1,40 @@
+ //
+ //  Stubs+Signer.swift
+ //  PolkadotVault
+ //
+ //  Created by Krzysztof Rodak on 10/05/2023.
+ //
+ 
+ import Foundation
+ 
+ extension Address {
+     static let stub: Address = .init(
+         path: "//polkadot",
+         hasPwd: true,
+         identicon: .stubIdenticon,
+-        seedName: "Polkadot Vault",
++        seedName: "Trevo Vault",
+         secretExposed: false
+     )
+ }
+ 
+ extension MKeysCard {
+     static let stub: MKeysCard = .init(
+         address: .stub,
+         addressKey: "",
+         base58: "",
+         swiped: false
+     )
+ }
+ 
+ extension MscNetworkInfo {
+     static let stub: MscNetworkInfo = .init(
+         networkTitle: "Polkadot",
+         networkLogo: "polkadot",
+         networkSpecsKey: "polkadot"
+     )
+ }
+ 
+ extension MKeyAndNetworkCard {
+     static let stub: MKeyAndNetworkCard = .init(
+         key: .stub,
+         network: .stub
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink.colorset/Contents.json
+index f74028d32023368e64922539367c1ebc05954f0a..1c80ccfa85474d0efd1ef4ec10bedf8da4d53335 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink.colorset/Contents.json
+@@ -1,38 +1,38 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0x7A",
++          "blue" : "0x00",
+           "green" : "0x00",
+-          "red" : "0xE6"
++          "red" : "0x00"
+         }
+       },
+       "idiom" : "universal"
+     },
+     {
+       "appearances" : [
+         {
+           "appearance" : "luminosity",
+           "value" : "dark"
+         }
+       ],
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0xB6",
+-          "green" : "0x72",
+-          "red" : "0xF2"
++          "blue" : "0x55",
++          "green" : "0x55",
++          "red" : "0x55"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink12.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink12.colorset/Contents.json
+index 4ea7cd3058dd770f463fdf90e9593342204cef0e..77e6983081c260c8a91ae3fe118e6b2c5fd1057b 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink12.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink12.colorset/Contents.json
+@@ -1,38 +1,38 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "0.080",
+-          "blue" : "0x7A",
++          "blue" : "0x00",
+           "green" : "0x00",
+-          "red" : "0xE6"
++          "red" : "0x00"
+         }
+       },
+       "idiom" : "universal"
+     },
+     {
+       "appearances" : [
+         {
+           "appearance" : "luminosity",
+           "value" : "dark"
+         }
+       ],
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "0.080",
+-          "blue" : "0xB6",
+-          "green" : "0x72",
+-          "red" : "0xF2"
++          "blue" : "0x55",
++          "green" : "0x55",
++          "red" : "0x55"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300.colorset/Contents.json
+index eaca097ca4caadadbb52e460051ed528f14691f8..a16d589fd992b7177ac04c35d3c1f9a7b2289d1a 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300.colorset/Contents.json
+@@ -1,20 +1,38 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+-          "alpha" : "1.000",
+-          "blue" : "0xB6",
+-          "green" : "0x72",
+-          "red" : "0xF2"
++          "alpha" : "0.702",
++          "blue" : "0x00",
++          "green" : "0x00",
++          "red" : "0x00"
++        }
++      },
++      "idiom" : "universal"
++    },
++    {
++      "appearances" : [
++        {
++          "appearance" : "luminosity",
++          "value" : "dark"
++        }
++      ],
++      "color" : {
++        "color-space" : "srgb",
++        "components" : {
++          "alpha" : "0.702",
++          "blue" : "0xFF",
++          "green" : "0xFF",
++          "red" : "0xFF"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300_fill_8.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300_fill_8.colorset/Contents.json
+index 4b28e10a937b9308435b2421636e7dce72d6e8b9..6db6c9676b48598e3b94944fa6a07f1dfb446ae8 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300_fill_8.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink300_fill_8.colorset/Contents.json
+@@ -1,20 +1,20 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "0.080",
+-          "blue" : "0xB6",
+-          "green" : "0x72",
+-          "red" : "0xF2"
++          "blue" : "0x00",
++          "green" : "0x00",
++          "red" : "0x00"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500.colorset/Contents.json
+index 69253c66d86f17d17903533cba3cb41914e25b6b..1c80ccfa85474d0efd1ef4ec10bedf8da4d53335 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500.colorset/Contents.json
+@@ -1,20 +1,38 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0x7A",
++          "blue" : "0x00",
+           "green" : "0x00",
+-          "red" : "0xE6"
++          "red" : "0x00"
++        }
++      },
++      "idiom" : "universal"
++    },
++    {
++      "appearances" : [
++        {
++          "appearance" : "luminosity",
++          "value" : "dark"
++        }
++      ],
++      "color" : {
++        "color-space" : "srgb",
++        "components" : {
++          "alpha" : "1.000",
++          "blue" : "0x55",
++          "green" : "0x55",
++          "red" : "0x55"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_disabled.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_disabled.colorset/Contents.json
+index 61fc55781788f9a279bf077d9089d6a83099ea85..1da4b6c44766c3b5f9e066ad6618b15dbcae7b28 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_disabled.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_disabled.colorset/Contents.json
+@@ -1,38 +1,38 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "display-p3",
+         "components" : {
+-          "alpha" : "1.000",
+-          "blue" : "0xD2",
+-          "green" : "0xA8",
+-          "red" : "0xF7"
++          "alpha" : "0.702",
++          "blue" : "0x00",
++          "green" : "0x00",
++          "red" : "0x00"
+         }
+       },
+       "idiom" : "universal"
+     },
+     {
+       "appearances" : [
+         {
+           "appearance" : "luminosity",
+           "value" : "dark"
+         }
+       ],
+       "color" : {
+         "color-space" : "display-p3",
+         "components" : {
+-          "alpha" : "1.000",
+-          "blue" : "0x37",
+-          "green" : "0x1B",
+-          "red" : "0x52"
++          "alpha" : "0.702",
++          "blue" : "0x55",
++          "green" : "0x55",
++          "red" : "0x55"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_text_disabled.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_text_disabled.colorset/Contents.json
+index b1bf1d194f0cffa35609a16d4e27cac50589b4c6..4136c4ddea67815acf8525e982cf202afc3ed651 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_text_disabled.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/accent_pink500_text_disabled.colorset/Contents.json
+@@ -1,38 +1,20 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "display-p3",
+         "components" : {
+-          "alpha" : "1.000",
+-          "blue" : "0xE7",
+-          "green" : "0xD2",
+-          "red" : "0xFB"
+-        }
+-      },
+-      "idiom" : "universal"
+-    },
+-    {
+-      "appearances" : [
+-        {
+-          "appearance" : "luminosity",
+-          "value" : "dark"
+-        }
+-      ],
+-      "color" : {
+-        "color-space" : "display-p3",
+-        "components" : {
+-          "alpha" : "1.000",
+-          "blue" : "0x47",
+-          "green" : "0x37",
+-          "red" : "0x54"
++          "alpha" : "0.702",
++          "blue" : "0xFF",
++          "green" : "0xFF",
++          "red" : "0xFF"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink300.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink300.colorset/Contents.json
+index eaca097ca4caadadbb52e460051ed528f14691f8..6e8d0a59aee6c7d88691feca71e6b06a7b1a269f 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink300.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink300.colorset/Contents.json
+@@ -1,20 +1,20 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0xB6",
+-          "green" : "0x72",
+-          "red" : "0xF2"
++          "blue" : "0x55",
++          "green" : "0x55",
++          "red" : "0x55"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink500.colorset/Contents.json b/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink500.colorset/Contents.json
+index 69253c66d86f17d17903533cba3cb41914e25b6b..7e8f38fe3b209eeb2ed1e56f41bccca79f1fe60d 100644
+--- a/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink500.colorset/Contents.json
++++ b/ios/PolkadotVault/Resources/Assets.xcassets/network_colors/pink500.colorset/Contents.json
+@@ -1,20 +1,20 @@
+ {
+   "colors" : [
+     {
+       "color" : {
+         "color-space" : "srgb",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0x7A",
++          "blue" : "0x00",
+           "green" : "0x00",
+-          "red" : "0xE6"
++          "red" : "0x00"
+         }
+       },
+       "idiom" : "universal"
+     }
+   ],
+   "info" : {
+     "author" : "xcode",
+     "version" : 1
+   }
+ }
+diff --git a/ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset/Contents.json b/ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset/Contents.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..ab043f95ab21cddedbf4fc92d8abd1e04d34ae1c
+--- /dev/null
++++ b/ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset/Contents.json
+@@ -0,0 +1,12 @@
++{
++  "images" : [
++    {
++      "filename" : "trevo-asset-hub.png",
++      "idiom" : "universal"
++    }
++  ],
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset/trevo-asset-hub.png b/ios/PolkadotVault/Resources/ChainIcons.xcassets/trevo-asset-hub.imageset/trevo-asset-hub.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..7c54c4e394e8359ab1a0d7e6d33fdbade97ddd54
+GIT binary patch
+literal 10946
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/ios/PolkadotVault/Resources/Docs/privacy-policy.txt b/ios/PolkadotVault/Resources/Docs/privacy-policy.txt
+index 5b70a74b2e411e641758527eb692d5107b319a90..9d2cc9786019a0eeb9bccd5b9f809a1947c1c2f1 100644
+--- a/ios/PolkadotVault/Resources/Docs/privacy-policy.txt
++++ b/ios/PolkadotVault/Resources/Docs/privacy-policy.txt
+@@ -1,126 +1,218 @@
+-**1. GENERAL INFORMATION**
++**Privacy Policy** 
+ 
+-Novasama Technologies GmbH, Schönhauser Allee 163, 10435 Berlin, Germany (hereinafter "**Novasama**" or “**we**”) offers the mobile application Polkadot Vault (hereinafter: “**Vault**”), a non-custodial wallet software that allows the User to turn his/her mobile device, such as smartphone or tablet (hereinafter: “**Storage Device**”), into a cold storage hardware wallet by holding the User’s private cryptographic keys offline while keeping the Storage Device offline. The Vault can be downloaded from the Apple App Store and from the Google Play Store. The User can use the Vault to safekeep their Private Keys, manage their accounts and blockchain-based digital assets (hereinafter: “**Digital Assets**”), send and receive transactions of Digital Assets, and cryptographically sign blockchain transactions. The Vault contains certain features that, inter alia, allow the User to connect the Vault to third-party decentralized applications (hereinafter: “**DApp**”), protocols and services that Novasama does not operate itself (hereinafter: “**Third-Party Services**”). Novasama does not offer Third-Party Services in its own name. Further information about the functions offered in connection with the Vault can be found in Novasama’s General terms and conditions of business and use (hereafter “GTC”). We encourage you to read the GTC carefully as they affect your obligations and legal rights regarding the usage of the Vault.
++Last updated: 3 November 2023 
+ 
+-In connection with the usage of the Vault, no personal data will be processed by Novasama since the Vault will be installed on Users’ Storage Device without Novasama having access to any personal data of the User when using the Vault. However, Novasama may process personal data of persons who visit Novasama’s website https://novasama.io/ (hereinafter each a “**Website** and together “**Websites**”) and/or contact Novasama. Personal data is information that relates to an identified or identifiable natural person. An identifiable natural person is a person who can be identified directly or indirectly, e.g., by means of association with an online identifier (hereinafter: “**Data Subject**”).
++TRAIT TECH PTE. LTD. (“**Trait Tech**”, “**we**”, “**our**”, “**us**”) receives, collects, stores, and manages user personal data according to the following Privacy Policy. We take pride in treating our users’ privacy the way we would like to be treated ourselves. We make sure we comply with the applicable personal data protection laws and regulations. 
+ 
+-Novasama takes the protection of personal data very seriously. We treat personal data confidentially, in accordance with this Privacy Notice and applicable data protection law, including, but not limited to the General Data Protection Regulation (hereinafter: “**GDPR**”) and the German Federal Data Protection Act (hereinafter: “**FDPA**”).
+-This Privacy Notice informs you about how we handle your personal data that is under our control.
+-Unless otherwise provided in this Privacy Notice, capitalised terms used herein have the meaning determined in the GTC.
++By visiting our website https\://trait.tech/ (“**Website**”), and/or sharing any personal information as described below, and/or using any of Trait Tech’s products and services (the “**Services**”), you agree to the terms of this Privacy Policy. 
+ 
+-**2. CONTROLLER**
++**1. Data Collected** 
+ 
+-Novasama acts as responsible party and, hence, as controller within the meaning of the GDPR with regard to the personal data processed in connection with the Websites or any contacting of Novasama. A controller is a natural or legal person who alone or jointly with others decides on the purposes and means of the processing of personal data.
+-If you have any questions regarding this Privacy Notice or the processing of your personal data, do not hesitate to contact us via the following contact details:
++1.1 **Data that you voluntarily provide us with:** 
+ 
+-**Name:**
+-**Novasama Technologies GmbH**
+-**Address:**
+-**Schönhauser Allee 163, 10435 Berlin, Germany**
+-**Email:**
+-**admin@novasama.io**
++1.1.1 You may provide us with your personal data in a number of ways, including, without limitation, when you sign up for and use the Services; have previously provided us with personal information prior to this Privacy Policy or last updates coming into effect; make any payment for the Services; subscribe to any alerts, information releases, news, newsletters, updates and media releases; complete and submit any forms to us; post any content on or through the Website; contact us directly in person or via any medium including but not limited to by mail, telephone, social media and commercial electronic messages; communicate with us for any matters and interact with or browse the Website generally. 
+ 
+-**3. PURPOSES AND LEGAL BASES OF DATA PROCESSING BY NOVASAMA**
++1.1.2 Personal data that may be provided by you includes, but is not limited to: 1) contact information such as your full name, current and valid email address; 2) personal data for KYC and KYB checks; 
+ 
+-**a) General**
++3\) account password; 
+ 
+-The Vault was built with privacy in mind, and we expect you to use it in a privacy-friendly manner. We intend to provide you with all the necessary tools and opportunities to use the Vault while processing as little personal data as possible. In particular, no personal data will be processed by Novasama in connection with the usage of the Vault. Rather, all personal data provided by the User when using the Vault will be stored locally on the User’s Storage Device and kept offline therein. Should the Vault be used to sign a transaction or to interact with DApps no personal data will be processed or accessed by Novasama. Any data processing in connection with the use of the Vault will, therefore, either be a data processing by a third party through interaction with Third-Party Services according to Section 4.a) of this Privacy Notice or a blockchain data processing according to Section 4.b) of this Privacy Notice, which are both not controlled by Novasama. Other than described under Section 3. b) - d) below, we neither collect your personal data nor process or store it.
++4\) physical address; 
+ 
+-**b) Visiting our Websites**
++5\) phone number; 
+ 
+-When visiting our Websites certain personal data is automatically collected every time you call up the Websites and is automatically stored in so-called server log files. The personal data processed in this regard are browser type and version, operating system used, website from which the access is made (referrer URL), host name of the accessing computer, date and time of access as well as IP address of the requesting computer (hereafter referred to as “**Access Personal Data**”).
+-The processing of Access Personal Data is necessary for technical reasons to provide the Websites in a functional way and to ensure system security. This also applies to the storage of your IP address, which is necessary and, under further conditions, can at least theoretically enable an assignment to your person. In addition to the above-mentioned purposes, we use server log files exclusively for the needs-based design and optimisation of the Websites. We do not combine this data with other data sources, nor do we evaluate the data for marketing purposes.
+-The Access Personal Data is only stored for the period of time for which it is required to achieve the above-mentioned purposes. Your IP address is stored for a maximum of 7 days for IT security purposes.
+-The legal basis for the temporary storage and processing of Access Personal Data is Art. 6 (1) sentence 1 lit. b GDPR, which permits the processing of personal data for the fulfilment of a contract or for the implementation of pre-contractual measures. In addition, Art. 6 para. 1 sentence 1 lit. f GDPR serves as the legal basis for the temporary storage of technical Access Personal Data. Our legitimate interest here is to be able to provide you with the Websites in a technically functioning and user-friendly way and to ensure the security of our systems.
++6\) billing information and purchase history; 
+ 
+-**c) Contacting us**
++7\) more detailed contact preferences; 
+ 
+-If you contact us, we may collect and process certain information related to your request, such as your name, email addresses and any other data requested by us or data that you choose to provide us with (hereafter together referred to as “**ontact Data**”).
++8\) location data. 
+ 
+-Contact Data will be processed for the purpose of processing and answering your enquiry and in the event of follow-up questions.
++1.1.3 By giving us this data, you consent to this data being stored by us, as described in our Terms and this Privacy Policy. 
+ 
+-If you contact us, our processing activities in this regard are based on our legitimate interests in accordance with Art. 6 (1) sentence 1 lit. f GDPR to provide appropriate response to customer/contact enquiries. In addition, if you contact us within the framework of an existing contractual relationship or in advance for information about our services, the Contact Data you provide to us will be processed for the purpose of processing and answering your contact enquiry in accordance with Art. 6 (1) sentence 1 lit. b GDPR as a legal basis.
+-The Contact Data will remain with us until the purpose for storing/processing no longer applies (i.e., after processing your enquiry has been completed). The Contact Data will, at the latest, be deleted after one (1) year from the last date when you contacted us regarding the same matter. Mandatory legal provisions – in particular retention periods – remain unaffected.
++1.2 **Data that we collect automatically** 
+ 
+-**d) Other processing purposes**
++1.2.1 We collect data from every visitor and customer of the Website, in particular we automatically collect data about your visit to the Website, your usage of the Services and your app and website browsing activities. This anonymized information may include IP address, browser type, browser language, cookies data, performance specifications of the user’s hardware and software, date and time of access to the Website and the URL of the page requested, other information about how you interacted with our Website and our Services.
+ 
+-    **i) Compliance with legal requirements:** We also process your personal data to comply with other legal obligations that may apply to us in connection with our business activities, including, but not limited to compliance with mandatory retention periods under commercial, trade or tax law or regulations and laws against money laundering. We process your personal data in accordance with Art. 6 (1) sentence 1 lit. c GDPR as legal basis to fulfil a legal obligation to which we are subject.
++**1.3 Data from your use of the Services** 
+ 
+-    **ii) Legal enforcement:** We also process your personal data in order to be able to assert our rights and enforce our legal claims, as well as to be able to defend ourselves against legal claims. Finally, we process your personal data to the extent necessary to prevent or prosecute criminal offences. In this context, we process your personal data to protect our legitimate interests pursuant to Art. 6 (1) sentence 1 lit. f GDPR as legal basis, insofar as we assert legal claims or defend ourselves in legal disputes or we prevent or investigate criminal offences.
++1.3.1 We may receive data about how and when you use the Services, store it in log files or other types of files associated with your account, and link it to other information we collect about you. This data may include, for example, your IP address, time, date, browser used, and actions you have taken within the Website. This type of data helps us to improve our Services for both you and for all of our users. 
+ 
+-    **iii) Consent:** Please note that we currently do not collect your personal data based on your consent. However, in case you give us consent to process your personal data for certain purposes (e.g., sending information material and offers), the lawfulness of this processing is based on your consent. Consent given can be withdrawn at any time. Please note that the withdrawal is only effective for the future and processing up to that point is not affected.
++**1.4 Cookies and tracking** 
+ 
+-**4. OTHER DATA PROCESSING NOT CONTROLLED BY NOVASAMA**
++1.4.1 Cookies are small data files that are placed on your computer or mobile device when you visit a website. Website owners use cookies to make their websites operate, improve functionality and user experience, as well as to provide reporting information. 
+ 
+-**a) Interaction with Third-Party Services**
++1.4.2 We may set our own cookies and use third parties cookies (e.g. for advertising, interactive content and analytics). 
+ 
+-Using the Vault to cryptographically sign a transaction may require the User to interact with certain Third-Party Services. Any interaction with or enabling such connections may allow such Third-Party Services providers to collect, process, or share certain personal data about you. Please note that Novasama does neither receive, process or store such personal data nor does it control, operate, or manage those Third-Party Services providers. Therefore, Novasama is not responsible for the Third-Party Services providers’ data processing or privacy documentation (policy, notice, statement) and any data protection rights in this regard would need to be exercised against the Third-Party Services provider. When you intend to interact with any such Third-Party Services providers or leave the Vault, we encourage you to read the privacy documentation of the respective Third-Party Service you use or visit.
++1.4.3 We use different types of cookies, including: 
+ 
+-**b) Blockchain data processing**
++1\) **Essential website cookies**: these are important cookies as they are necessary to provide you with services available through our Website, such 
+ 
+-Please note that certain data, such as public addresses associated with your wallets and information about transactions associated therewith (hereafter “**Transactions**”), interact with public decentralised blockchain infrastructures and blockchain-based software, including smart-contracts, which work autonomously. “Decentralised” means that there is no single person, including Novasama, who controls the blockchain or stores data available thereon. “Public” means that the access is available for anyone and cannot be restricted. The data entered in a public decentralised blockchain is distributed via the nodes that simultaneously store all records entered into the blockchain. By design, blockchain records cannot be changed or deleted and are said to be “immutable”. Due to the blockchain’s nature, once you start entering information into a blockchain, particularly by carrying out any Transactions, such information, which may be considered personal data, will become publicly available on a blockchain. Please be aware that any Transaction within a blockchain is irreversible and any information, including personal data, entered into a blockchain cannot be deleted or changed. Novasama will never control such information entered in a blockchain nor manage access to it and is, therefore, not responsible for any data processing in this regard. The ultimate decision whether to transact on a blockchain or carry out any Transaction rests with you. Therefore, your ability to exercise certain data protection rights in this regard will be limited.
++as access to secure areas. 
+ 
+-**c) App Store data processing**
++2\) **Performance and functionality cookies**: these cookies are necessary to enhance the performance and functionality of our Website but are 
+ 
++non-essential to their use. However, without these cookies, certain 
+ 
+-The Vault can be downloaded from the Apple App Store and from the Google Play Store. Please note, that downloading the Vault from an App Store will allow the respective App Store provider to collect, process, or share certain personal data about you (e.g. account information and/or contact details). Please note that Novasama does neither receive, process or store such personal data nor does it control, operate, or manage those App Store providers. Therefore, Novasama is not responsible for the App Store providers’ data processing or privacy documentation (policy, notice, statement) and any data protection rights in this regard would need to be exercised against the App Store provider. When you intend to interact with any such App Store providers, e.g. to download the Vault, we encourage you to read the privacy documentation of the respective App Store provider you use or visit prior.
++functionality may become unavailable. 
+ 
+-**5. DATA RECIPIENTS**
++3\) **Analytics and customization cookies**: these cookies collect information that is used either in aggregate form to help us understand how our 
+ 
+-Within Novasama those persons will get access to your personal data that need it to fulfil our contractual and legal obligations.
++Website is being used or how effective our marketing campaigns are, or to 
+ 
+-In individual cases we may transmit personal data to our advisors in legal or tax matters, whereby these recipients act independently in their own data protection responsibility and are also obliged to comply with the requirements of the GDPR and other applicable data protection regulations. Furthermore, they are obliged to maintain special confidentiality and secrecy due to their professional status. Other than that, we will not transfer any personal data controlled by us to any third-party recipients.
++help us customize our Website for you in order to enhance your 
+ 
+-**6. DATA TRANSFER TO THIRD COUNTRIES**
++experience. 
+ 
+-We will not transfer any personal data to recipients located in countries outside the EU (European Union) / EEA (European Economic Area).
++4\) **Advertising cookies**: these cookies are used to make advertising messages more relevant to you. They perform functions like preventing the same ad 
+ 
+-**7. DURATION OF DATA STORAGE**
++from continuously reappearing, ensuring that ads are properly displayed, 
+ 
+-We initially process and store your personal data for the duration for which the respective purpose of use requires corresponding storage (see above under Section 3 on the individual processing purposes). This may also include the periods of initiating a contract (pre-contractual legal relationship) and processing a contract. On this basis, personal data is regularly deleted as part of the fulfilment of our contractual and/or legal obligations, unless its temporary further processing is necessary for the following purposes:
++and in some cases selecting advertisements that are based on your 
+ 
+-    · Fulfilment of legal storage obligations, which result, for example, from the German Commercial Code (§§ 238, 257 para. 4 HGB) and the German Fiscal Code (§ 147 para. 3, 4 AO). The periods specified there for storage or documentation are up to ten years.
++interests. 
+ 
+-    · Preservation of evidence taking into account the statute of limitations. According to §§ 194 ff. of the German Civil Code (BGB), these limitation periods can be up to 30 years, with the regular limitation period being three years.
++5\) **Stripe\_mid and Stripe\_sid**: these are cookies that enable the process of card transactions on the Website. The transaction is made by Stripe 
+ 
+-**8. DATA SUBJECT RIGHTS**
++without storing any credit card information. 
+ 
+-You are entitled to the following rights as a Data Subject under the legal requirements:
++1.4.4 You may opt out from cookies at any time by customizing your cookie preferences. However, in some cases we will not be able to provide you with all services. 
+ 
+-**a) Right of withdrawal:** You may, in accordance with Art. 7 (3) GDPR, at any time withdraw any consent you provided to allow us to process your personal data. Please note that the withdrawal only takes effect for the future. Processing that took place before the withdrawal is not affected. However, please note that we currently do not collect your personal data based on your consent.
++**1.5 Web beacons and similar technologies** 
+ 
+-**b) Right to information/access:** You are entitled at any time, within the framework of Art. 15 GDPR, to request confirmation from us as to whether we are processing personal data relating to you. If this is the case, you are also entitled, within the framework of Art. 15 GDPR, to receive information about this personal data as well as certain other information (including processing purposes, categories of personal data, categories of recipients, planned storage period, the origin of the data, the use of automated decision-making and, in the case of third country transfers, the appropriate safeguards) and a copy of your personal data. The restrictions of § 34 FDPA apply.
++1.5.1 Apart from cookies, we use other similar technologies, like web beacons, to monitor traffic, deliver and communicate with cookies, improve site performance. Similar to cookies you may opt out from web beacons at any time. If you wish to opt out of this processing activity, please contact us at token\@trait.tech with the subject named “Privacy Policy”. 
+ 
+-**c) Right to rectification:** You are entitled to request us to rectify the personal data stored about you if it is inaccurate or incorrect, in accordance with Art. 16 GDPR.
++**1.6 Data from third party sources**
+ 
+-**d) Right to erasure:** You are entitled, under the conditions of Art. 17 GDPR, to demand that we delete personal data relating to you without delay. The right to erasure does not apply if the processing of the personal data is necessary, for example, to comply with a legal obligation (e.g., statutory retention obligations) or to assert, exercise or defend legal claims. Furthermore, the restrictions of § 35 FDPA apply.
++1.6.1 We may receive some information about you, such as name, email address, demographic information, IP address, location, and use of social media websites, from third parties. 
+ 
+-**e) Right to restrict processing:** You are entitled to demand that we restrict the processing of your personal data under the conditions of Art. 18 GDPR.
++**1.7 Opting-Out** 
+ 
+-**f) Right to data portability:** You are entitled, under the conditions of Art. 20 GDPR to demand that we hand over to you the personal data concerning you that you have provided to us, in a structured, common and machine-readable format. Note that this right only applies to automated information which you initially provided consent for us to use or where we used the information to perform a contract with you. However, we are currently not processing your personal data based on your consent or based on performance of a contract with you.
++1.7.1 You may decline to have your personal data collected via third party tracking technologies by navigating to the settings feature in your browser and declining all third party cookies or declining third party cookies from specific sites, or, for mobile, limiting ad tracking or resetting the advertising identifier via the privacy settings on your mobile device. 
+ 
+-**g) Right of objection:** You are entitled to object to the processing of your personal data under the conditions of Art. 21 GDPR, so that we must stop processing your personal data. The right to object only exists within the limits provided for in Art. 21 GDPR. In addition, our interests may conflict with the termination of processing, so that we are entitled to process your personal data despite your objection.
++1.7.2 If your browser does not permit you to block any cookies and similar technologies, you can use the following third party tools to decline the collection and use of information for the purpose of serving your interest based advertising: 
+ 
+-**h) Right of appeal to a supervisory authority:** Subject to the conditions of Art. 77 GDPR, you have the right to lodge a complaint with a competent supervisory authority. A list of data protection supervisory authorities in Germany and their contact details can be found here. As a rule, the Data Subject can turn to the supervisory authority at his/her habitual residence or place of work or Novasama’s registered office. The supervisory authority responsible for Novasama is the Berlin Commissioner for Data Protection and Freedom of Information (Der Berliner Beauftragte für Datenschutz und Informationsfreiheit)
++- The NAI’s opt-out platform: http\://www\.networkadvertising.org/choices/ 
++- The EDAA’s opt-out platform http\://www\.youronlinechoices.com/ 
++- The DAA’s opt-out platform: http\://optout.aboutads.info/?c=2\&lang=EN 
+ 
+-**Other concerns:** For further data protection questions and concerns, please contact us under the contact details provided in Section 2 above.
++**2. Minors** 
+ 
+-**9. REQUIREMENT TO PROVIDE DATA**
++2.1. Minors and children under the age of 16 (or other legal age of your country of residence) should not use our Services. If you are 13 years of age up to 16, you need to obtain a written parental or guardian consent, unless the law of the country of your residence prescribes higher age requirements, in which case you need to meet such requirements. We do not knowingly provide any Services to minors. If you access our Services, you represent that you have the legal capacity to enter into a binding agreement. 
+ 
+-Visiting our Websites requires you to provide certain personal data to us, as described in Section 3.b) above. Other than that, you are not required to provide any personal data to us. However, if you decide not to provide your personal data to us, you may not be able to contact us and/or we will not be able to contact you, e.g., to respond to your enquiries or questions.
++**3. Use of the Data** 
+ 
+-**10. AUTOMATED DECISION MAKING / PROFILING**
++3.1. We only use your personal data for the following purposes: 
+ 
+-We do not use your personal data to make any automated decision making or profiling (meaning an automated analysis of your personal circumstances).
++3.1.1 to provide you with the Services that you requested; 
+ 
+-**11. CHILDREN PERSONAL DATA**
++3.1.2 to promote the use of our Services to you; 
+ 
+-The Vault is not intended for the use of children (under 18 years old). We do not knowingly market to, solicit, process, collect, or use personal data of children.
++3.1.3 to analyze and improve Trait Tech Services; 
+ 
+-If we become aware that a child has provided us with personal data, we will use commercially reasonable efforts to delete such information from our database within a reasonable timeframe. If you are the parent or legal guardian of a child and believe that we have collected personal data from your child, please contact us.
++3.1.4 to send you informational and promotional content that you may subscribe to or unsubscribe; 
+ 
+-**12. CHANGES TO THIS PRIVACY NOTICE**
++3.1.5 to bill and collect money for Services ordered; 
+ 
+-We keep this Privacy Notice under regular review and may update it at any time. If we make any changes to this Privacy Notice, we will change the “Last Updated” date above. Please review this Privacy Notice regularly to check for any updates. The current version of the Privacy Notice can be accessed at any time on https://novasama.io/vault-privacy.
++3.1.6 to send you notifications, including notifications on change of our Services; 
+ 
+-Last Updated: February 5, 2024
++3.1.7 to communicate with our customers about our Website and Services and provide customer support in response to their inquiries; 
++
++3.1.8 to enforce compliance with our Terms and applicable law; 
++
++3.1.9 to protect our rights and safety as well as the rights and safety of our customers and third parties; 
++
++3.1.10 to meet legal requirements; 
++
++3.1.11 to provide information to representatives and Service Providers; 
++
++3.1.12 to prosecute and defend a court, arbitration, or similar legal proceeding;
++
++3.1.13 to respond to lawful requests by public authorities, including to meet national security or law enforcement requirements; 
++
++3.1.14 to provide, support, and improve the Services we offer; 
++
++3.1.15 to provide suggestions about products or services that you may be interested in and which you may opt out; 
++
++3.1.16 to transfer your information in the case of a sale, merger, consolidation, liquidation, reorganization, or acquisition. 
++
++**4. Sharing of Data** 
++
++4.1 We do not share personal information you have provided to us without your consent, unless: 4.1.1 Doing so is appropriate to carry out your own request; 
++
++4.1.2 We believe it is needed to enforce our Terms, or if it is legally required; 
++
++4.1.3 We believe it is needed to detect, prevent or address fraud, security or technical issues; 
++
++4.1.4 Otherwise protect our property, legal rights, or that of others. 
++
++4.2 Trait Tech is operated from the Republic of Singapore. If you are visiting the Website or Services from outside of Singapore, you agree to any processing of any personal information you provide us according to this policy. 
++
++4.3 We don't share your personal information with third parties, except for people and other entities that perform certain tasks on our behalf and who are under our control (our “Service Providers”). We may need to share personal information with our Service Providers in order to provide products or services to you. Unless we tell you differently, our Service Providers do not have any right to use Personal Information or other information we share with them beyond what is necessary to assist us. You hereby consent to our sharing of personal information with our Service Providers. Our Service Providers are:
++
++|        |                              |                                 |                                                |
++| :----: | :--------------------------: | ------------------------------- | ---------------------------------------------- |
++| **#**  |       **Entity Name**        | **Webpage**                     | **Purpose**                                    |
++|   1.   |          Google LLC          | https\://analytics.google.com/  | We use Google Analytics for analytical purpose |
++|   2.   |        Amplitude Inc.        | https\://amplitude.com          | For analytical purpose                         |
++|   3.   |         Stripe, Inc.         | https\://stripe.com/            | For payment processing                         |
++|   4.   | Wise / Wise Payments Limited | https\://wise.com               | For payment processing                         |
++
++****
++
++|     |                                |                       |                                               |
++| :-: | ------------------------------ | --------------------- | --------------------------------------------- |
++| 5.  | Sumsub / Sum and Substance Ltd | https\://sumsub.com/  | For customer verification to comply with laws |
++| 6.  | Onfido Ltd                     | https\://onfido.com   | For customer verification to comply with laws |
++
++****
++
++4.4 Only aggregated, anonymized data is periodically transmitted to external services to help us improve the Website and Services. To receive the current list of external services that we use for this purpose, please email at token\@trait.tech. 
++
++**5. Safeguarding your Personal Data** 
++
++5.1 The protection of your personal data is vital to us. We take commercially reasonable measures to protect your personal data from loss, misuse and unauthorized access, disclosure, alteration, and destruction, considering the risks involved in the processing and the nature of the personal data, thanks to the use of the following technologies: 
++
++⎯ SSL certificates, 
++
++⎯ Two-factor authentication. 
++
++5.2 Our employees, contractors and any business partners can access personal data on a need-to-know basis, and under a strict duty of maintaining confidentiality. We use encryption for sensitive information, and we test our system on a regular basis to ensure we comply with industry practices and standards. 
++
++5.3 While we strive to use commercially acceptable means to protect your personal data, no method of transmission over the Internet, or method of electronic storage, is completely secure, and we cannot guarantee the absolute security of any data. 
++
++5.4 You agree to protect the security of your login information and password and not to transfer such information to any third party. We will not be liable to you for the use of your account by any third party. 
++
++5.5 If you become aware of any unauthorized use of your account, you shall immediately notify us in writing. 
++
++**6. Access to your Personal Data** 
++
++6.1 You may access your personal data held by us to correct, update, and remove inaccurate or incorrect data. You have the following rights: 
++
++6.1.1 delete some or all personal data that we held about you; 
++
++6.1.2 change or correct your personal data that we held about you; 
++
++6.1.3 object to, or limit or restrict, use of your personal data; 
++
++6.1.4 right to access and/or take your personal data: you can ask us for a copy of your personal information in machine readable form; 
++
++6.1.5 access information we hold about you.
++
++6.2 If you request us to view, change and remove your data associated with your account, please contact us at token\@trait.tech. We will process your request within 15 business days. In accordance with the applicable laws, additional fees may be applied. 
++
++**7. Changes to the Privacy Policy** 
++
++7.1 We may amend this Privacy Policy from time to time. Use of information we collect now is subject to the Privacy Policy in effect at the time such information is used. If we make major changes in the way we collect or use information, we will notify you by posting an announcement on the Website or sending you an email. 
++
++**8. Merge of Company** 
++
++8.1 If Trait Tech merges with, or is acquired by, another company or organization, or sells all or a portion of its assets, your personal data may be disclosed to our advisers and any prospective purchaser or any prospective purchaser’s adviser and may be among the assets transferred. However, personal data will always remain subject to this Privacy Policy. 
++
++**9. Data Retention** 
++
++9.1 We retain your personal data primarily within the Republic of Singapore. We retain your personal data for as long as we need it to fulfil the purposes for which we originally collected it or as needed to provide with the Services, except if required otherwise by law. In some cases we may determine the period of data retention based on the period we need to access the data for the provision of services, receiving payment, or for any other auditing or legal purposes. 
++
++9.2 Countries where we process information may have laws that are different, and potentially not as protective, as the laws of your own country, though we will always comply with the applicable laws when we process any information. 
++
++**10. Contact us** 
++
++10.1 Should you have any questions or concerns, please email us at support\@trait.tech.
+diff --git a/ios/PolkadotVault/Resources/Docs/terms-and-conditions.txt b/ios/PolkadotVault/Resources/Docs/terms-and-conditions.txt
+index 2094b0dd47884e8da7d2976ac959392adcabc4cf..c8db742f8cc2764bd4a30be7428515f3f6bb5b63 100644
+--- a/ios/PolkadotVault/Resources/Docs/terms-and-conditions.txt
++++ b/ios/PolkadotVault/Resources/Docs/terms-and-conditions.txt
+@@ -1,87 +1,169 @@
+-**General terms and conditions of business and use**
++**TERMS AND CONDITIONS**
+ 
+-**1. Basic Provisions; Risk Information; No Financial Service**
++Effective Date: 4 September 2024
+ 
+-**1.1** Novasama Technologies GmbH, Schönhauser Allee 163, 10435 Berlin, Germany (hereinafter: “**Novasama**”) offers the mobile application Polkadot Vault (hereinafter: “**Vault**”) to customers as Free-Ware free of charge. The Vault is a non-custodial wallet software that allows the User to turn his/her mobile device, such as smartphone or tablet (hereinafter: “**Storage Device**”), into a cold storage hardware wallet by holding the User’s private cryptographic keys (hereinafter: “**Private Key**”) offline while keeping the Storage Device offline. Novasama does neither store, nor has access to or control over a User's Private Key and seed recovery phrase (hereinafter: “**Mnemonic Phrase**”) at any time.
++Welcome to website and mobile application (hereinafter jointly, the “**App**”)! This App is operated by Trait Tech as defined below (“**Trait Tech**”). These Terms and Conditions is the binding legal agreement between Trait Tech and you, the user of our App, and Services as defined below.
+ 
++The following Terms & Conditions govern your access and use of the App and the Services.
+ 
+-**1.2** The User can use the Vault to safekeep their Private Keys, manage their accounts and blockchain-based digital assets (hereinafter: “**Digital Assets**”), send and receive transactions of Digital Assets, and cryptographically sign blockchain transactions.
++Any purchase and use of Trait Token created and distributed by Trait Token is defined by the relevant Terms and Conditions as amended from time to time. Such Terms and Conditions shall be legally binding on you.
+ 
+-**1.3** By using the Vault, the User confirms that the User is aware of the inherent risks associated with the use of cryptographic and blockchain-based systems and that the User is experienced with securing Private Keys and handling Digital Assets. The User is aware that Digital Asset markets can be highly volatile due to various factors such as speculation, advancing technology, or changes in the regulatory environment and may involve financial risks. Blockchain transactions signed by using the Private Key stored in the Vault and validated by the blockchain network are irrevocable and irreversible, and there is no possibility to retrieve Digital Assets that have been transferred.
++**By visiting our App, and/or purchasing our Services, you constitute an agreement to these Terms. If you do not agree to be bound by these Terms, you shall not access this App or use our Services. Please read these Terms before you use this App, and Services.**
+ 
+-**1.4** The User acknowledges that Novasama offers a non-custodial wallet solution. The User is responsible for storing and securing the User’s Mnemonic Phrase and Private Keys, as well as any backups thereof. In particular, the User acknowledges that the failure or loss of the Storage Device can lead to the irreversible loss of all information stored in the Vault including the Mnemonic Phrase and/or Private Key. Therefore, the User commits to keeping a back-up copy of his/her information, including Mnemonic Phrase and Private Key, separate from the Vault and from the Storage Device altogether.
++Trait Tech reserves the right, at its sole discretion, to change these Terms. These changes are effective immediately upon posting the amended Terms on the App, unless otherwise stated. When changes come into effect, the revised Terms shall supersede the previous version of the Terms. You are responsible for regularly reviewing these Terms. 
+ 
+-**1.5** Novasama does not store Mnemonic Phrases and Private Keys for the User, nor does it have any backups or access to the User’s Mnemonic Phrase and Private Keys. In the event of loss of the Mnemonic Phrase and Private Keys by the User, Novasama will not be able to recover the User's Private Keys or otherwise restore access to the Vault or any Digital Assets. Novasama is not responsible for the loss of the User’s Mnemonic Phrase or Private Keys. In case of loss, only the User himself can recover his/her Wallet.
+-**1.6** The User is aware that the use of blockchain infrastructures and the processing of blockchain transactions may result in network fees, which shall be borne by the User. Novasama does not charge the User with these network fees and cannot influence these costs.
+-**1.7** Novasama does not provide any financial services, in particular Novasama does not give any  investment recommendations or advice and does not provide any trading or crypto custody services. Novasama is also not a provider of Digital Assets, does not offer Digital Assets for sale or purchase. The User is responsible for the tax treatment, in particular income tax treatment, of the profits from the purchase or sale of Digital Assets and use of other services.
++1. **Definitions**
+ 
+-**2. Scope of Application; Amendment of the General Terms and Conditions of Business and Use**
++1. “**Trait Tech**” means an Exempt Private Company Limited by Shares, duly incorporated in Singapore, having its registered address at 10 Anson Road, #20-05, International Plaza, Singapore (079903).
++2. “**Trait Token**” means tokens issued by Trait Tech.
++3. “**Services**” means Trait Tech’s services on maintaining and hosting the App and Software, making available services accessible through it.
++4. “**Terms**” means these Terms and Conditions as amended from time to time.
++5. “**User**” means any entity accessing or using the Service and App.
+ 
+-**2.1** These General Terms and Conditions of Business and Use (hereinafter: “**GTC**”) apply to contracts concluded between Novasama and the contractual partner (hereinafter: “**User**”) (hereinafter: “**User Agreement**”). The contract is concluded by downloading the Vault on the User’s Storage Device subject to these GTC. The use of the Vault is only permitted to legal entities, partnerships and natural persons with unlimited legal capacity. In particular, minors are prohibited from using the Vault.
+-‍
++2. **Disclaimer**
+ 
+-**2.2** The application of the User’s general terms and conditions is excluded. Deviating, conflicting or supplementary general terms and conditions of the User shall only become part of the contract if and to the extent that Novasama has expressly agreed to their application in writing. This consent requirement shall apply in any case, even if for example Novasama, being aware of the general terms and conditions of the contractual partner, accepts payments by the contractual partner without reservations.
++1. The App and Services do not constitute the provision of any financial or investment advice in connection with the Services contemplated by these Terms. The information and materials contained on the App is given for information purpose only and is not to be construed as a solicitation to enter into any transaction. You should consult a financial or investment professional regarding any possible transaction if you have any doubts.
++2. The detailed disclaimer is provided in the Terms governing the purchase and use of Trait Tokens.
++3. You should carefully consider all possible risks, and you shall be free to make your own decision 
+ 
+-**2.3** The current version of the GTC is published on Novasama’s website under https://novasama.io, indicating the date of the last update to the GTC. By downloading or updating the Vault, the User accepts the version of the GTC available at the time of his/her latest download or update.
++3. **Eligibility**
+ 
+-**3. Functions of the Vault; User’s Duty of Care; Third-Party Services.**
++1. By using the Services, you represent and warrant that you have not previously been suspended or removed from the App.
+ 
+-**3.1** The Vault allows the User, *inter alia*, to store his/her Private Keys and Mnemonic Phrase offline, to create multiple accounts with derivation paths using his/her Mnemonic Phrase, and to sign transactions or services related to Digital Assets in an air-gapped way without connecting the Storage Device to the internet and/or to other devices. The Vault is native to the Polkadot ecosystem and can be used for any supported blockchain. Novasama continues to develop the Vault on a regular basis, so that the services offered may be subject to change. The presentation of the Vault only reflects the current functionality and does not constitute a binding offer for future services.
++4. **Restricted Countries**
+ 
+-**3.2** To use the Vault, the User must choose a Storage Device which the User is willing to permanently disconnect from the internet and from other devices. The User must reset this Storage Device to factory settings, download the Vault and disconnect the Storage Device from the internet and from all other devices. The Vault will then guide the User through the set-up process. The User acknowledges that, once the Vault is set-up, its security benefits as a hardware wallet might be corrupted if the Storage Device is ever connected to the internet and/or to other devices. The User is responsible for keeping the Storage Device safe and offline at all times. Furthermore, the User must frequently update the metadata about blockchain network specifications (hereinafter: “**Metadata**”) stored in the Vault. Otherwise, the User might not be able to, e.g., sign transactions for as long as the Metadata in the Vault is outdated. Up-to-date Metadata is currently provided by Novasama as well as by other providers and can be imported into the Vault in an air-gapped way while keeping the Storage Device offline.
++1. You should be aware that our App may be restricted and/or unavailable for users in some jurisdictions as governed by applicable laws. Trait Tech shall not be responsible for any unavailability of our App and/or Services in any Restricted Country or other countries. 
++2. You should personally ensure that using our Services is allowed in your country of citizenship or residence. Trait Tech shall not be responsible for any violation of laws pertaining to the above.
++3. Trait Tech shall not be held liable for any use of our Services by individuals or legal entities that are restricted or limited to use our Services. Users who violate their applicable laws and regulations shall be solely liable for such violation.
+ 
+-**3.3** From time to time, Novasama may release updated versions of the Vault software. Should the User decide to update the Vault, the User must reset the Storage Device and delete the Vault and the information contained therein prior to connecting the Storage Device to the internet. After that, the User must download and set-up the updated version of the Vault again and add his/her Private Keys, as described in Section 3.2. The User’s obligation to keep back-up copies of his/her information, including Mnemonic Phrase and Private Key, remains unaffected (cf. Section 1.4).
++5. **Use Restrictions**
+ 
+-**3.4** The Vault contains certain features (hereinafter: “**Vault Features**”) that, inter alia,  allow the User to connect the Vault to third-party decentralized applications (hereinafter: “**DApp**”), protocols and services that Novasama does not operate itself (hereinafter: “**Third-Party Services**”, cf. Section 4 below). Novasama does not offer Third-Party Services in its own name. The conditions of service provisions for Third-Party Services, if any, shall be governed exclusively by the applicable contractual provisions between the User and the respective provider of the Third-Party Services. Novasama continues to develop the Vault Features on a regular basis, so that the Vault Features offered and Vault's compatibility with Third-Party Services may be subject to change. The presentation of the Vault and the Vault Features in the Vault only reflects the current functionality and does not constitute a binding offer for future services.‍
++1. When accessing to and using the Services, the User shall not:
+ 
+-**4. Conditions of Service; GNU GPLv3**
++1) Copy, duplicate, reproduce or publish the Services or any of their contents;
+ 
+-**4.1** The User's right to use the Vault is limited to the respective state of art. Novasama may temporarily restrict the Vault or certain Vault Features if this is necessary due to capacity limits, to maintain the security or integrity of the software, servers or services or to carry out technical measures, e.g. maintenance work serving the proper or improved service of the Vault. In these cases, Novasama will take the User’s legitimate interests into account, e.g. by providing appropriate information about planned maintenance work in advance. Section 6 of the GTC remains unaffected.
++2. Electronically transfer the Services to multiple computers over a network;
+ 
+-**4.2** To the extent the User connects his/her Vault to Third-Party Services or relies on content or data from third party providers, Novasama does not warrant their accuracy, completeness or timeliness. No contractual relationship exists between Novasama and the Third-Party Service providers and the Third-Party Service providers are not acting as agents of or at the direction of Novasama. Novasama has no technical, legal or organizational means to influence Third-Party Services. Novasama is not liable for any damages incurred by the User due to the use of Third-Party Services, in particular when signing transactions or importing Metadata, such as in case of bridged tokens, unavailability and customization of DApps and protocols, transactions to incompatible, incorrect or unassigned wallet addresses, transactions to DApps, failure of nodes or unavailability of blockchain networks, hacker attacks on DApps, or inaccurate Metadata imported from Third-Party Service providers.
+-**4.3** Novasama reserves all intellectual property rights in and to the Vault, Vault Features, its software, content, data, or other material. Novasama provides the Vault software code on an "open source" basis in accordance with the terms of the GPL 3.0 license, which can be found here: https://opensource.org/licenses/GPL-3.0, and make the source code of the Vault available here https://github.com/novasamatech. You are free to use, modify and distribute the software code of the Vault in accordance with the terms of GPL 3.0.
++3) Distribute copies of the Services to others by any means whatsoever;
+ 
+-**5. Fees**
++4. In whole or in part change, modify, adapt, translate, reverse engineer, disassemble or decompile the Services or create derivative works based on the Services;
+ 
+-Blockchain network fees which are due for the execution of transactions shall be borne by the User. Novasama does not charge the User with these network fees and cannot influence these costs. Furthermore, Novasama has no control over the fees charged by the Third-Party Services.
++5) Assign, rent, exchange, hire out, lend, lease or sublease the Services or any copies thereof;
+ 
+-**6. Liability of Novasama; Force Majeure**
++6. Sell or transfer the Services or any copies thereof;
+ 
+-**6.1** Except in case of intentional misconduct (*Vorsatz*) or gross negligence (*grobe Fahrlässigkeit*), any liability of Novasama shall be excluded for any and all claims arising in connection to the Vault provided to the Customer as Free-Ware free of charge. Warranty obligations shall only arise if Novasama has fraudulently concealed a possible defect in the Vault or the contractual services.
++7) Bundle, repackage, or include the Services with any software in any way;
+ 
+-**6.2** The limitations of liability according to Section 6.1 do not apply (i) concerning damages arising from injury to life, body or health, (ii) as far as Novasama has assumed a guarantee, (iii) to claims of the User according to the Product Liability Act (*Produkthaftungsgesetz*), and (iv) to claims of the User according to any applicable data privacy laws.
++8) Use the Services beyond the term of a free trial subscription, if applicable;
+ 
+-**6.3** The liability provisions in Sections 6.1 and 6.2 shall also apply to the personal liability of the executive bodies, legal representatives, employees and vicarious agents of Novasama.
++8. Utilize the Services for any purpose or project other than the permitted use(s) as set in these Terms.
+ 
+-**6.4** If the User suffers damages from the loss of data, Novasama is not liable for this, as far as the damages would have been avoided by a regular and complete backup of all relevant data by the User.
++2) Unless otherwise indicated under the Clause 5.1 above, all intellectual property rights (such as but not limited to trademarks, trade names, logos, patents, copyrights, domain names and derivative rights) in the Services and related content and technology around the world are and will remain the exclusive property of Trait Tech or its licensors. 
++3) The User shall be solely responsible for saving all User data as such data will be deleted any time after the subscription is terminated for any reason.
+ 
+-**6.5** Novasama takes all possible measures to enable the User to access the Vault and the Vault Features. In the event of disruptions to the technical infrastructure, the internet connection or a relevant blockchain, Novasama shall be exempt from its obligation to perform. This also applies if Novasama is prevented from performing due to force majeure or other circumstances, the elimination of which is not possible or cannot be economically expected of Novasama.
++6. **Wallet**
+ 
+-**6.6** Liability in any other event but Section 6.1 to 6.5 above is excluded.
++1. Trait Tech provides a non-custodial wallet software for digital assets issued on TRAIT blockchain. The Users can use the wallet to authorize transactions and pay for the Services. The Users shall be solely responsible for:
+ 
+-**7. Indemnities**
++- any activities and risks associated with their wallet;
++- retention and security of their private key to access the wallet.
+ 
+-**7.1** The User agrees to indemnify Novasama to the extent liable under statutory law from all claims, which other Users or other third parties assert for infringement of their rights against Novasama due to the User’s use of the Vault or other Third-Party Services.
++2. Keeping your private key securely is important, otherwise you may lose control of your wallet. Trait Tech does not store or have access to your private key and cannot retrieve it in case of loss. The private keys are stored at User’s device only. Trait Tech shall have no responsibility or liability whatsoever in the event you are unable to access your wallet for any reason or lose your tokens. The User shall be solely responsible for saving backup keys, and use the App at its sole risk. 
++3. The User is solely liable for determining whether any taxes apply to the transactions the User performs with the wallet. You agree that we are not responsible for determining whether taxes apply to your transactions or for collecting, reporting, withholding, or remitting any taxes.
+ 
+-**7.2** In this case, the User assumes all necessary costs of legal defense of Novasama, including all statutory court and attorney fees. This does not apply if the User is not responsible for the infringement.
++7) **Use of the Services**
+ 
+-**7.3** In case of a claim asserted by a third party, the User is obliged to the extent liable under statutory law to provide Novasama with immediate, truthful and complete information necessary for the examination of claims and defense.
++1. Certain Services and access to the App may only be accessible subject to the following conditions:
+ 
+-**8. Data Protection**
++1. You ensure that using our Services is allowed in your country of citizenship or residence.
+ 
+-‍Novasama informs the User about Novasama’s processing of personal data, including the disclosure to third parties and the rights of the User as an affected party, in the data protection information.
++2. You must comply with these Terms.
+ 
+-**9. Final Provisions**
++3. You agree to comply with any and all laws, regulations, and rules of governmental or regulatory authorities applicable to you and our Services. 
+ 
+-**9.1** Novasama is entitled to transfer its rights and obligations under the User Agreement in whole or in part to third parties with a notice period of four weeks. In this case, the User has the right to terminate the User Agreement without notice.
++8) **Use of the App**
+ 
+-**9.2** Should individual provisions of these GTC be or become invalid or unenforceable in whole or in part, this shall not affect the validity of the remaining provisions. The invalid or unenforceable provision shall be replaced by the statutory provision. If there is no statutory provision or if the statutory provision would lead to an unacceptable result, the parties shall enter negotiations to replace the invalid or unenforceable provision with a valid provision that comes as close as possible to the economic purpose of the invalid or unenforceable provision.
++1. You agree that you will not use the Services for any purpose that is unlawful or prohibited by these Terms. You must not, without limitation:
+ 
+-**9.3** The User Agreement including these GTC shall be governed by German law. The application of the UN Convention on Contracts for the International Sale of Goods is excluded. For consumers domiciled in another European country but Germany, the mandatory provisions of the consumer protection laws of the member state in which the consumer is domiciled shall also apply, provided that these are more advantageous for the consumer than the provisions of the German law.
++1. use our Services to perform criminal activity of any kind, including but not limited to, money laundering, illegal gambling, terrorist financing or malicious hacking;
+ 
+-**9.4** For users who are merchants within the meaning of the German Commercial Code (*Handelsgesetzbuch*), a special fund (*Sondervermögen*) under public law or a legal person under public law, Berlin shall be the exclusive place of jurisdiction for all disputes arising from the contractual relationship.
++2. damage, disable, overburden or impair the App or Services, or interfere with any other party’s use and enjoyment of the App or Services;
+ 
+-**9.5** In the event of a conflict between the German and the English version of these GTC, the German version shall prevail.
++3. attempt to gain unauthorised access to the Services, computer systems or networks connected to the Services by any means;
+ 
+-Last Updated: February 28, 2024
++4. reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by Trait Tech;
++
++5. upload, post, host, or transmit unsolicited email, SMSs, or “spam” messages;
++
++6. make available any materials containing viruses, bots or other code, files or programs designed to interfere, hinder or impair the operation of any computer, telecommunication equipment or software;
++
++7. violate third party rights, including, without limitation, Trait Tech’s agents, partners, on the App and/or cause harm in any way;
++
++8. collect and store personal information of other users without their proper authorization.
++
++9) **Fraud Attempts; Access Restrictions**
++
++1. If we have reasons to believe that your use of this App and Services is fraudulent and/or illegal, we are entitled in our sole discretion to block, suspend or terminate your access to the App or deny the use of any Services. If you have conducted any fraudulent and/or illegal activity, Trait Tech reserves the right to take any necessary legal action, and you may be liable for monetary losses to Trait Tech.
++
++10) **Intellectual Property Rights**
++
++1. The intellectual property contained in the App, and Services (and any derivative works based on them) is confidential and/or proprietary information of Trait Tech, our affiliates or its licensors and is protected by copyright and other intellectual property rights. All title, ownership and intellectual property rights on the App, and Services shall remain with Trait Tech, our affiliates or licensors, as the case may be. All rights not otherwise claimed under the Terms or by Trait Tech are hereby reserved.
++2. You further acknowledge and agree that the App, and Services are protected by copyrights, trademarks (whether registered or being under registration), service marks, patents or other proprietary rights and laws. Except as expressly permitted by applicable law or as authorized by Trait Tech or the applicable licensor (such as an advertiser), you agree not to modify, rent, lease, loan, sell, distribute, transmit, broadcast, publicly perform or create derivative works based on the Services, or the App, in whole or in part. Without limiting the foregoing, any reproduction, redistribution, reverse engineering or decompilation of the Services, or the App is expressly prohibited by law, and may result in severe civil and criminal penalties. 
++
++11) **Linked Sites**
++
++1. This App may contain links to third party web sites (“linked sites”). The linked sites are not under the control of Trait Tech and we are not responsible for the content of any linked site. Trait Tech makes no representations regarding the content or appropriateness of content on such sites. When you access a linked site from this App, you leave this App and you do so at your own risk. You are responsible for viewing and complying with the terms and conditions posted on the linked site. 
++
++12) **Disclaimer of Warranties**
++
++1. All Services, including software, products, information, text, and related graphics contained within or available through the App are provided “as is” and “as available”. Under no circumstances shall we be liable for any errors or omissions in the Services on the App. Trait Tech makes no representations or warranties of any kind, either express or implied, as to the operation of this App or the Services, data or materials included on this App. Trait Tech does not warrant or make any representations regarding suitability, availability, accuracy, reliability, completeness, or timeliness of any material of any kind contained within the Services. We cannot ensure that the Services and other information provided on the App are accurate, correct, reliable, exhaustive, or complete on every subject. 
++2. Under no circumstances shall Trait Tech, including its subsidiaries, affiliates, officers, agents, licensors, employees, partners, licensors, or others involved in creating, sponsoring, promoting or otherwise making available the App and its content, be liable to any person or entity whatsoever for any direct, indirect, incidental, consequential or punitive damages or any damages or losses whatsoever.
++
++13) **Limitation of Liability**
++
++1. You acknowledge and agree that all access and use of the App, or use of the Services are at your own risk. 
++2. WE AND OUR SUPPLIERS AND LICENSORS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO: DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES (EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF THESE DAMAGES), RESULTING FROM YOUR USE OF OUR APP, AND SOFTWARE. UNDER NO CIRCUMSTANCES WILL THE TOTAL LIABILITY OF US AND OUR SUPPLIERS AND LICENSORS OF ALL KINDS AND UNDER NO CIRCUMSTANCES WILL THE TOTAL LIABILITY OF YOU (CARESOURCE AND ITS USERS AND AGENTS) ARISING OUT OF OR RELATED TO YOUR USE OF THE APP, AND SOFTWARE (INCLUDING BUT NOT LIMITED TO WARRANTY CLAIMS), REGARDLESS OF THE FORUM AND REGARDLESS OF WHETHER ANY ACTION OR CLAIM IS BASED ON CONTRACT, TORT, OR OTHERWISE, EXCEED THE AMOUNTS, IF ANY, THAT YOU HAVE PAID FOR YOUR USE OF THE APP, AND SOFTWARE. 
++
++14) **Indemnification**
+ 
++1. You agree to indemnify and hold Trait Tech and its subsidiaries, affiliates, officers, agents, licensors, employees, partners, licensors or others involved in creating, sponsoring, promoting or otherwise making available the App, Services and data, harmless from any and all claims, damages, losses or liabilities, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of any action, inaction or omission by you. 
++
++15) **Force Majeure**
++
++1. Trait Tech shall not be deemed to be in default of any provision hereof or be liable for any delay, failure in performance, or interruption of service resulting directly or indirectly from acts of God, civil, public, or military authority, civil disturbance, war, terrorism, strikes, fires, other catastrophes, power or telecommunications failure, embargoes, sanctions, government orders, or any other cause beyond its reasonable control. If the delay continues for a period more than six (6) months, either party shall be entitled to terminate these Terms on written notice. 
++
++16) **Duration and Termination**
++
++1. These Terms will remain in full force and effect while you use the App and Services.
++2. We reserve the right to restrict your access, temporarily or indefinitely suspend Services and/or App if:
++
++a) you breach these Terms or other policies;
++
++b) we believe that your actions may cause any loss or liability to our Users or to us;
++
++c) we believe, in our sole discretion, that your actions may cause legal liability for you, our Users, us, or our affiliates; may be contrary to the interests of the App or the user community; or may involve illicit activity. 
++
++3. Any terms and conditions of these Terms that may survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.
++
++17) **Governing Law; Dispute Resolution**
++
++1. These Terms shall be construed and governed by the laws of Singapore without prejudice to its conflict of laws.
++2. All disputes directly arising under these Terms, which cannot be settled amicably, shall be submitted to settlement proceedings under the Rules of Arbitration of the International Chamber of Commerce by one or more arbitrators appointed in accordance with said Rules. If the dispute has not been settled pursuant to the said Rules within ninety (90) days following the filing of a Request for ADR or within such other period as the Parties may agree in writing, such dispute shall be finally settled under the rules of arbitration of the International Chamber of Commerce by one or more arbitrators appointed in accordance with the said rules of arbitration. The place of arbitration shall be Singapore. The chairman of such arbitration shall be of legal education. The arbitral proceedings shall be conducted in English. The award of the arbitration will be final and binding upon the Parties. 
++
++18) **Miscellaneous**
++
++1. We reserve the right to modify, suspend or terminate any Services or products available through the App, at any time for any reason with or without notice to you. 
++2. If any portion of these Terms is found illegal or unenforceable, in whole or in part, such provision shall, as to such jurisdiction, be ineffective solely to the extent of such determination of invalidity or unenforceability without affecting the validity or enforceability thereof in any other manner or jurisdiction and without affecting the remaining provisions of the Terms, which shall continue to be in full force and effect.
++3. No joint venture, partnership, employment, or agency relationship exists between you and Trait Tech as a result of these Terms.
++4. No waiver by either party of any default by the other in the performance of any provisions of these Terms shall operate as a waiver of any continuing or future default, whether of a like or different character.
++5. Trait Tech reserves the right to assign its obligations and duties in these Terms to any person or entity.
++6. Any notice or other communication to be given to us under these Terms shall be in writing in the English language unless otherwise agreed between Trait Tech and the user. Any notice or other communication from users shall take effect only when received by us unless such notice or another communication is contrary to these Terms.
++7. These Terms constitute the entire agreement between you and Trait Tech with respect to your use of the App, purchase of Trait Token, use of the Products and Services. For issues related to any of the above, the User agrees to rely only on these Terms with respect to the subject matter hereof. 
++8. These Terms supersede any prior and contemporaneous agreements and understandings, whether written or oral, between the Parties with respect to the subject matter hereof. There are no representations, understandings or agreements relating to these Agreement that are not fully expressed in these Terms.
++
++19) **Contact Us**
++
++1. If you have questions in relation to these Terms, please contact us at <support@trait.tech>. Trait Tech Pte. Ltd., Republic of Singapore.
++2. © Copyright 2023 Trait Tech Pte. Ltd. All Rights Reserved.
++
++Last Updated: February 28, 2024
+diff --git a/ios/PolkadotVault/Resources/en.lproj/Localizable.strings b/ios/PolkadotVault/Resources/en.lproj/Localizable.strings
+index c89c01f7c38d68b3603393f2c252b82e29f2e278..5589e90a37bb93da8a20234d4ad5e83af5c9f454 100644
+--- a/ios/PolkadotVault/Resources/en.lproj/Localizable.strings
++++ b/ios/PolkadotVault/Resources/en.lproj/Localizable.strings
+@@ -154,59 +154,59 @@
+ "KeyExport.Label.Header" = "Export Private Key";
+ "KeyExport.Label.Hide" = "Private Key will be hidden in";
+ 
+ "PublicKeyDetailsModal.Action.Networks" = "Address on Other Networks";
+ "PublicKeyDetailsModal.Action.Share" = "Share Private Key";
+ "PublicKeyDetailsModal.Action.ChangeNetwork" = "Change this Key's network";
+ "PublicKeyDetailsModal.Action.Delete" = "Delete";
+ 
+ "PublicKeyDetailsModal.Confirmation.Label.Title" = "Forget this Key?";
+ "PublicKeyDetailsModal.Confirmation.Label.Content" = "This key for this network will be removed.\nAre you sure?";
+ "PublicKeyDetailsModal.Confirmation.Action.Cancel" = "Cancel";
+ "PublicKeyDetailsModal.Confirmation.Action.Remove" = "Remove Key";
+ "PublicKeyDetailsModal.Confirmation.Snackbar" = "Key Has Been Removed";
+ 
+ "BackupModal.Label.Secret" = "Secret Recovery Phrase";
+ "BackupModal.Label.Derived" = "Derived keys";
+ "BackupModal.Label.QRCode" = "Backup with QR Code";
+ "BackupModal.Label.Snackbar" = "Private Keys will be hidden in";
+ "BackupModal.Label.EmptyPath" = "Derivation Path Name Is Empty";
+ 
+ "ErrorModal.Action.Ok" = "Got It";
+ "GenericErrorModal.Label.Title" = "Something has gone wrong.";
+ "GenericErrorModal.Label.MessagePrefix" = "View the details below to find out more.";
+ "GenericErrorModal.Action.Ok" = "OK";
+ "Error.Navigation.Label.Prefix" = "Internal navigation error.";
+-"Error.Navigation.Label.Message" = "Please restart Polkadot Vault app and try again.\nInternal error description: %@";
+-"Error.Navigation.Label.Suffix" = "Report an issue to Polkadot Vault team via Github at: https://github.com/paritytech/parity-signer/";
++"Error.Navigation.Label.Message" = "Please restart Trevo Vault app and try again.\nInternal error description: %@";
++"Error.Navigation.Label.Suffix" = "Report an issue to Trevo Vault team via Github at: https://github.com/trevo-vault/trevo-vault";
+ "Error.Navigation.Label.NoAction" = "No further action available from this state.\nLast action: \"%@\" details: \"%@\"";
+ "Error.Service.Label.Prefix" = "Internal service error.";
+ "Error.Service.Label.Message" = "Rust backend operation failed, please try again.\nInternal error description: %@";
+-"Error.Service.Label.Suffix" = "Report an issue to Polkadot Vault team via Github at: https://github.com/paritytech/parity-signer/";
++"Error.Service.Label.Suffix" = "Report an issue to Trevo Vault team via Github at: https://github.com/trevo-vault/trevo-vault";
+ 
+ "Error.FeatureNotAvailable.Title" = "Feature Disabled";
+-"Error.FeatureNotAvailable.Message" = "This feature is not available in current build version. Please contact Polkadot Vault team if you require build with this feature.";
++"Error.FeatureNotAvailable.Message" = "This feature is not available in current build version. Please contact Trevo Vault team if you require build with this feature.";
+ 
+ "KeysExport.KeySets.Label.Header" = "Export %@ %@";
+ "KeysExport.KeySets.Label.Header.Suffix.Single" = "Key";
+ "KeysExport.KeySets.Label.Header.Suffix.Plural" = "Keys";
+ "KeysExport.KeySets.Label.Info" = "Please note that by scanning this QR code into your application you’ll export all the keys shown in the list below";
+ "KeysExport.KeySets.Label.Key.Single" = "%@ Key";
+ "KeysExport.KeySets.Label.Key.Plural" = "%@ Keys";
+ 
+ 
+ "Scanner.Label.Scan.Main.Header" = "Scan QR code";
+ "Scanner.Label.Scan.Main.Message" = "Sign transaction, add network or update metadata";
+ "Scanner.Action.Cancel" = "Cancel";
+ "Scanner.Action.Sign" = "Sign";
+ "Scanner.Label.Progress" = "%d / %d complete";
+ "Scanner.Label.Multipart" = "Scanning";
+ 
+ "TransactionPreview.Label.Title" = "Transaction Details";
+ "TransactionPreview.Action.UnlockSign" = "Unlock key and sign";
+ "TransactionPreview.Action.Approve" = "Approve";
+ "TransactionPreview.Action.SelectSeed" = "Select seed";
+ "TransactionPreview.Action.Cancel" = "Cancel";
+ "TransactionPreview.Action.Done" = "Done";
+ "CameraView.parsingMultidata" = "PARSING MULTIPART DATA";
+ "CameraView.startOver" = "Start over";
+ 
+@@ -227,51 +227,51 @@
+ "Transaction.AddNetwork.Label.Crypto" = "Crypto";
+ "Transaction.AddNetwork.Label.Spec" = "Spec name";
+ "Transaction.AddNetwork.Label.Logo" = "Logo";
+ "Transaction.AddNetwork.Label.Path" = "Default path";
+ 
+ "TransactionSign.Label.Details" = "Transaction Details";
+ "TransactionSign.Label.Header.Single" = "Sign Transaction";
+ "TransactionSign.Label.Header.Multiple" = "Sign %@ Transactions";
+ "TransactionSign.Label.Header.Metadata" = "Add Metadata";
+ "TransactionSign.Label.Header.Network" = "Add Network";
+ 
+ "TransactionSign.Label.MultipleTransactionsInfo" = "Please note that by scanning this QR code into your application you’ll sign transactions using all keys shown in the transactions list above";
+ "TransactionSign.Label.Sign" = "Sign With";
+ "TransactionSign.Label.SignCode" = "Scan QR code to Sign Transaction";
+ "TransactionSign.Action.Done" = "Done";
+ "TransactionSign.Action.Note" = "Add Log Note";
+ "TransactionSign.Action.Error" = "Got It";
+ 
+ "TransactionSign.Label.Details.Pallet" = "Pallet";
+ "TransactionSign.Label.Details.Method" = "Method";
+ "TransactionSign.Label.Details.Destination" = "Dest";
+ "TransactionSign.Label.Details.Value" = "Value";
+ 
+ "TransactionSign.Error.Generic.Title" = "Error signing Transaction";
+ "TransactionSign.Error.UnknownNetwork.Title" = "Please Add The Network\nYou Want To Transact in";
+-"TransactionSign.Error.UnknownNetwork.Message" = "You're trying to sign a transaction in a network which has not been added to your Polkadot Vault.";
++"TransactionSign.Error.UnknownNetwork.Message" = "You're trying to sign a transaction in a network which has not been added to your Trevo Vault.";
+ "TransactionSign.Error.UnknownNetwork.Step1.Highlight.font" = "metadata.parity.io for Polkadot, Kusama, and Westend\nmetadata.novasama.io for Parachains and Solochains\nask network's developers directly if you haven’t found it in the portals";
+ 
+ "TransactionSign.Error.UnknownNetwork.Step1" = "Go to Portal where your network is stored\nmetadata.parity.io for Polkadot, Kusama, and Westend\nmetadata.novasama.io for Parachains and Solochains\nask network's developers directly if you haven’t found it in the portals";
+ "TransactionSign.Error.UnknownNetwork.Step1.Highlight.first" = "metadata.parity.io";
+ "TransactionSign.Error.UnknownNetwork.Step1.Highlight.second" = "metadata.novasama.io";
+ "TransactionSign.Error.UnknownNetwork.Step1.Highlight.third" = "ask network's developers directly if you haven’t found it in the portals";
+ "TransactionSign.Error.UnknownNetwork.Step2" = "Choose the network you need";
+ "TransactionSign.Error.UnknownNetwork.Step3" = "Scan \"Chain spec\" QR to add the missing network";
+ 
+ "TransactionSign.Error.OutdatedMetadata.Title" = "Please Update %@ Network Metadata";
+ "TransactionSign.Error.OutdatedMetadata.Message" = "%@ network's %@ metadata is different to the %@ data you're using in the app. Please update it to sign the transaction.";
+ "TransactionSign.Error.OutdatedMetadata.Step1.Highlight.font" = "metadata.parity.io for Polkadot, Kusama, and Westend\nmetadata.novasama.io for Parachains and Solochains\nask network's developers directly if you haven’t found it in the portals";
+ 
+ "TransactionSign.Error.OutdatedMetadata.Step1" = "Go to Portal where your network is stored\nmetadata.parity.io for Polkadot, Kusama, and Westend\nmetadata.novasama.io for Parachains and Solochains\nask network's developers directly if you haven’t found it in the portals";
+ "TransactionSign.Error.OutdatedMetadata.Step1.Highlight.first" = "metadata.parity.io";
+ "TransactionSign.Error.OutdatedMetadata.Step1.Highlight.second" = "metadata.novasama.io";
+ "TransactionSign.Error.OutdatedMetadata.Step1.Highlight.third" = "ask network's developers directly if you haven’t found it in the portals";
+ 
+ "TransactionSign.Error.OutdatedMetadata.Step2" = "Choose the network you need";
+ "TransactionSign.Error.OutdatedMetadata.Step3" = "Scan the metadata’s QR code with the scanner";
+ 
+ "TransactionSign.Error.NetworkAlreadyAdded.Title" = "%@ Network Has Already Been Added";
+ "TransactionSign.Error.NetworkAlreadyAdded.Message" = "Go to Settings > Networks to check all the added networks.";
+ 
+ "TransactionSign.Error.MetadataAlreadyAdded.Title" = "This %@ Network %@ Metadata Version Has Already Been Added";
+@@ -467,87 +467,87 @@
+ "CreateDerivedKey.Modal.Confirmation.Content" = "Keep the path name written legibly and stored securely. Derived key can be backed up only by entering derivation path.";
+ "CreateDerivedKey.Modal.Confirmation.Header" = "Derivation Path Name";
+ "CreateDerivedKey.Modal.Confirmation.Confirmation" = "I have written down my derivation path name";
+ "CreateDerivedKey.Modal.Confirmation.Action" = "Done";
+ "CreateDerivedKey.Modal.Confirmation.EmptyPath" = "Derivation Path Name Is Empty";
+ 
+ "CreateDerivedKey.InfoModal.DerivationMethods.Title" = "Derivation Methods";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Soft.Title" = "/ Soft derivation";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Soft.Content" = "A soft derivation allows someone to potentially \"go backwards\" to figure out the initial account's private key if they know the derived account's private key. It is also possible to determine that different accounts generated from the same seed are linked to that seed.";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Hard.Title" = "// Hard derivation";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Hard.Content" = "A hard derivation path does not allow either of these - even if you know a derived private key, it's not feasible to figure out the private key of the root address, and it's impossible to prove that the first account is linked with the second.";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Password.Title" = "/// Password derivation";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Password.Content" = "In this type of derivation, if the mnemonic phrase were to leak, accounts could not be derived without the initial password. In fact, for soft- and hard-derived accounts, if someone knows the mnemonic phrase and the derivation path, they will have access to your account. For password-derived accounts, the password is applied on the derivation path. You can know the mnemonic phrase and the derivation path, but without the password it is not possible to access the account. In mathematical terms, if we have a written derivation path and a password, we can calculate the real derivation path as f(written derivation path, password); where f is a function. We can then calculate the account key pair using f(seed, real derivation path). Note that unlike hard and soft derivations that can be mixed, only a single password should be specified per derivation.";
+ "CreateDerivedKey.InfoModal.DerivationMethods.Action" = "Got It";
+ 
+ "Onboarding.Agreements.Label.Title" = "Please Agree to our Terms of Service and Privacy Policy";
+ "Onboarding.Agreements.Label.PrivacyCell" = "Privacy Policy";
+ "Onboarding.Agreements.Label.ToSCell" = "Terms of Service";
+ "Onboarding.Agreements.Label.Confirmation" = "I’ve read and accept the Terms of Service and Privacy Policy";
+ "Onboarding.Agreements.Action.Accept" = "I Accept";
+ 
+ "Error.Jailbreak.Label.Title" = "Warning! This Device has been Jailbroken";
+ "Error.Jailbreak.Label.Subtitle" = "We’ve detected that this Device Has Been Jailbroken and Isn’t Safe to Use. Please try again with another device.";
+ 
+ "Error.DevicePincodeRequired.Label.Title" = "Set Up A Passcode";
+-"Error.DevicePincodeRequired.Label.Subtitle" = "Any operation in Polkadot Vault requires passcode confirmation. Using the application without a password is not allowed.";
++"Error.DevicePincodeRequired.Label.Subtitle" = "Any operation in Trevo Vault requires passcode confirmation. Using the application without a password is not allowed.";
+ "Error.DevicePincodeRequired.Label.Step1" = "On iPhone models with Face ID, go to Settings > Face ID & Passcode. On earlier iPhone models, go to Touch ID & Passcode.";
+ "Error.DevicePincodeRequired.Label.Step2" = "Tap Turn Passcode On";
+ "Error.DevicePincodeRequired.Action.Settings" = "Go to Settings";
+ "Error.PrivateKeyQRCodeService.NoKeyDetails" = "Key Details data not available.";
+ "Error.PrivateKeyQRCodeService.BackupUnavailable" = "Seed phrase backup not available.";
+ "Error.PrivateKeyQRCodeService.BackupUnavailable" = "Seed phrase backup not available.";
+ 
+-"Error.ApplicationUpdateRequired.Label.Title" = "Upgrade your Polkadot Vault according\n to the requirements";
+-"Error.ApplicationUpdateRequired.Label.Subtitle" = "The new version has been installed with the air gap break. Your keys are safe, to continue using Polkadot Vault, you must upgrade your app according to the requirements.";
+-"Error.ApplicationUpdateRequired.Label.Info" = "Find the latest Polkadot Vault upgrade information here paritytech.github.io/parity-signer/tutorials/Upgrading.html";
+-"Error.ApplicationUpdateRequired.Label.Info.Highlight" = "paritytech.github.io/parity-signer/tutorials/Upgrading.html";
++"Error.ApplicationUpdateRequired.Label.Title" = "Upgrade your Trevo Vault according\n to the requirements";
++"Error.ApplicationUpdateRequired.Label.Subtitle" = "The new version has been installed with the air gap break. Your keys are safe, to continue using Trevo Vault, you must upgrade your app according to the requirements.";
++"Error.ApplicationUpdateRequired.Label.Info" = "Find the latest Trevo Vault upgrade information here trevo.finance/trevo-vault/upgrading";
++"Error.ApplicationUpdateRequired.Label.Info.Highlight" = "trevo.finance/trevo-vault/upgrading";
+ "Error.ApplicationUpdateRequired.Action.Backup" = "Backup Secret Phrase";
+ 
+ "Error.LockedDevice.Label.Title" = "Please Unlock the App";
+-"Error.LockedDevice.Label.Subtitle" = "The device has been locked owing to an authentication failure. Please unlock it to keep using the Polkadot Vault.";
++"Error.LockedDevice.Label.Subtitle" = "The device has been locked owing to an authentication failure. Please unlock it to keep using the Trevo Vault.";
+ "Error.LockedDevice.Action.Unlock" = "Unlock the App";
+ 
+ "Onboarding.Screenshots.Label.Title" = "Please confirm you understand the risks of screenshots";
+ "Onboarding.Screenshots.Label.Content" = "Taking and storing screenshots with private information may lead to losing funds";
+ "Onboarding.Screenshots.Label.Confirmation" = "I'm aware of the risks involved in taking screenshots";
+ "Onboarding.Screenshots.Action.Next" = "Next";
+ 
+ "Airgap.Label.Title.Setup" = "Set Up\nAir Gap Mode";
+ "Airgap.Label.Title.Broken" = "Please Enable\nAir Gap Mode";
+ "Airgap.Label.Content" = "Please follow these steps to enable Air Gap mode and keep it permanently enabled.";
+ "Airgap.Label.Airplane" = "Enable Airplane Mode";
+ "Airgap.Label.Wifi" = "Turn off WiFi Connection";
+ "Airgap.Label.Location" = "Turn off Location Services";
+ 
+ "Airgap.Label.Cables" = "Disconnect all cables";
+ "Airgap.Label.Cables.Confirmation" = "I confirm that all Cables are Disconnected";
+ "Airgap.Action.Next" = "Next";
+ "Airgap.Action.Done" = "Done";
+ 
+ "Onboarding.SetUpNetworks.Label.Title" = "Set Up Networks On Which You Will Sign Transactions";
+-"Onboarding.SetUpNetworks.Label.Content" = "Polkadot Vault is a fully Decentralised wallet, which means users have to manage networks themselves. Follow the tutorial to learn more.";
++"Onboarding.SetUpNetworks.Label.Content" = "Trevo Vault is a fully Decentralised wallet, which means users have to manage networks themselves. Follow the tutorial to learn more.";
+ "Onboarding.SetUpNetworks.Action.SetUp" = "Set Up Networks";
+ "Onboarding.SetUpNetworks.Action.Later" = "Set Up Later";
+ 
+ "Onboarding.SetUpNetworks.Step1.Label.Step" = "Step 1 / 2";
+ "Onboarding.SetUpNetworks.Step1.Label.Title" = "How to Add Networks";
+ "Onboarding.SetUpNetworks.Step1.Label.Step1.One" = "Go to Portal where your network is stored";
+ "Onboarding.SetUpNetworks.Step1.Label.Step1.Two" = "metadata.parity.io for Polkadot, Kusama, and Westend";
+ "Onboarding.SetUpNetworks.Step1.Label.Step1.Two.Highlight" = "metadata.parity.io";
+ "Onboarding.SetUpNetworks.Step1.Label.Step1.Three" = "metadata.novasama.io for Parachains and Solochains";
+ "Onboarding.SetUpNetworks.Step1.Label.Step1.Three.Highlight" = "metadata.novasama.io";
+ "Onboarding.SetUpNetworks.Step1.Label.Step2" = "Choose the Network you need";
+ "Onboarding.SetUpNetworks.Step1.Label.Step3" = "Scan \"Chain spec\" QR to add the missing network";
+ "Onboarding.SetUpNetworks.Step1.Label.Step3.Action" = "Scan Chain Spec";
+ "Onboarding.SetUpNetworks.Step1.Label.Step4" = "Press \"Next\" When You’re Done";
+ "Onboarding.SetUpNetworks.Step1.Action.Next" = "Next";
+ 
+ "Onboarding.SetUpNetworks.Step2.Label.Step" = "Step 2 / 2";
+ "Onboarding.SetUpNetworks.Step2.Label.Title" = "How to Update Network’s Metadata";
+ "Onboarding.SetUpNetworks.Step2.Label.Step1.One" = "Go to the Portal where your network’s metadata is stored";
+ "Onboarding.SetUpNetworks.Step2.Label.Step1.Two" = "metadata.parity.io for Polkadot, Kusama, and Westend";
+ "Onboarding.SetUpNetworks.Step2.Label.Step1.Two.Highlight" = "metadata.parity.io";
+ "Onboarding.SetUpNetworks.Step2.Label.Step1.Three" = "metadata.novasama.io for Parachains and Solochains";
+ "Onboarding.SetUpNetworks.Step2.Label.Step1.Three.Highlight" = "metadata.novasama.io";
+ "Onboarding.SetUpNetworks.Step2.Label.Step2" = "Choose the Network you need";
+ "Onboarding.SetUpNetworks.Step2.Label.Step3" = "Go to \"Update Metadata\" Tab and Scan the Metadata Animated QR Code";
+@@ -595,51 +595,51 @@
+ "SelectKeySetsForNetworkKey.Error.DerivedKeyForNetwork" = "Derived key for %@ could not be created: %@";
+ "SelectKeySetsForNetworkKey.Error.NoNetwork" = "Network could not be retrieved";
+ "SelectKeySetsForNetworkKey.Snackbar.KeysCreated" = "Derived Keys have been created";
+ 
+ "ErrorDisplayed.DbNotInitialized" = "Database not initialized";
+ "ErrorDisplayed.DbSchemaMismatch" = "Database scheme has been updated. Please do a fresh app install";
+ "ErrorDisplayed.MutexPoisoned" = "Mutex poisoned";
+ "ErrorDisplayed.InvalidType" = "Unexpected backend response type";
+ "ErrorDisplayed.WrongPassword" = "Wrong Password";
+ 
+ "AddDerivedKeys.Label.Title" = "Add Derived Keys";
+ "AddDerivedKeys.Label.Header" = "Сheck the keys, scan QR code into the app and confirm adding keys by pressing the button below";
+ "AddDerivedKeys.Label.QRCodeHeader" = "Scan the QR code into the app";
+ "AddDerivedKeys.Action.Main" = "Done";
+ "AddDerivedKeys.Error.NetworkMissing" = "Some keys can not be imported until their networks are added. Please add missing networks and their metadata. ";
+ "AddDerivedKeys.Error.AlreadyImported" = "Some are hidden from the list because they have already been imported.";
+ "AddDerivedKeys.Error.DerivedKeyForNetwork.Content" = "Derived key %@ could not be created: %@";
+ "AddDerivedKeys.Error.DerivedKeyForNetwork.Title" = "There was an issue importing keys.";
+ 
+ "ManageKeySets.Label.Header" = "Key Sets";
+ "ManageKeySets.Label.DerivedKeys.single" = "%@ Key";
+ "ManageKeySets.Label.DerivedKeys.plural" = "%@ Keys";
+ "ManageKeySets.Action.Add" = "Add new Key Set";
+ "ManageKeySets.Action.Recover" = "Recover Key Set";
+ 
+-"NoKeySets.Label.Header" = "Welcome to\nPolkadot Vault";
++"NoKeySets.Label.Header" = "Welcome to\nTrevo Vault";
+ "NoKeySets.Label.Subheader" = "Add a new key set or recover an existing one by entering the secret recovery phrase to get started";
+ "NoKeySets.Action.Add" = "Add new Key Set";
+ "NoKeySets.Action.Recover" = "Recover Key Set";
+ 
+ "BananaSplitBackup.Label.Title" = "Banana Split Backup";
+ "BananaSplitBackup.Label.Header" = "Backup your key set by turning the secret phrase into sharded QR codes with passphrase protection";
+ "BananaSplitBackup.Label.Shards.Header" = "Number of QR Code Shards";
+ "BananaSplitBackup.Label.Shards.Footer" = "%@ shards out of %@ to reconstruct";
+ "BananaSplitBackup.Label.Passphrase.Header" = "Passphrase for the Recovery";
+ "BananaSplitBackup.Label.Passphrase.Footer" = "Write down your passphrase. You'll need it to recover from Banana Split.";
+ "BananaSplitBackup.Label.Passphrase.Info" = "Banana Split backup will recover the key set without derived keys. To back up derived keys, use the manual backup option. Each key will have to be added individually by entering the derivation path name.";
+ "BananaSplitBackup.Action.Create" = "Create";
+ "BananaSplitBackup.Error.CouldNotLoad" = "Banana Split Backup could not be loaded";
+ 
+ "BananaSplitBackupQRCode.Label.Info" = "Scan this animated QR code into the bs.parity.io app to print QR code shards.";
+ "BananaSplitBackupQRCode.Label.Info.Highlight" = "bs.parity.io";
+ 
+ "BananaSplitActionModal.Action.Passphrase" = "Show Passphrase";
+ "BananaSplitActionModal.Action.Remove" = "Remove Backup";
+ "BananaSplitActionModal.Action.Cancel" = "Cancel";
+ 
+ "BananaSplitPassphraseModal.Label.Header" = "Passphrase";
+ "BananaSplitDeleteBackup.Label.Title" = "Remove Banana Split";
+ "BananaSplitDeleteBackup.Label.Content" = "You can still use this backup if you have QR code shards printed and have passphrase written down on paper.";
+ "BananaSplitDeleteBackup.Action.Cancel" = "Cancel";
+diff --git a/ios/PolkadotVault/Stubs/Stubs+Signer.swift b/ios/PolkadotVault/Stubs/Stubs+Signer.swift
+index f875e0ce7d3832b49ba37e0534d069543efe93ca..dc3ebbf2345e30c1fccabdeb4c6d3f2b71ac3c4c 100644
+--- a/ios/PolkadotVault/Stubs/Stubs+Signer.swift
++++ b/ios/PolkadotVault/Stubs/Stubs+Signer.swift
+@@ -1,40 +1,40 @@
+ //
+ //  Stubs+Signer.swift
+ //  PolkadotVault
+ //
+ //  Created by Krzysztof Rodak on 10/05/2023.
+ //
+ 
+ import Foundation
+ 
+ extension Address {
+     static let stub: Address = .init(
+         path: "//polkadot",
+         hasPwd: true,
+         identicon: .stubIdenticon,
+-        seedName: "Polkadot Vault",
++        seedName: "Trevo Vault",
+         secretExposed: false
+     )
+ }
+ 
+ extension MKeysCard {
+     static let stub: MKeysCard = .init(
+         address: .stub,
+         addressKey: "",
+         base58: "",
+         swiped: false
+     )
+ }
+ 
+ extension MscNetworkInfo {
+     static let stub: MscNetworkInfo = .init(
+         networkTitle: "Polkadot",
+         networkLogo: "polkadot",
+         networkSpecsKey: "polkadot"
+     )
+ }
+ 
+ extension MKeyAndNetworkCard {
+     static let stub: MKeyAndNetworkCard = .init(
+         key: .stub,
+         network: .stub
+diff --git a/ios/fastlane/Appfile b/ios/fastlane/Appfile
+index 1b58274e56a375ebb35a64047f6db2f42ab19677..8f72f1fa96ded7f9c95d1c1acd06bae1b175020f 100644
+--- a/ios/fastlane/Appfile
++++ b/ios/fastlane/Appfile
+@@ -1,4 +1,4 @@
+-app_identifier  "io.parity.NativeSigner"
++app_identifier  "finance.trevo.vault"
+ apple_id        "stepan@novasama.io"
+ team_name       "Novasama Technologies GmbH"
+ team_id         "QXCVVJ6654"
+diff --git a/ios/fastlane/Matchfile b/ios/fastlane/Matchfile
+index 310a62fbe2af45211bf974e88eab2899c4bc8b18..4350eb3c60a6d70f1402c19dee7900701368586e 100644
+--- a/ios/fastlane/Matchfile
++++ b/ios/fastlane/Matchfile
+@@ -1,4 +1,4 @@
+ git_url("https://github.com/novasamatech/match_security_management_gmbh")
+ storage_mode("git")
+ type("appstore")
+-app_identifier("io.parity.NativeSigner")
++app_identifier("finance.trevo.vault")
+diff --git a/ios/fastlane/lanes/lane_build.rb b/ios/fastlane/lanes/lane_build.rb
+index 50c0f4d47d48a9fa123a63d011c9b6c54b43b423..fbd56e283e12d4dfc51282fa5d15390f92a5b132 100644
+--- a/ios/fastlane/lanes/lane_build.rb
++++ b/ios/fastlane/lanes/lane_build.rb
+@@ -1,39 +1,39 @@
+ desc "Build the iOS app for release"
+ desc "Parameters:"
+ desc "- 'scheme : <value>' defines scheme to use for build phase"
+ desc "- 'target : <value>' defines target to build"
+ desc "- 'configuration : <value>' defines configuration for build"
+ desc " "
+-desc "Example usage: fastlane build_release scheme:'NativeSigner' target: 'NativeSigner' configuration: 'Release' "
++desc "Example usage: fastlane build_release scheme:'TrevoVault' target: 'TrevoVault' configuration: 'Release' "
+ lane :build_release do |options|
+   scheme = options[:scheme]
+   target = options[:target]
+   configuration = options[:configuration]
+   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+ 
+-  profile_name = "match AppStore io.parity.NativeSigner"
++  profile_name = "match AppStore finance.trevo.vault"
+   output_name = scheme # just in case we need to customise it for other GAs
+   export_method = "app-store"
+   compile_bitcode = false
+   xcodeproj_path = "./#{target}.xcodeproj"
+ 
+   clean_build_artifacts
+ 
+   increment_build_number(
+     build_number: ENV["BUILD_NUMBER"], # based on commit, defined in GA
+     xcodeproj: xcodeproj_path
+   )
+   update_code_signing_settings(
+     use_automatic_signing: false,
+     targets: [target],
+     code_sign_identity: "Apple Distribution",
+     bundle_identifier: app_identifier,
+     profile_name: profile_name,
+     build_configurations: [configuration]
+   )
+   gym(
+     scheme: scheme,
+     output_name: output_name,
+     configuration: configuration,
+     xcargs: "-skipPackagePluginValidation -skipMacroValidation",
+     export_options: {

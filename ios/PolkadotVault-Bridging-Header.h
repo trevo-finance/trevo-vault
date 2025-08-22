@@ -1,6 +1,6 @@
 //
 // PolkadotVault-Bridging-Header.h
-//  Polkadot Vault
+//  Trevo Vault
 //
 //  Created by Alexander Slesarev on 22.7.2021.
 //

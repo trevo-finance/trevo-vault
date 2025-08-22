@@ -1,87 +1,169 @@
-**General terms and conditions of business and use**
+**TERMS AND CONDITIONS**
 
-**1. Basic Provisions; Risk Information; No Financial Service**
+Effective Date: 4 September 2024
 
-**1.1** Novasama Technologies GmbH, Schönhauser Allee 163, 10435 Berlin, Germany (hereinafter: “**Novasama**”) offers the mobile application Polkadot Vault (hereinafter: “**Vault**”) to customers as Free-Ware free of charge. The Vault is a non-custodial wallet software that allows the User to turn his/her mobile device, such as smartphone or tablet (hereinafter: “**Storage Device**”), into a cold storage hardware wallet by holding the User’s private cryptographic keys (hereinafter: “**Private Key**”) offline while keeping the Storage Device offline. Novasama does neither store, nor has access to or control over a User's Private Key and seed recovery phrase (hereinafter: “**Mnemonic Phrase**”) at any time.
+Welcome to website and mobile application (hereinafter jointly, the “**App**”)! This App is operated by Trait Tech as defined below (“**Trait Tech**”). These Terms and Conditions is the binding legal agreement between Trait Tech and you, the user of our App, and Services as defined below.
 
+The following Terms & Conditions govern your access and use of the App and the Services.
 
-**1.2** The User can use the Vault to safekeep their Private Keys, manage their accounts and blockchain-based digital assets (hereinafter: “**Digital Assets**”), send and receive transactions of Digital Assets, and cryptographically sign blockchain transactions.
+Any purchase and use of Trait Token created and distributed by Trait Token is defined by the relevant Terms and Conditions as amended from time to time. Such Terms and Conditions shall be legally binding on you.
 
-**1.3** By using the Vault, the User confirms that the User is aware of the inherent risks associated with the use of cryptographic and blockchain-based systems and that the User is experienced with securing Private Keys and handling Digital Assets. The User is aware that Digital Asset markets can be highly volatile due to various factors such as speculation, advancing technology, or changes in the regulatory environment and may involve financial risks. Blockchain transactions signed by using the Private Key stored in the Vault and validated by the blockchain network are irrevocable and irreversible, and there is no possibility to retrieve Digital Assets that have been transferred.
+**By visiting our App, and/or purchasing our Services, you constitute an agreement to these Terms. If you do not agree to be bound by these Terms, you shall not access this App or use our Services. Please read these Terms before you use this App, and Services.**
 
-**1.4** The User acknowledges that Novasama offers a non-custodial wallet solution. The User is responsible for storing and securing the User’s Mnemonic Phrase and Private Keys, as well as any backups thereof. In particular, the User acknowledges that the failure or loss of the Storage Device can lead to the irreversible loss of all information stored in the Vault including the Mnemonic Phrase and/or Private Key. Therefore, the User commits to keeping a back-up copy of his/her information, including Mnemonic Phrase and Private Key, separate from the Vault and from the Storage Device altogether.
+Trait Tech reserves the right, at its sole discretion, to change these Terms. These changes are effective immediately upon posting the amended Terms on the App, unless otherwise stated. When changes come into effect, the revised Terms shall supersede the previous version of the Terms. You are responsible for regularly reviewing these Terms. 
 
-**1.5** Novasama does not store Mnemonic Phrases and Private Keys for the User, nor does it have any backups or access to the User’s Mnemonic Phrase and Private Keys. In the event of loss of the Mnemonic Phrase and Private Keys by the User, Novasama will not be able to recover the User's Private Keys or otherwise restore access to the Vault or any Digital Assets. Novasama is not responsible for the loss of the User’s Mnemonic Phrase or Private Keys. In case of loss, only the User himself can recover his/her Wallet.
-**1.6** The User is aware that the use of blockchain infrastructures and the processing of blockchain transactions may result in network fees, which shall be borne by the User. Novasama does not charge the User with these network fees and cannot influence these costs.
-**1.7** Novasama does not provide any financial services, in particular Novasama does not give any  investment recommendations or advice and does not provide any trading or crypto custody services. Novasama is also not a provider of Digital Assets, does not offer Digital Assets for sale or purchase. The User is responsible for the tax treatment, in particular income tax treatment, of the profits from the purchase or sale of Digital Assets and use of other services.
+1. **Definitions**
 
-**2. Scope of Application; Amendment of the General Terms and Conditions of Business and Use**
+1. “**Trait Tech**” means an Exempt Private Company Limited by Shares, duly incorporated in Singapore, having its registered address at 10 Anson Road, #20-05, International Plaza, Singapore (079903).
+2. “**Trait Token**” means tokens issued by Trait Tech.
+3. “**Services**” means Trait Tech’s services on maintaining and hosting the App and Software, making available services accessible through it.
+4. “**Terms**” means these Terms and Conditions as amended from time to time.
+5. “**User**” means any entity accessing or using the Service and App.
 
-**2.1** These General Terms and Conditions of Business and Use (hereinafter: “**GTC**”) apply to contracts concluded between Novasama and the contractual partner (hereinafter: “**User**”) (hereinafter: “**User Agreement**”). The contract is concluded by downloading the Vault on the User’s Storage Device subject to these GTC. The use of the Vault is only permitted to legal entities, partnerships and natural persons with unlimited legal capacity. In particular, minors are prohibited from using the Vault.
-‍
+2. **Disclaimer**
 
-**2.2** The application of the User’s general terms and conditions is excluded. Deviating, conflicting or supplementary general terms and conditions of the User shall only become part of the contract if and to the extent that Novasama has expressly agreed to their application in writing. This consent requirement shall apply in any case, even if for example Novasama, being aware of the general terms and conditions of the contractual partner, accepts payments by the contractual partner without reservations.
+1. The App and Services do not constitute the provision of any financial or investment advice in connection with the Services contemplated by these Terms. The information and materials contained on the App is given for information purpose only and is not to be construed as a solicitation to enter into any transaction. You should consult a financial or investment professional regarding any possible transaction if you have any doubts.
+2. The detailed disclaimer is provided in the Terms governing the purchase and use of Trait Tokens.
+3. You should carefully consider all possible risks, and you shall be free to make your own decision 
 
-**2.3** The current version of the GTC is published on Novasama’s website under https://novasama.io, indicating the date of the last update to the GTC. By downloading or updating the Vault, the User accepts the version of the GTC available at the time of his/her latest download or update.
+3. **Eligibility**
 
-**3. Functions of the Vault; User’s Duty of Care; Third-Party Services.**
+1. By using the Services, you represent and warrant that you have not previously been suspended or removed from the App.
 
-**3.1** The Vault allows the User, *inter alia*, to store his/her Private Keys and Mnemonic Phrase offline, to create multiple accounts with derivation paths using his/her Mnemonic Phrase, and to sign transactions or services related to Digital Assets in an air-gapped way without connecting the Storage Device to the internet and/or to other devices. The Vault is native to the Polkadot ecosystem and can be used for any supported blockchain. Novasama continues to develop the Vault on a regular basis, so that the services offered may be subject to change. The presentation of the Vault only reflects the current functionality and does not constitute a binding offer for future services.
+4. **Restricted Countries**
 
-**3.2** To use the Vault, the User must choose a Storage Device which the User is willing to permanently disconnect from the internet and from other devices. The User must reset this Storage Device to factory settings, download the Vault and disconnect the Storage Device from the internet and from all other devices. The Vault will then guide the User through the set-up process. The User acknowledges that, once the Vault is set-up, its security benefits as a hardware wallet might be corrupted if the Storage Device is ever connected to the internet and/or to other devices. The User is responsible for keeping the Storage Device safe and offline at all times. Furthermore, the User must frequently update the metadata about blockchain network specifications (hereinafter: “**Metadata**”) stored in the Vault. Otherwise, the User might not be able to, e.g., sign transactions for as long as the Metadata in the Vault is outdated. Up-to-date Metadata is currently provided by Novasama as well as by other providers and can be imported into the Vault in an air-gapped way while keeping the Storage Device offline.
+1. You should be aware that our App may be restricted and/or unavailable for users in some jurisdictions as governed by applicable laws. Trait Tech shall not be responsible for any unavailability of our App and/or Services in any Restricted Country or other countries. 
+2. You should personally ensure that using our Services is allowed in your country of citizenship or residence. Trait Tech shall not be responsible for any violation of laws pertaining to the above.
+3. Trait Tech shall not be held liable for any use of our Services by individuals or legal entities that are restricted or limited to use our Services. Users who violate their applicable laws and regulations shall be solely liable for such violation.
 
-**3.3** From time to time, Novasama may release updated versions of the Vault software. Should the User decide to update the Vault, the User must reset the Storage Device and delete the Vault and the information contained therein prior to connecting the Storage Device to the internet. After that, the User must download and set-up the updated version of the Vault again and add his/her Private Keys, as described in Section 3.2. The User’s obligation to keep back-up copies of his/her information, including Mnemonic Phrase and Private Key, remains unaffected (cf. Section 1.4).
+5. **Use Restrictions**
 
-**3.4** The Vault contains certain features (hereinafter: “**Vault Features**”) that, inter alia,  allow the User to connect the Vault to third-party decentralized applications (hereinafter: “**DApp**”), protocols and services that Novasama does not operate itself (hereinafter: “**Third-Party Services**”, cf. Section 4 below). Novasama does not offer Third-Party Services in its own name. The conditions of service provisions for Third-Party Services, if any, shall be governed exclusively by the applicable contractual provisions between the User and the respective provider of the Third-Party Services. Novasama continues to develop the Vault Features on a regular basis, so that the Vault Features offered and Vault's compatibility with Third-Party Services may be subject to change. The presentation of the Vault and the Vault Features in the Vault only reflects the current functionality and does not constitute a binding offer for future services.‍
+1. When accessing to and using the Services, the User shall not:
 
-**4. Conditions of Service; GNU GPLv3**
+1) Copy, duplicate, reproduce or publish the Services or any of their contents;
 
-**4.1** The User's right to use the Vault is limited to the respective state of art. Novasama may temporarily restrict the Vault or certain Vault Features if this is necessary due to capacity limits, to maintain the security or integrity of the software, servers or services or to carry out technical measures, e.g. maintenance work serving the proper or improved service of the Vault. In these cases, Novasama will take the User’s legitimate interests into account, e.g. by providing appropriate information about planned maintenance work in advance. Section 6 of the GTC remains unaffected.
+2. Electronically transfer the Services to multiple computers over a network;
 
-**4.2** To the extent the User connects his/her Vault to Third-Party Services or relies on content or data from third party providers, Novasama does not warrant their accuracy, completeness or timeliness. No contractual relationship exists between Novasama and the Third-Party Service providers and the Third-Party Service providers are not acting as agents of or at the direction of Novasama. Novasama has no technical, legal or organizational means to influence Third-Party Services. Novasama is not liable for any damages incurred by the User due to the use of Third-Party Services, in particular when signing transactions or importing Metadata, such as in case of bridged tokens, unavailability and customization of DApps and protocols, transactions to incompatible, incorrect or unassigned wallet addresses, transactions to DApps, failure of nodes or unavailability of blockchain networks, hacker attacks on DApps, or inaccurate Metadata imported from Third-Party Service providers.
-**4.3** Novasama reserves all intellectual property rights in and to the Vault, Vault Features, its software, content, data, or other material. Novasama provides the Vault software code on an "open source" basis in accordance with the terms of the GPL 3.0 license, which can be found here: https://opensource.org/licenses/GPL-3.0, and make the source code of the Vault available here https://github.com/novasamatech. You are free to use, modify and distribute the software code of the Vault in accordance with the terms of GPL 3.0.
+3) Distribute copies of the Services to others by any means whatsoever;
 
-**5. Fees**
+4. In whole or in part change, modify, adapt, translate, reverse engineer, disassemble or decompile the Services or create derivative works based on the Services;
 
-Blockchain network fees which are due for the execution of transactions shall be borne by the User. Novasama does not charge the User with these network fees and cannot influence these costs. Furthermore, Novasama has no control over the fees charged by the Third-Party Services.
+5) Assign, rent, exchange, hire out, lend, lease or sublease the Services or any copies thereof;
 
-**6. Liability of Novasama; Force Majeure**
+6. Sell or transfer the Services or any copies thereof;
 
-**6.1** Except in case of intentional misconduct (*Vorsatz*) or gross negligence (*grobe Fahrlässigkeit*), any liability of Novasama shall be excluded for any and all claims arising in connection to the Vault provided to the Customer as Free-Ware free of charge. Warranty obligations shall only arise if Novasama has fraudulently concealed a possible defect in the Vault or the contractual services.
+7) Bundle, repackage, or include the Services with any software in any way;
 
-**6.2** The limitations of liability according to Section 6.1 do not apply (i) concerning damages arising from injury to life, body or health, (ii) as far as Novasama has assumed a guarantee, (iii) to claims of the User according to the Product Liability Act (*Produkthaftungsgesetz*), and (iv) to claims of the User according to any applicable data privacy laws.
+8) Use the Services beyond the term of a free trial subscription, if applicable;
 
-**6.3** The liability provisions in Sections 6.1 and 6.2 shall also apply to the personal liability of the executive bodies, legal representatives, employees and vicarious agents of Novasama.
+8. Utilize the Services for any purpose or project other than the permitted use(s) as set in these Terms.
 
-**6.4** If the User suffers damages from the loss of data, Novasama is not liable for this, as far as the damages would have been avoided by a regular and complete backup of all relevant data by the User.
+2) Unless otherwise indicated under the Clause 5.1 above, all intellectual property rights (such as but not limited to trademarks, trade names, logos, patents, copyrights, domain names and derivative rights) in the Services and related content and technology around the world are and will remain the exclusive property of Trait Tech or its licensors. 
+3) The User shall be solely responsible for saving all User data as such data will be deleted any time after the subscription is terminated for any reason.
 
-**6.5** Novasama takes all possible measures to enable the User to access the Vault and the Vault Features. In the event of disruptions to the technical infrastructure, the internet connection or a relevant blockchain, Novasama shall be exempt from its obligation to perform. This also applies if Novasama is prevented from performing due to force majeure or other circumstances, the elimination of which is not possible or cannot be economically expected of Novasama.
+6. **Wallet**
 
-**6.6** Liability in any other event but Section 6.1 to 6.5 above is excluded.
+1. Trait Tech provides a non-custodial wallet software for digital assets issued on TRAIT blockchain. The Users can use the wallet to authorize transactions and pay for the Services. The Users shall be solely responsible for:
 
-**7. Indemnities**
+- any activities and risks associated with their wallet;
+- retention and security of their private key to access the wallet.
 
-**7.1** The User agrees to indemnify Novasama to the extent liable under statutory law from all claims, which other Users or other third parties assert for infringement of their rights against Novasama due to the User’s use of the Vault or other Third-Party Services.
+2. Keeping your private key securely is important, otherwise you may lose control of your wallet. Trait Tech does not store or have access to your private key and cannot retrieve it in case of loss. The private keys are stored at User’s device only. Trait Tech shall have no responsibility or liability whatsoever in the event you are unable to access your wallet for any reason or lose your tokens. The User shall be solely responsible for saving backup keys, and use the App at its sole risk. 
+3. The User is solely liable for determining whether any taxes apply to the transactions the User performs with the wallet. You agree that we are not responsible for determining whether taxes apply to your transactions or for collecting, reporting, withholding, or remitting any taxes.
 
-**7.2** In this case, the User assumes all necessary costs of legal defense of Novasama, including all statutory court and attorney fees. This does not apply if the User is not responsible for the infringement.
+7) **Use of the Services**
 
-**7.3** In case of a claim asserted by a third party, the User is obliged to the extent liable under statutory law to provide Novasama with immediate, truthful and complete information necessary for the examination of claims and defense.
+1. Certain Services and access to the App may only be accessible subject to the following conditions:
 
-**8. Data Protection**
+1. You ensure that using our Services is allowed in your country of citizenship or residence.
 
-‍Novasama informs the User about Novasama’s processing of personal data, including the disclosure to third parties and the rights of the User as an affected party, in the data protection information.
+2. You must comply with these Terms.
 
-**9. Final Provisions**
+3. You agree to comply with any and all laws, regulations, and rules of governmental or regulatory authorities applicable to you and our Services. 
 
-**9.1** Novasama is entitled to transfer its rights and obligations under the User Agreement in whole or in part to third parties with a notice period of four weeks. In this case, the User has the right to terminate the User Agreement without notice.
+8) **Use of the App**
 
-**9.2** Should individual provisions of these GTC be or become invalid or unenforceable in whole or in part, this shall not affect the validity of the remaining provisions. The invalid or unenforceable provision shall be replaced by the statutory provision. If there is no statutory provision or if the statutory provision would lead to an unacceptable result, the parties shall enter negotiations to replace the invalid or unenforceable provision with a valid provision that comes as close as possible to the economic purpose of the invalid or unenforceable provision.
+1. You agree that you will not use the Services for any purpose that is unlawful or prohibited by these Terms. You must not, without limitation:
 
-**9.3** The User Agreement including these GTC shall be governed by German law. The application of the UN Convention on Contracts for the International Sale of Goods is excluded. For consumers domiciled in another European country but Germany, the mandatory provisions of the consumer protection laws of the member state in which the consumer is domiciled shall also apply, provided that these are more advantageous for the consumer than the provisions of the German law.
+1. use our Services to perform criminal activity of any kind, including but not limited to, money laundering, illegal gambling, terrorist financing or malicious hacking;
 
-**9.4** For users who are merchants within the meaning of the German Commercial Code (*Handelsgesetzbuch*), a special fund (*Sondervermögen*) under public law or a legal person under public law, Berlin shall be the exclusive place of jurisdiction for all disputes arising from the contractual relationship.
+2. damage, disable, overburden or impair the App or Services, or interfere with any other party’s use and enjoyment of the App or Services;
 
-**9.5** In the event of a conflict between the German and the English version of these GTC, the German version shall prevail.
+3. attempt to gain unauthorised access to the Services, computer systems or networks connected to the Services by any means;
+
+4. reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by Trait Tech;
+
+5. upload, post, host, or transmit unsolicited email, SMSs, or “spam” messages;
+
+6. make available any materials containing viruses, bots or other code, files or programs designed to interfere, hinder or impair the operation of any computer, telecommunication equipment or software;
+
+7. violate third party rights, including, without limitation, Trait Tech’s agents, partners, on the App and/or cause harm in any way;
+
+8. collect and store personal information of other users without their proper authorization.
+
+9) **Fraud Attempts; Access Restrictions**
+
+1. If we have reasons to believe that your use of this App and Services is fraudulent and/or illegal, we are entitled in our sole discretion to block, suspend or terminate your access to the App or deny the use of any Services. If you have conducted any fraudulent and/or illegal activity, Trait Tech reserves the right to take any necessary legal action, and you may be liable for monetary losses to Trait Tech.
+
+10) **Intellectual Property Rights**
+
+1. The intellectual property contained in the App, and Services (and any derivative works based on them) is confidential and/or proprietary information of Trait Tech, our affiliates or its licensors and is protected by copyright and other intellectual property rights. All title, ownership and intellectual property rights on the App, and Services shall remain with Trait Tech, our affiliates or licensors, as the case may be. All rights not otherwise claimed under the Terms or by Trait Tech are hereby reserved.
+2. You further acknowledge and agree that the App, and Services are protected by copyrights, trademarks (whether registered or being under registration), service marks, patents or other proprietary rights and laws. Except as expressly permitted by applicable law or as authorized by Trait Tech or the applicable licensor (such as an advertiser), you agree not to modify, rent, lease, loan, sell, distribute, transmit, broadcast, publicly perform or create derivative works based on the Services, or the App, in whole or in part. Without limiting the foregoing, any reproduction, redistribution, reverse engineering or decompilation of the Services, or the App is expressly prohibited by law, and may result in severe civil and criminal penalties. 
+
+11) **Linked Sites**
+
+1. This App may contain links to third party web sites (“linked sites”). The linked sites are not under the control of Trait Tech and we are not responsible for the content of any linked site. Trait Tech makes no representations regarding the content or appropriateness of content on such sites. When you access a linked site from this App, you leave this App and you do so at your own risk. You are responsible for viewing and complying with the terms and conditions posted on the linked site. 
+
+12) **Disclaimer of Warranties**
+
+1. All Services, including software, products, information, text, and related graphics contained within or available through the App are provided “as is” and “as available”. Under no circumstances shall we be liable for any errors or omissions in the Services on the App. Trait Tech makes no representations or warranties of any kind, either express or implied, as to the operation of this App or the Services, data or materials included on this App. Trait Tech does not warrant or make any representations regarding suitability, availability, accuracy, reliability, completeness, or timeliness of any material of any kind contained within the Services. We cannot ensure that the Services and other information provided on the App are accurate, correct, reliable, exhaustive, or complete on every subject. 
+2. Under no circumstances shall Trait Tech, including its subsidiaries, affiliates, officers, agents, licensors, employees, partners, licensors, or others involved in creating, sponsoring, promoting or otherwise making available the App and its content, be liable to any person or entity whatsoever for any direct, indirect, incidental, consequential or punitive damages or any damages or losses whatsoever.
+
+13) **Limitation of Liability**
+
+1. You acknowledge and agree that all access and use of the App, or use of the Services are at your own risk. 
+2. WE AND OUR SUPPLIERS AND LICENSORS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO: DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES (EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF THESE DAMAGES), RESULTING FROM YOUR USE OF OUR APP, AND SOFTWARE. UNDER NO CIRCUMSTANCES WILL THE TOTAL LIABILITY OF US AND OUR SUPPLIERS AND LICENSORS OF ALL KINDS AND UNDER NO CIRCUMSTANCES WILL THE TOTAL LIABILITY OF YOU (CARESOURCE AND ITS USERS AND AGENTS) ARISING OUT OF OR RELATED TO YOUR USE OF THE APP, AND SOFTWARE (INCLUDING BUT NOT LIMITED TO WARRANTY CLAIMS), REGARDLESS OF THE FORUM AND REGARDLESS OF WHETHER ANY ACTION OR CLAIM IS BASED ON CONTRACT, TORT, OR OTHERWISE, EXCEED THE AMOUNTS, IF ANY, THAT YOU HAVE PAID FOR YOUR USE OF THE APP, AND SOFTWARE. 
+
+14) **Indemnification**
+
+1. You agree to indemnify and hold Trait Tech and its subsidiaries, affiliates, officers, agents, licensors, employees, partners, licensors or others involved in creating, sponsoring, promoting or otherwise making available the App, Services and data, harmless from any and all claims, damages, losses or liabilities, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of any action, inaction or omission by you. 
+
+15) **Force Majeure**
+
+1. Trait Tech shall not be deemed to be in default of any provision hereof or be liable for any delay, failure in performance, or interruption of service resulting directly or indirectly from acts of God, civil, public, or military authority, civil disturbance, war, terrorism, strikes, fires, other catastrophes, power or telecommunications failure, embargoes, sanctions, government orders, or any other cause beyond its reasonable control. If the delay continues for a period more than six (6) months, either party shall be entitled to terminate these Terms on written notice. 
+
+16) **Duration and Termination**
+
+1. These Terms will remain in full force and effect while you use the App and Services.
+2. We reserve the right to restrict your access, temporarily or indefinitely suspend Services and/or App if:
+
+a) you breach these Terms or other policies;
+
+b) we believe that your actions may cause any loss or liability to our Users or to us;
+
+c) we believe, in our sole discretion, that your actions may cause legal liability for you, our Users, us, or our affiliates; may be contrary to the interests of the App or the user community; or may involve illicit activity. 
+
+3. Any terms and conditions of these Terms that may survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.
+
+17) **Governing Law; Dispute Resolution**
+
+1. These Terms shall be construed and governed by the laws of Singapore without prejudice to its conflict of laws.
+2. All disputes directly arising under these Terms, which cannot be settled amicably, shall be submitted to settlement proceedings under the Rules of Arbitration of the International Chamber of Commerce by one or more arbitrators appointed in accordance with said Rules. If the dispute has not been settled pursuant to the said Rules within ninety (90) days following the filing of a Request for ADR or within such other period as the Parties may agree in writing, such dispute shall be finally settled under the rules of arbitration of the International Chamber of Commerce by one or more arbitrators appointed in accordance with the said rules of arbitration. The place of arbitration shall be Singapore. The chairman of such arbitration shall be of legal education. The arbitral proceedings shall be conducted in English. The award of the arbitration will be final and binding upon the Parties. 
+
+18) **Miscellaneous**
+
+1. We reserve the right to modify, suspend or terminate any Services or products available through the App, at any time for any reason with or without notice to you. 
+2. If any portion of these Terms is found illegal or unenforceable, in whole or in part, such provision shall, as to such jurisdiction, be ineffective solely to the extent of such determination of invalidity or unenforceability without affecting the validity or enforceability thereof in any other manner or jurisdiction and without affecting the remaining provisions of the Terms, which shall continue to be in full force and effect.
+3. No joint venture, partnership, employment, or agency relationship exists between you and Trait Tech as a result of these Terms.
+4. No waiver by either party of any default by the other in the performance of any provisions of these Terms shall operate as a waiver of any continuing or future default, whether of a like or different character.
+5. Trait Tech reserves the right to assign its obligations and duties in these Terms to any person or entity.
+6. Any notice or other communication to be given to us under these Terms shall be in writing in the English language unless otherwise agreed between Trait Tech and the user. Any notice or other communication from users shall take effect only when received by us unless such notice or another communication is contrary to these Terms.
+7. These Terms constitute the entire agreement between you and Trait Tech with respect to your use of the App, purchase of Trait Token, use of the Products and Services. For issues related to any of the above, the User agrees to rely only on these Terms with respect to the subject matter hereof. 
+8. These Terms supersede any prior and contemporaneous agreements and understandings, whether written or oral, between the Parties with respect to the subject matter hereof. There are no representations, understandings or agreements relating to these Agreement that are not fully expressed in these Terms.
+
+19) **Contact Us**
+
+1. If you have questions in relation to these Terms, please contact us at <support@trait.tech>. Trait Tech Pte. Ltd., Republic of Singapore.
+2. © Copyright 2023 Trait Tech Pte. Ltd. All Rights Reserved.
 
 Last Updated: February 28, 2024
-

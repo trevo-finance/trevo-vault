@@ -12,7 +12,7 @@ extension Address {
         path: "//polkadot",
         hasPwd: true,
         identicon: .stubIdenticon,
-        seedName: "Polkadot Vault",
+        seedName: "Trevo Vault",
         secretExposed: false
     )
 }
