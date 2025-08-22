@@ -4,14 +4,14 @@ desc "- 'scheme : <value>' defines scheme to use for build phase"
 desc "- 'target : <value>' defines target to build"
 desc "- 'configuration : <value>' defines configuration for build"
 desc " "
-desc "Example usage: fastlane build_release scheme:'NativeSigner' target: 'NativeSigner' configuration: 'Release' "
+desc "Example usage: fastlane build_release scheme:'TrevoVault' target: 'TrevoVault' configuration: 'Release' "
 lane :build_release do |options|
   scheme = options[:scheme]
   target = options[:target]
   configuration = options[:configuration]
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
 
-  profile_name = "match AppStore io.parity.NativeSigner"
+  profile_name = "match AppStore finance.trevo.vault"
   output_name = scheme # just in case we need to customise it for other GAs
   export_method = "app-store"
   compile_bitcode = false

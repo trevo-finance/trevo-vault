@@ -1,6 +1,6 @@
 //
 // PolkadotVaultApp.swift
-//  Polkadot Vault
+//  Trevo Vault
 //
 //  Created by Alexander Slesarev on 19.7.2021.
 //

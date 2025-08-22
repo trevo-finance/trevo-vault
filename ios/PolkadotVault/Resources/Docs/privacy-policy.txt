@@ -1,126 +1,218 @@
-**1. GENERAL INFORMATION**
+**Privacy Policy** 
 
-Novasama Technologies GmbH, Schönhauser Allee 163, 10435 Berlin, Germany (hereinafter "**Novasama**" or “**we**”) offers the mobile application Polkadot Vault (hereinafter: “**Vault**”), a non-custodial wallet software that allows the User to turn his/her mobile device, such as smartphone or tablet (hereinafter: “**Storage Device**”), into a cold storage hardware wallet by holding the User’s private cryptographic keys offline while keeping the Storage Device offline. The Vault can be downloaded from the Apple App Store and from the Google Play Store. The User can use the Vault to safekeep their Private Keys, manage their accounts and blockchain-based digital assets (hereinafter: “**Digital Assets**”), send and receive transactions of Digital Assets, and cryptographically sign blockchain transactions. The Vault contains certain features that, inter alia, allow the User to connect the Vault to third-party decentralized applications (hereinafter: “**DApp**”), protocols and services that Novasama does not operate itself (hereinafter: “**Third-Party Services**”). Novasama does not offer Third-Party Services in its own name. Further information about the functions offered in connection with the Vault can be found in Novasama’s General terms and conditions of business and use (hereafter “GTC”). We encourage you to read the GTC carefully as they affect your obligations and legal rights regarding the usage of the Vault.
+Last updated: 3 November 2023 
 
-In connection with the usage of the Vault, no personal data will be processed by Novasama since the Vault will be installed on Users’ Storage Device without Novasama having access to any personal data of the User when using the Vault. However, Novasama may process personal data of persons who visit Novasama’s website https://novasama.io/ (hereinafter each a “**Website** and together “**Websites**”) and/or contact Novasama. Personal data is information that relates to an identified or identifiable natural person. An identifiable natural person is a person who can be identified directly or indirectly, e.g., by means of association with an online identifier (hereinafter: “**Data Subject**”).
+TRAIT TECH PTE. LTD. (“**Trait Tech**”, “**we**”, “**our**”, “**us**”) receives, collects, stores, and manages user personal data according to the following Privacy Policy. We take pride in treating our users’ privacy the way we would like to be treated ourselves. We make sure we comply with the applicable personal data protection laws and regulations. 
 
-Novasama takes the protection of personal data very seriously. We treat personal data confidentially, in accordance with this Privacy Notice and applicable data protection law, including, but not limited to the General Data Protection Regulation (hereinafter: “**GDPR**”) and the German Federal Data Protection Act (hereinafter: “**FDPA**”).
-This Privacy Notice informs you about how we handle your personal data that is under our control.
-Unless otherwise provided in this Privacy Notice, capitalised terms used herein have the meaning determined in the GTC.
+By visiting our website https\://trait.tech/ (“**Website**”), and/or sharing any personal information as described below, and/or using any of Trait Tech’s products and services (the “**Services**”), you agree to the terms of this Privacy Policy. 
 
-**2. CONTROLLER**
+**1. Data Collected** 
 
-Novasama acts as responsible party and, hence, as controller within the meaning of the GDPR with regard to the personal data processed in connection with the Websites or any contacting of Novasama. A controller is a natural or legal person who alone or jointly with others decides on the purposes and means of the processing of personal data.
-If you have any questions regarding this Privacy Notice or the processing of your personal data, do not hesitate to contact us via the following contact details:
+1.1 **Data that you voluntarily provide us with:** 
 
-**Name:**
-**Novasama Technologies GmbH**
-**Address:**
-**Schönhauser Allee 163, 10435 Berlin, Germany**
-**Email:**
-**admin@novasama.io**
+1.1.1 You may provide us with your personal data in a number of ways, including, without limitation, when you sign up for and use the Services; have previously provided us with personal information prior to this Privacy Policy or last updates coming into effect; make any payment for the Services; subscribe to any alerts, information releases, news, newsletters, updates and media releases; complete and submit any forms to us; post any content on or through the Website; contact us directly in person or via any medium including but not limited to by mail, telephone, social media and commercial electronic messages; communicate with us for any matters and interact with or browse the Website generally. 
 
-**3. PURPOSES AND LEGAL BASES OF DATA PROCESSING BY NOVASAMA**
+1.1.2 Personal data that may be provided by you includes, but is not limited to: 1) contact information such as your full name, current and valid email address; 2) personal data for KYC and KYB checks; 
 
-**a) General**
+3\) account password; 
 
-The Vault was built with privacy in mind, and we expect you to use it in a privacy-friendly manner. We intend to provide you with all the necessary tools and opportunities to use the Vault while processing as little personal data as possible. In particular, no personal data will be processed by Novasama in connection with the usage of the Vault. Rather, all personal data provided by the User when using the Vault will be stored locally on the User’s Storage Device and kept offline therein. Should the Vault be used to sign a transaction or to interact with DApps no personal data will be processed or accessed by Novasama. Any data processing in connection with the use of the Vault will, therefore, either be a data processing by a third party through interaction with Third-Party Services according to Section 4.a) of this Privacy Notice or a blockchain data processing according to Section 4.b) of this Privacy Notice, which are both not controlled by Novasama. Other than described under Section 3. b) - d) below, we neither collect your personal data nor process or store it.
+4\) physical address; 
 
-**b) Visiting our Websites**
+5\) phone number; 
 
-When visiting our Websites certain personal data is automatically collected every time you call up the Websites and is automatically stored in so-called server log files. The personal data processed in this regard are browser type and version, operating system used, website from which the access is made (referrer URL), host name of the accessing computer, date and time of access as well as IP address of the requesting computer (hereafter referred to as “**Access Personal Data**”).
-The processing of Access Personal Data is necessary for technical reasons to provide the Websites in a functional way and to ensure system security. This also applies to the storage of your IP address, which is necessary and, under further conditions, can at least theoretically enable an assignment to your person. In addition to the above-mentioned purposes, we use server log files exclusively for the needs-based design and optimisation of the Websites. We do not combine this data with other data sources, nor do we evaluate the data for marketing purposes.
-The Access Personal Data is only stored for the period of time for which it is required to achieve the above-mentioned purposes. Your IP address is stored for a maximum of 7 days for IT security purposes.
-The legal basis for the temporary storage and processing of Access Personal Data is Art. 6 (1) sentence 1 lit. b GDPR, which permits the processing of personal data for the fulfilment of a contract or for the implementation of pre-contractual measures. In addition, Art. 6 para. 1 sentence 1 lit. f GDPR serves as the legal basis for the temporary storage of technical Access Personal Data. Our legitimate interest here is to be able to provide you with the Websites in a technically functioning and user-friendly way and to ensure the security of our systems.
+6\) billing information and purchase history; 
 
-**c) Contacting us**
+7\) more detailed contact preferences; 
 
-If you contact us, we may collect and process certain information related to your request, such as your name, email addresses and any other data requested by us or data that you choose to provide us with (hereafter together referred to as “**ontact Data**”).
+8\) location data. 
 
-Contact Data will be processed for the purpose of processing and answering your enquiry and in the event of follow-up questions.
+1.1.3 By giving us this data, you consent to this data being stored by us, as described in our Terms and this Privacy Policy. 
 
-If you contact us, our processing activities in this regard are based on our legitimate interests in accordance with Art. 6 (1) sentence 1 lit. f GDPR to provide appropriate response to customer/contact enquiries. In addition, if you contact us within the framework of an existing contractual relationship or in advance for information about our services, the Contact Data you provide to us will be processed for the purpose of processing and answering your contact enquiry in accordance with Art. 6 (1) sentence 1 lit. b GDPR as a legal basis.
-The Contact Data will remain with us until the purpose for storing/processing no longer applies (i.e., after processing your enquiry has been completed). The Contact Data will, at the latest, be deleted after one (1) year from the last date when you contacted us regarding the same matter. Mandatory legal provisions – in particular retention periods – remain unaffected.
+1.2 **Data that we collect automatically** 
 
-**d) Other processing purposes**
+1.2.1 We collect data from every visitor and customer of the Website, in particular we automatically collect data about your visit to the Website, your usage of the Services and your app and website browsing activities. This anonymized information may include IP address, browser type, browser language, cookies data, performance specifications of the user’s hardware and software, date and time of access to the Website and the URL of the page requested, other information about how you interacted with our Website and our Services.
 
-    **i) Compliance with legal requirements:** We also process your personal data to comply with other legal obligations that may apply to us in connection with our business activities, including, but not limited to compliance with mandatory retention periods under commercial, trade or tax law or regulations and laws against money laundering. We process your personal data in accordance with Art. 6 (1) sentence 1 lit. c GDPR as legal basis to fulfil a legal obligation to which we are subject.
+**1.3 Data from your use of the Services** 
 
-    **ii) Legal enforcement:** We also process your personal data in order to be able to assert our rights and enforce our legal claims, as well as to be able to defend ourselves against legal claims. Finally, we process your personal data to the extent necessary to prevent or prosecute criminal offences. In this context, we process your personal data to protect our legitimate interests pursuant to Art. 6 (1) sentence 1 lit. f GDPR as legal basis, insofar as we assert legal claims or defend ourselves in legal disputes or we prevent or investigate criminal offences.
+1.3.1 We may receive data about how and when you use the Services, store it in log files or other types of files associated with your account, and link it to other information we collect about you. This data may include, for example, your IP address, time, date, browser used, and actions you have taken within the Website. This type of data helps us to improve our Services for both you and for all of our users. 
 
-    **iii) Consent:** Please note that we currently do not collect your personal data based on your consent. However, in case you give us consent to process your personal data for certain purposes (e.g., sending information material and offers), the lawfulness of this processing is based on your consent. Consent given can be withdrawn at any time. Please note that the withdrawal is only effective for the future and processing up to that point is not affected.
+**1.4 Cookies and tracking** 
 
-**4. OTHER DATA PROCESSING NOT CONTROLLED BY NOVASAMA**
+1.4.1 Cookies are small data files that are placed on your computer or mobile device when you visit a website. Website owners use cookies to make their websites operate, improve functionality and user experience, as well as to provide reporting information. 
 
-**a) Interaction with Third-Party Services**
+1.4.2 We may set our own cookies and use third parties cookies (e.g. for advertising, interactive content and analytics). 
 
-Using the Vault to cryptographically sign a transaction may require the User to interact with certain Third-Party Services. Any interaction with or enabling such connections may allow such Third-Party Services providers to collect, process, or share certain personal data about you. Please note that Novasama does neither receive, process or store such personal data nor does it control, operate, or manage those Third-Party Services providers. Therefore, Novasama is not responsible for the Third-Party Services providers’ data processing or privacy documentation (policy, notice, statement) and any data protection rights in this regard would need to be exercised against the Third-Party Services provider. When you intend to interact with any such Third-Party Services providers or leave the Vault, we encourage you to read the privacy documentation of the respective Third-Party Service you use or visit.
+1.4.3 We use different types of cookies, including: 
 
-**b) Blockchain data processing**
+1\) **Essential website cookies**: these are important cookies as they are necessary to provide you with services available through our Website, such 
 
-Please note that certain data, such as public addresses associated with your wallets and information about transactions associated therewith (hereafter “**Transactions**”), interact with public decentralised blockchain infrastructures and blockchain-based software, including smart-contracts, which work autonomously. “Decentralised” means that there is no single person, including Novasama, who controls the blockchain or stores data available thereon. “Public” means that the access is available for anyone and cannot be restricted. The data entered in a public decentralised blockchain is distributed via the nodes that simultaneously store all records entered into the blockchain. By design, blockchain records cannot be changed or deleted and are said to be “immutable”. Due to the blockchain’s nature, once you start entering information into a blockchain, particularly by carrying out any Transactions, such information, which may be considered personal data, will become publicly available on a blockchain. Please be aware that any Transaction within a blockchain is irreversible and any information, including personal data, entered into a blockchain cannot be deleted or changed. Novasama will never control such information entered in a blockchain nor manage access to it and is, therefore, not responsible for any data processing in this regard. The ultimate decision whether to transact on a blockchain or carry out any Transaction rests with you. Therefore, your ability to exercise certain data protection rights in this regard will be limited.
+as access to secure areas. 
 
-**c) App Store data processing**
+2\) **Performance and functionality cookies**: these cookies are necessary to enhance the performance and functionality of our Website but are 
 
+non-essential to their use. However, without these cookies, certain 
 
-The Vault can be downloaded from the Apple App Store and from the Google Play Store. Please note, that downloading the Vault from an App Store will allow the respective App Store provider to collect, process, or share certain personal data about you (e.g. account information and/or contact details). Please note that Novasama does neither receive, process or store such personal data nor does it control, operate, or manage those App Store providers. Therefore, Novasama is not responsible for the App Store providers’ data processing or privacy documentation (policy, notice, statement) and any data protection rights in this regard would need to be exercised against the App Store provider. When you intend to interact with any such App Store providers, e.g. to download the Vault, we encourage you to read the privacy documentation of the respective App Store provider you use or visit prior.
+functionality may become unavailable. 
 
-**5. DATA RECIPIENTS**
+3\) **Analytics and customization cookies**: these cookies collect information that is used either in aggregate form to help us understand how our 
 
-Within Novasama those persons will get access to your personal data that need it to fulfil our contractual and legal obligations.
+Website is being used or how effective our marketing campaigns are, or to 
 
-In individual cases we may transmit personal data to our advisors in legal or tax matters, whereby these recipients act independently in their own data protection responsibility and are also obliged to comply with the requirements of the GDPR and other applicable data protection regulations. Furthermore, they are obliged to maintain special confidentiality and secrecy due to their professional status. Other than that, we will not transfer any personal data controlled by us to any third-party recipients.
+help us customize our Website for you in order to enhance your 
 
-**6. DATA TRANSFER TO THIRD COUNTRIES**
+experience. 
 
-We will not transfer any personal data to recipients located in countries outside the EU (European Union) / EEA (European Economic Area).
+4\) **Advertising cookies**: these cookies are used to make advertising messages more relevant to you. They perform functions like preventing the same ad 
 
-**7. DURATION OF DATA STORAGE**
+from continuously reappearing, ensuring that ads are properly displayed, 
 
-We initially process and store your personal data for the duration for which the respective purpose of use requires corresponding storage (see above under Section 3 on the individual processing purposes). This may also include the periods of initiating a contract (pre-contractual legal relationship) and processing a contract. On this basis, personal data is regularly deleted as part of the fulfilment of our contractual and/or legal obligations, unless its temporary further processing is necessary for the following purposes:
+and in some cases selecting advertisements that are based on your 
 
-    · Fulfilment of legal storage obligations, which result, for example, from the German Commercial Code (§§ 238, 257 para. 4 HGB) and the German Fiscal Code (§ 147 para. 3, 4 AO). The periods specified there for storage or documentation are up to ten years.
+interests. 
 
-    · Preservation of evidence taking into account the statute of limitations. According to §§ 194 ff. of the German Civil Code (BGB), these limitation periods can be up to 30 years, with the regular limitation period being three years.
+5\) **Stripe\_mid and Stripe\_sid**: these are cookies that enable the process of card transactions on the Website. The transaction is made by Stripe 
 
-**8. DATA SUBJECT RIGHTS**
+without storing any credit card information. 
 
-You are entitled to the following rights as a Data Subject under the legal requirements:
+1.4.4 You may opt out from cookies at any time by customizing your cookie preferences. However, in some cases we will not be able to provide you with all services. 
 
-**a) Right of withdrawal:** You may, in accordance with Art. 7 (3) GDPR, at any time withdraw any consent you provided to allow us to process your personal data. Please note that the withdrawal only takes effect for the future. Processing that took place before the withdrawal is not affected. However, please note that we currently do not collect your personal data based on your consent.
+**1.5 Web beacons and similar technologies** 
 
-**b) Right to information/access:** You are entitled at any time, within the framework of Art. 15 GDPR, to request confirmation from us as to whether we are processing personal data relating to you. If this is the case, you are also entitled, within the framework of Art. 15 GDPR, to receive information about this personal data as well as certain other information (including processing purposes, categories of personal data, categories of recipients, planned storage period, the origin of the data, the use of automated decision-making and, in the case of third country transfers, the appropriate safeguards) and a copy of your personal data. The restrictions of § 34 FDPA apply.
+1.5.1 Apart from cookies, we use other similar technologies, like web beacons, to monitor traffic, deliver and communicate with cookies, improve site performance. Similar to cookies you may opt out from web beacons at any time. If you wish to opt out of this processing activity, please contact us at token\@trait.tech with the subject named “Privacy Policy”. 
 
-**c) Right to rectification:** You are entitled to request us to rectify the personal data stored about you if it is inaccurate or incorrect, in accordance with Art. 16 GDPR.
+**1.6 Data from third party sources**
 
-**d) Right to erasure:** You are entitled, under the conditions of Art. 17 GDPR, to demand that we delete personal data relating to you without delay. The right to erasure does not apply if the processing of the personal data is necessary, for example, to comply with a legal obligation (e.g., statutory retention obligations) or to assert, exercise or defend legal claims. Furthermore, the restrictions of § 35 FDPA apply.
+1.6.1 We may receive some information about you, such as name, email address, demographic information, IP address, location, and use of social media websites, from third parties. 
 
-**e) Right to restrict processing:** You are entitled to demand that we restrict the processing of your personal data under the conditions of Art. 18 GDPR.
+**1.7 Opting-Out** 
 
-**f) Right to data portability:** You are entitled, under the conditions of Art. 20 GDPR to demand that we hand over to you the personal data concerning you that you have provided to us, in a structured, common and machine-readable format. Note that this right only applies to automated information which you initially provided consent for us to use or where we used the information to perform a contract with you. However, we are currently not processing your personal data based on your consent or based on performance of a contract with you.
+1.7.1 You may decline to have your personal data collected via third party tracking technologies by navigating to the settings feature in your browser and declining all third party cookies or declining third party cookies from specific sites, or, for mobile, limiting ad tracking or resetting the advertising identifier via the privacy settings on your mobile device. 
 
-**g) Right of objection:** You are entitled to object to the processing of your personal data under the conditions of Art. 21 GDPR, so that we must stop processing your personal data. The right to object only exists within the limits provided for in Art. 21 GDPR. In addition, our interests may conflict with the termination of processing, so that we are entitled to process your personal data despite your objection.
+1.7.2 If your browser does not permit you to block any cookies and similar technologies, you can use the following third party tools to decline the collection and use of information for the purpose of serving your interest based advertising: 
 
-**h) Right of appeal to a supervisory authority:** Subject to the conditions of Art. 77 GDPR, you have the right to lodge a complaint with a competent supervisory authority. A list of data protection supervisory authorities in Germany and their contact details can be found here. As a rule, the Data Subject can turn to the supervisory authority at his/her habitual residence or place of work or Novasama’s registered office. The supervisory authority responsible for Novasama is the Berlin Commissioner for Data Protection and Freedom of Information (Der Berliner Beauftragte für Datenschutz und Informationsfreiheit)
+- The NAI’s opt-out platform: http\://www\.networkadvertising.org/choices/ 
+- The EDAA’s opt-out platform http\://www\.youronlinechoices.com/ 
+- The DAA’s opt-out platform: http\://optout.aboutads.info/?c=2\&lang=EN 
 
-**Other concerns:** For further data protection questions and concerns, please contact us under the contact details provided in Section 2 above.
+**2. Minors** 
 
-**9. REQUIREMENT TO PROVIDE DATA**
+2.1. Minors and children under the age of 16 (or other legal age of your country of residence) should not use our Services. If you are 13 years of age up to 16, you need to obtain a written parental or guardian consent, unless the law of the country of your residence prescribes higher age requirements, in which case you need to meet such requirements. We do not knowingly provide any Services to minors. If you access our Services, you represent that you have the legal capacity to enter into a binding agreement. 
 
-Visiting our Websites requires you to provide certain personal data to us, as described in Section 3.b) above. Other than that, you are not required to provide any personal data to us. However, if you decide not to provide your personal data to us, you may not be able to contact us and/or we will not be able to contact you, e.g., to respond to your enquiries or questions.
+**3. Use of the Data** 
 
-**10. AUTOMATED DECISION MAKING / PROFILING**
+3.1. We only use your personal data for the following purposes: 
 
-We do not use your personal data to make any automated decision making or profiling (meaning an automated analysis of your personal circumstances).
+3.1.1 to provide you with the Services that you requested; 
 
-**11. CHILDREN PERSONAL DATA**
+3.1.2 to promote the use of our Services to you; 
 
-The Vault is not intended for the use of children (under 18 years old). We do not knowingly market to, solicit, process, collect, or use personal data of children.
+3.1.3 to analyze and improve Trait Tech Services; 
 
-If we become aware that a child has provided us with personal data, we will use commercially reasonable efforts to delete such information from our database within a reasonable timeframe. If you are the parent or legal guardian of a child and believe that we have collected personal data from your child, please contact us.
+3.1.4 to send you informational and promotional content that you may subscribe to or unsubscribe; 
 
-**12. CHANGES TO THIS PRIVACY NOTICE**
+3.1.5 to bill and collect money for Services ordered; 
 
-We keep this Privacy Notice under regular review and may update it at any time. If we make any changes to this Privacy Notice, we will change the “Last Updated” date above. Please review this Privacy Notice regularly to check for any updates. The current version of the Privacy Notice can be accessed at any time on https://novasama.io/vault-privacy.
+3.1.6 to send you notifications, including notifications on change of our Services; 
 
-Last Updated: February 5, 2024
+3.1.7 to communicate with our customers about our Website and Services and provide customer support in response to their inquiries; 
+
+3.1.8 to enforce compliance with our Terms and applicable law; 
+
+3.1.9 to protect our rights and safety as well as the rights and safety of our customers and third parties; 
+
+3.1.10 to meet legal requirements; 
+
+3.1.11 to provide information to representatives and Service Providers; 
+
+3.1.12 to prosecute and defend a court, arbitration, or similar legal proceeding;
+
+3.1.13 to respond to lawful requests by public authorities, including to meet national security or law enforcement requirements; 
+
+3.1.14 to provide, support, and improve the Services we offer; 
+
+3.1.15 to provide suggestions about products or services that you may be interested in and which you may opt out; 
+
+3.1.16 to transfer your information in the case of a sale, merger, consolidation, liquidation, reorganization, or acquisition. 
+
+**4. Sharing of Data** 
+
+4.1 We do not share personal information you have provided to us without your consent, unless: 4.1.1 Doing so is appropriate to carry out your own request; 
+
+4.1.2 We believe it is needed to enforce our Terms, or if it is legally required; 
+
+4.1.3 We believe it is needed to detect, prevent or address fraud, security or technical issues; 
+
+4.1.4 Otherwise protect our property, legal rights, or that of others. 
+
+4.2 Trait Tech is operated from the Republic of Singapore. If you are visiting the Website or Services from outside of Singapore, you agree to any processing of any personal information you provide us according to this policy. 
+
+4.3 We don't share your personal information with third parties, except for people and other entities that perform certain tasks on our behalf and who are under our control (our “Service Providers”). We may need to share personal information with our Service Providers in order to provide products or services to you. Unless we tell you differently, our Service Providers do not have any right to use Personal Information or other information we share with them beyond what is necessary to assist us. You hereby consent to our sharing of personal information with our Service Providers. Our Service Providers are:
+
+|        |                              |                                 |                                                |
+| :----: | :--------------------------: | ------------------------------- | ---------------------------------------------- |
+| **#**  |       **Entity Name**        | **Webpage**                     | **Purpose**                                    |
+|   1.   |          Google LLC          | https\://analytics.google.com/  | We use Google Analytics for analytical purpose |
+|   2.   |        Amplitude Inc.        | https\://amplitude.com          | For analytical purpose                         |
+|   3.   |         Stripe, Inc.         | https\://stripe.com/            | For payment processing                         |
+|   4.   | Wise / Wise Payments Limited | https\://wise.com               | For payment processing                         |
+
+****
+
+|     |                                |                       |                                               |
+| :-: | ------------------------------ | --------------------- | --------------------------------------------- |
+| 5.  | Sumsub / Sum and Substance Ltd | https\://sumsub.com/  | For customer verification to comply with laws |
+| 6.  | Onfido Ltd                     | https\://onfido.com   | For customer verification to comply with laws |
+
+****
+
+4.4 Only aggregated, anonymized data is periodically transmitted to external services to help us improve the Website and Services. To receive the current list of external services that we use for this purpose, please email at token\@trait.tech. 
+
+**5. Safeguarding your Personal Data** 
+
+5.1 The protection of your personal data is vital to us. We take commercially reasonable measures to protect your personal data from loss, misuse and unauthorized access, disclosure, alteration, and destruction, considering the risks involved in the processing and the nature of the personal data, thanks to the use of the following technologies: 
+
+⎯ SSL certificates, 
+
+⎯ Two-factor authentication. 
+
+5.2 Our employees, contractors and any business partners can access personal data on a need-to-know basis, and under a strict duty of maintaining confidentiality. We use encryption for sensitive information, and we test our system on a regular basis to ensure we comply with industry practices and standards. 
+
+5.3 While we strive to use commercially acceptable means to protect your personal data, no method of transmission over the Internet, or method of electronic storage, is completely secure, and we cannot guarantee the absolute security of any data. 
+
+5.4 You agree to protect the security of your login information and password and not to transfer such information to any third party. We will not be liable to you for the use of your account by any third party. 
+
+5.5 If you become aware of any unauthorized use of your account, you shall immediately notify us in writing. 
+
+**6. Access to your Personal Data** 
+
+6.1 You may access your personal data held by us to correct, update, and remove inaccurate or incorrect data. You have the following rights: 
+
+6.1.1 delete some or all personal data that we held about you; 
+
+6.1.2 change or correct your personal data that we held about you; 
+
+6.1.3 object to, or limit or restrict, use of your personal data; 
+
+6.1.4 right to access and/or take your personal data: you can ask us for a copy of your personal information in machine readable form; 
+
+6.1.5 access information we hold about you.
+
+6.2 If you request us to view, change and remove your data associated with your account, please contact us at token\@trait.tech. We will process your request within 15 business days. In accordance with the applicable laws, additional fees may be applied. 
+
+**7. Changes to the Privacy Policy** 
+
+7.1 We may amend this Privacy Policy from time to time. Use of information we collect now is subject to the Privacy Policy in effect at the time such information is used. If we make major changes in the way we collect or use information, we will notify you by posting an announcement on the Website or sending you an email. 
+
+**8. Merge of Company** 
+
+8.1 If Trait Tech merges with, or is acquired by, another company or organization, or sells all or a portion of its assets, your personal data may be disclosed to our advisers and any prospective purchaser or any prospective purchaser’s adviser and may be among the assets transferred. However, personal data will always remain subject to this Privacy Policy. 
+
+**9. Data Retention** 
+
+9.1 We retain your personal data primarily within the Republic of Singapore. We retain your personal data for as long as we need it to fulfil the purposes for which we originally collected it or as needed to provide with the Services, except if required otherwise by law. In some cases we may determine the period of data retention based on the period we need to access the data for the provision of services, receiving payment, or for any other auditing or legal purposes. 
+
+9.2 Countries where we process information may have laws that are different, and potentially not as protective, as the laws of your own country, though we will always comply with the applicable laws when we process any information. 
+
+**10. Contact us** 
+
+10.1 Should you have any questions or concerns, please email us at support\@trait.tech.
