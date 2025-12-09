@@ -172,7 +172,7 @@ private fun getDescriptionForUpdateMetadata(): List<AnnotatedString> {
 		withStyle(SpanStyle(color = MaterialTheme.colors.pink300)) {
 			withAnnotation(
 				COMPOSE_URL_TAG_ANNOTATION,
-				"https://${context.getString(R.string.transaction_error_steps_2_url_core_networks)}"
+				context.getString(R.string.transaction_error_steps_2_url_core_networks)
 			) {
 				append(context.getString(R.string.transaction_error_steps_2_url_core_networks))
 			}

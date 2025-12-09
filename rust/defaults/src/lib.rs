@@ -190,7 +190,7 @@ fn default_network_info() -> [DefaultNetworkInfo; 1] {
             decimals: 12,
             encryption: Encryption::Sr25519,
             genesis_hash: H256::from_str(
-                "977630d34363c8b118147fe7deb58118fa1f75197d036071572e9a3698bee56d",
+                "f49c90ff41f63169e356faa7f03c749181a09566c22690d7926e82b791d34906",
             )
             .expect("known value"),
             logo: String::from("trevo"),
