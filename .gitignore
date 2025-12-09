@@ -96,6 +96,8 @@ rust/database/database_hot
 rust/qrcode_static/*.png
 rust/files/completed/*
 rust/files/in_progress/*
+# build artifacts
+target/
 # development mess
 rust/transaction_parsing/src/main.rs
 rust/transaction_signing/src/main.rs
