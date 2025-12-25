@@ -3189,7 +3189,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
 				DEVELOPMENT_TEAM = QXCVVJ6654;
 				ENABLE_BITCODE = NO;
@@ -3206,7 +3206,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PolkadotVault",
 				);
-				MARKETING_VERSION = 6.3.2;
+				MARKETING_VERSION = 6.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
 				PRODUCT_MODULE_NAME = PolkadotVault;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3224,7 +3224,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
 				DEVELOPMENT_TEAM = QXCVVJ6654;
 				ENABLE_BITCODE = NO;
@@ -3241,7 +3241,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PolkadotVault",
 				);
-				MARKETING_VERSION = 6.3.2;
+				MARKETING_VERSION = 6.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
 				PRODUCT_MODULE_NAME = PolkadotVault;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3366,7 +3366,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = accent_pink300;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PolkadotVault/Preview Content\"";
 				DEVELOPMENT_TEAM = QXCVVJ6654;
 				ENABLE_BITCODE = NO;
@@ -3383,7 +3383,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PolkadotVault",
 				);
-				MARKETING_VERSION = 6.3.2;
+				MARKETING_VERSION = 6.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = finance.trevo.vault;
 				PRODUCT_MODULE_NAME = PolkadotVault;
 				PROVISIONING_PROFILE_SPECIFIER = "";
