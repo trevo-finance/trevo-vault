@@ -581,11 +581,19 @@ pub enum Error {
         encryption: Encryption,
     },
 
-    #[error(transparent)]
-    NotUtf8(#[from] std::str::Utf8Error),
+    #[error("Message payload must be wrapped with tags <Bytes></Bytes>")]
+    InvalidMessagePayload,
 
-    #[error("Parser error: {0}")]
-    ParserError(String),
+    /// [`OrderedNetworkSpecs`] needed to parse
+    /// historical transactions saved into history log, searched by network
+    /// name.
+    ///
+    /// [`OrderedNetworkSpecs`]: definitions::network_specs::OrderedNetworkSpecs
+    #[error(
+        "Could not find network specs for {name} \
+        needed to decode historical transaction."
+    )]
+    HistoryUnknownNetwork { name: String },
 }
 
 fn display_parsing_errors(network_name: &str, errors: &[(u32, parser::Error)]) -> String {

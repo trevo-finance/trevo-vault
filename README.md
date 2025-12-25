@@ -198,6 +198,14 @@ which cargo          # Should show: /Users/YOUR_USERNAME/.cargo/bin/cargo
 which uniffi-bindgen # Should show: /Users/YOUR_USERNAME/.cargo/bin/uniffi-bindgen
 ```
 
+#### "build fails when runnning particular test"
+
+Try to enable features for the dependencies. For example,
+
+```
+cargo test -p navigator export_import_substrate_and_ethereum_addrs --features db_handling/active
+```
+
 # Release Android
 
 - Create PR with new app version updated

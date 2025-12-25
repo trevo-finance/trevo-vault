@@ -23,7 +23,7 @@ use load_metadata::load_metadata;
 mod load_types;
 use load_types::load_types;
 mod message;
-use message::process_message;
+use message::{process_any_chain_message, process_concrete_chain_message};
 pub mod parse_transaction;
 pub use parse_transaction::entry_to_transactions_with_decoding;
 use parse_transaction::{parse_transaction, parse_transaction_with_proof};
@@ -60,9 +60,10 @@ fn handle_scanner_input(database: &sled::Db, payload: &str) -> Result<Transactio
 
     match &data_hex[4..6] {
         "00" | "02" => parse_transaction(database, data_hex),
-        "03" => process_message(database, data_hex),
+        "03" => process_concrete_chain_message(database, data_hex),
         "04" => parse_transaction_bulk(database, data_hex),
         "06" => parse_transaction_with_proof(database, data_hex),
+        "08" => process_any_chain_message(database, data_hex),
         "80" => load_metadata(database, data_hex),
         "81" => load_types(database, data_hex),
         "c1" => add_specs(database, data_hex),
@@ -104,6 +105,9 @@ pub fn decode_payload(
         "05" => Ok(DecodeSequenceResult::DynamicDerivationTransaction {
             s: vec![data_hex.to_string()],
         }),
+        "07" => Ok(DecodeSequenceResult::DynamicDerivationTransaction {
+            s: vec![data_hex.to_string()],
+        }),
         "df" => decode_dynamic_derivations(data_hex),
         _ => Ok(DecodeSequenceResult::Other {
             s: payload.to_string(),
@@ -124,7 +128,11 @@ fn parse_transaction_bulk(database: &sled::Db, payload: &str) -> Result<Transact
             for t in &b.encoded_transactions {
                 let encoded = hex::encode(t);
                 let encoded = "53".to_string() + &encoded;
-                let action = parse_transaction(database, &encoded)?;
+                let action = if &encoded[4..6] == "06" {
+                    parse_transaction_with_proof(database, &encoded)?
+                } else {
+                    parse_transaction(database, &encoded)?
+                };
                 match action {
                     TransactionAction::Sign {
                         actions: a,

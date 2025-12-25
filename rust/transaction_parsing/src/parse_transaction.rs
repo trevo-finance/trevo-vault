@@ -1,9 +1,12 @@
+use db_handling::helpers::try_get_address_details_by_multisigner;
 use db_handling::identities::derive_single_key;
 use db_handling::{
     db_transactions::{SignContent, TrDbColdSign, TrDbColdSignOne},
     helpers::{get_all_networks, try_get_address_details, try_get_network_specs},
 };
 use definitions::crypto::Encryption;
+use definitions::navigation::NetworkSpecs;
+use definitions::navigation::TransactionSignActionNetwork;
 use definitions::network_specs::OrderedNetworkSpecs;
 use definitions::{
     history::{Entry, Event, SignDisplay},
@@ -12,6 +15,7 @@ use definitions::{
     network_specs::VerifierValue,
     users::AddressDetails,
 };
+use parser::MetadataProof;
 use parser::{
     cut_method_extensions, decode_call, decode_extensions, decode_metadata_proof,
     decoding_commons::OutputCard, parse_extensions, parse_method,
@@ -62,8 +66,13 @@ pub(crate) fn parse_transaction(database: &sled::Db, data_hex: &str) -> Result<T
     let (author_multi_signer, call_data, genesis_hash, encryption) =
         multisigner_msg_genesis_encryption(database, data_hex)?;
 
-    let author_address_key = AddressKey::new(author_multi_signer.clone(), Some(genesis_hash));
-    let address_details = try_get_address_details(database, &author_address_key)?;
+    let address_details = try_get_address_details_by_multisigner(
+        database,
+        &author_multi_signer,
+        &genesis_hash,
+        &encryption,
+    )?;
+
     do_parse_transaction(
         database,
         author_multi_signer,
@@ -81,8 +90,13 @@ pub(crate) fn parse_transaction_with_proof(
     let (author_multi_signer, payload, genesis_hash, encryption) =
         multisigner_msg_genesis_encryption(database, data_hex)?;
 
-    let author_address_key = AddressKey::new(author_multi_signer.clone(), Some(genesis_hash));
-    let address_details = try_get_address_details(database, &author_address_key)?;
+    let address_details = try_get_address_details_by_multisigner(
+        database,
+        &author_multi_signer,
+        &genesis_hash,
+        &encryption,
+    )?;
+
     do_parse_transaction_with_proof(
         database,
         author_multi_signer,
@@ -105,17 +119,29 @@ pub fn parse_dd_transaction(
         database,
         seeds,
         &transaction.derivation_path,
-        &transaction.root_multisigner,
+        &transaction.root_key_id,
         network_specs_key,
     )?;
-    do_parse_transaction(
-        database,
-        author_multi_signer,
-        &call_data,
-        genesis_hash,
-        encryption,
-        Some(address_details),
-    )
+
+    match &data_hex[4..6] {
+        "05" => do_parse_transaction(
+            database,
+            author_multi_signer,
+            &call_data,
+            genesis_hash,
+            encryption,
+            Some(address_details),
+        ),
+        "07" => do_parse_transaction_with_proof(
+            database,
+            author_multi_signer,
+            &call_data,
+            genesis_hash,
+            encryption,
+            Some(address_details),
+        ),
+        _ => Err(Error::PayloadNotSupported(data_hex[4..6].to_string())),
+    }
 }
 
 fn do_parse_transaction_with_proof(
@@ -132,12 +158,22 @@ fn do_parse_transaction_with_proof(
     let mut index: u32 = 0;
     let indent: u32 = 0;
 
-    let network_specs = try_get_network_specs(database, &network_specs_key)?.ok_or_else(|| {
-        Error::UnknownNetwork {
+    let copied_vec: Vec<u8> = payload.to_vec();
+    let mut remained_payload = &copied_vec[..];
+
+    let metadata_proof =
+        decode_metadata_proof(&mut remained_payload).map_err(|_| Error::UnknownNetwork {
             genesis_hash,
             encryption,
-        }
-    })?;
+        })?;
+
+    let network_specs = do_get_network_specs(
+        database,
+        &network_specs_key,
+        &metadata_proof,
+        genesis_hash,
+        encryption,
+    )?;
 
     let cards_prep = match address_details {
         Some(address_details) => {
@@ -161,29 +197,11 @@ fn do_parse_transaction_with_proof(
             (Card::AuthorPlain {
                 author: &author_multi_signer,
                 base58prefix: network_specs.specs.base58prefix,
+                encryption,
             })
             .card(&mut index, indent),
             Box::new((Card::Warning(Warning::AuthorNotFound)).card(&mut index, indent)),
         ),
-    };
-
-    let copied_vec: Vec<u8> = payload.to_vec();
-    let mut remained_payload = &copied_vec[..];
-
-    let metadata_proof = match decode_metadata_proof(&mut remained_payload) {
-        Ok(v) => v,
-        Err(e) => {
-            return prepare_read_transaction_action(ReadTransactionPrepareParams {
-                maybe_error: Some(e),
-                cards_prep,
-                network_specs,
-                author_multi_signer,
-                maybe_method_cards: None,
-                maybe_extension_cards: None,
-                index,
-                indent,
-            })
-        }
     };
 
     let (call_data, extensions_data) = match cut_method_extensions(remained_payload) {
@@ -294,10 +312,41 @@ fn do_parse_transaction_with_proof(
             content,
             has_pwd: address_details.has_pwd,
             author_info,
-            network_info: network_specs.clone(),
+            network_info: TransactionSignActionNetwork::Concrete(Box::new(network_specs)),
         }],
         checksum,
     })
+}
+
+fn do_get_network_specs(
+    database: &sled::Db,
+    network_specs_key: &NetworkSpecsKey,
+    metadata_proof: &MetadataProof,
+    genesis_hash: H256,
+    encryption: Encryption,
+) -> Result<OrderedNetworkSpecs> {
+    let network_specs = try_get_network_specs(database, network_specs_key)?.unwrap_or_else(|| {
+        let path_id = String::from("//") + &metadata_proof.extra_info.spec_name;
+
+        OrderedNetworkSpecs {
+            specs: NetworkSpecs {
+                base58prefix: metadata_proof.extra_info.base58_prefix,
+                color: String::from("#000"),
+                decimals: metadata_proof.extra_info.decimals,
+                encryption,
+                genesis_hash,
+                logo: metadata_proof.extra_info.spec_name.clone(),
+                name: metadata_proof.extra_info.spec_name.clone(),
+                path_id,
+                secondary_color: String::from("#000"),
+                title: metadata_proof.extra_info.spec_name.clone(),
+                unit: metadata_proof.extra_info.token_symbol.clone(),
+            },
+            order: 0,
+        }
+    });
+
+    Ok(network_specs)
 }
 
 fn prepare_read_transaction_action(
@@ -412,6 +461,7 @@ fn do_parse_transaction(
                     (Card::AuthorPlain {
                         author: &author_multi_signer,
                         base58prefix: network_specs.specs.base58prefix,
+                        encryption,
                     })
                     .card(&mut index, indent),
                     Box::new((Card::Warning(Warning::AuthorNotFound)).card(&mut index, indent)),
@@ -514,7 +564,10 @@ fn do_parse_transaction(
                                                 content,
                                                 has_pwd: address_details.has_pwd,
                                                 author_info,
-                                                network_info: network_specs.clone(),
+                                                network_info:
+                                                    TransactionSignActionNetwork::Concrete(
+                                                        Box::new(network_specs.clone()),
+                                                    ),
                                             }],
                                             checksum,
                                         })
@@ -622,7 +675,9 @@ pub fn entry_to_transactions_with_decoding(
                     .iter()
                     .find(|network| sign_display.network_name == network.specs.name)
                     .cloned()
-                    .unwrap();
+                    .ok_or_else(|| Error::HistoryUnknownNetwork {
+                        name: sign_display.network_name.clone(),
+                    })?;
 
                 let address_key = AddressKey::new(m.clone(), Some(network.specs.genesis_hash));
                 let verifier_details = Some(sign_display.signed_by.show_card());

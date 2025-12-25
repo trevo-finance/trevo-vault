@@ -6,10 +6,12 @@ use constants::test_values::{
 
 use db_handling::{
     cold_default::{populate_cold, populate_cold_no_metadata, populate_cold_no_networks},
+    identities::try_create_address,
     manage_history::get_history,
 };
 use definitions::navigation::{
     DecodeSequenceResult, Identicon, MAddressCard, TransactionSignAction,
+    TransactionSignActionNetwork,
 };
 use definitions::{
     crypto::Encryption,
@@ -744,7 +746,7 @@ fn parse_transaction_1() {
         assert_eq!(actions.len(), 1);
         assert_eq!(content, &content_known);
         assert_eq!(author_info, &author_info_known);
-        assert_eq!(network_info, &network_info_known);
+        assert_eq!(network_info.get_network_spec(), Some(network_info_known));
         assert_eq!(*has_pwd, false)
     } else {
         panic!("Wrong action {:?}", output)
@@ -1068,7 +1070,7 @@ fn parse_transaction_2() {
         assert_eq!(actions.len(), 1);
         assert_eq!(content, &content_known);
         assert_eq!(author_info, &author_info_known);
-        assert_eq!(network_info, &network_info_known);
+        assert_eq!(network_info.get_network_spec(), Some(network_info_known));
         assert!(!has_pwd, "Expected no password");
     } else {
         panic!("Wrong action {:?}", action)
@@ -1236,7 +1238,7 @@ fn parse_transaction_3() {
         assert_eq!(content, &content_known);
         assert_eq!(author_info, &author_info_known);
         assert!(!has_pwd, "Expected no password");
-        assert_eq!(network_info, &network_info_known);
+        assert_eq!(network_info.get_network_spec(), Some(network_info_known));
     } else {
         panic!("Wrong action {:?}", output)
     }
@@ -2540,6 +2542,64 @@ fn parse_msg_1() {
         assert_eq!(actions.len(), 1);
         assert_eq!(set, &set_expected);
         assert_eq!(author_info, &author_info_known);
+        assert_eq!(network_info.get_network_spec(), Some(network_info_known));
+        assert!(!has_pwd, "Expected no password");
+    } else {
+        panic!("Wrong action {:?}", action)
+    }
+    fs::remove_dir_all(dbname).unwrap();
+}
+
+#[test]
+fn parse_any_chain_msg() {
+    let dbname = &tempdir().unwrap().into_path().to_str().unwrap().to_string();
+    let db = sled::open(dbname).unwrap();
+    populate_cold(&db, Verifier { v: None }).unwrap();
+    let sign_msg = hex::encode(b"<Bytes>uuid-abcd</Bytes>");
+    let text = String::from("uuid-abcd");
+    let line =
+        format!("530108d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d{sign_msg}");
+
+    let set_expected = TransactionCardSet {
+        message: Some(vec![TransactionCard {
+            index: 0,
+            indent: 0,
+            card: Card::TextCard { f: text },
+        }]),
+        ..Default::default()
+    };
+
+    let author_info_known = MAddressCard {
+        address_key: concat!(
+            "01d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d",
+            "01e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e"
+        )
+        .to_string(),
+        base58: "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY".to_string(),
+        address: Address {
+            identicon: Identicon::Dots {
+                identity: alice_sr_alice(),
+            },
+            seed_name: "Alice".to_string(),
+            path: "//Alice".to_string(),
+            has_pwd: false,
+            secret_exposed: false,
+        },
+    };
+
+    let network_info_known = TransactionSignActionNetwork::AnyNetwork(Encryption::Sr25519);
+    let action = produce_output(&db, &line).unwrap();
+
+    if let TransactionAction::Sign { actions, .. } = action {
+        let TransactionSignAction {
+            content: set,
+            has_pwd,
+            author_info,
+            network_info,
+        } = &actions[0];
+        assert_eq!(actions.len(), 1);
+        assert_eq!(set, &set_expected);
+        assert_eq!(author_info, &author_info_known);
         assert_eq!(network_info, &network_info_known);
         assert!(!has_pwd, "Expected no password");
     } else {
@@ -2558,16 +2618,17 @@ fn parse_msg_2() {
     let line = format!("530103d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d{sign_msg}e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e");
 
     let error = produce_output(&db, &line).unwrap_err();
-    if let error::Error::ParserError(a) = error {
-        assert_eq!(a, "Error(Error { input: \"uuid-abcd\", code: TakeUntil })");
-    } else {
-        panic!("Unexpected error {:?}", error)
+
+    match error {
+        error::Error::InvalidMessagePayload => {}
+        _ => panic!("Unexpected error {:?}", error),
     }
+
     fs::remove_dir_all(dbname).unwrap();
 }
 
 #[test]
-fn import_derivations() {
+fn import_unique_derivation() {
     let dbname = &tempdir().unwrap().into_path().to_str().unwrap().to_string();
     let db = sled::open(dbname).unwrap();
     populate_cold(&db, Verifier { v: None }).unwrap();
@@ -2602,6 +2663,81 @@ fn import_derivations() {
                         },
                         has_pwd: None,
                         network_title: Some("Westend".to_string()),
+                        status: DerivedKeyStatus::Importable,
+                    }],
+                }],
+            },
+        }]),
+        ..Default::default()
+    };
+
+    let action = produce_output(&db, line).unwrap();
+    if let TransactionAction::Derivations { content: set } = action {
+        assert_eq!(*set, set_expected);
+    } else {
+        panic!("Wrong action {:?}", action)
+    }
+    fs::remove_dir_all(dbname).unwrap();
+}
+
+#[test]
+fn import_derivation_existing_for_another_chain() {
+    let dbname = &tempdir().unwrap().into_path().to_str().unwrap().to_string();
+    let db = sled::open(dbname).unwrap();
+    populate_cold(&db, Verifier { v: None }).unwrap();
+
+    // import derived key for westend
+    let derivation_path = "//westend//0";
+    let westend_specs_key = NetworkSpecsKey::from_parts(
+        &H256::from_str("e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e")
+            .unwrap(),
+        &Encryption::Sr25519,
+    );
+
+    try_create_address(
+        &db,
+        "Alice",
+        ALICE_SEED_PHRASE,
+        derivation_path,
+        &westend_specs_key,
+    )
+    .unwrap();
+
+    // try to import the same derivation for polkadot
+
+    let line = "53ffde00041c6d7920736565640146ebddef8cd9bb167dc30878d7113b7e168e6f0646beffd77d69d39bad76b47a04c0354847694263466745424d6754364745756f395341393873426e4767774874504b44586955756b5436617143724b457801302f2f77657374656e642f2f300191b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3";
+
+    let polkadot_genesis =
+        H256::from_str("0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3")
+            .unwrap();
+
+    let set_expected = TransactionCardSet {
+        importing_derivations: Some(vec![TransactionCard {
+            index: 0,
+            indent: 0,
+            card: Card::DerivationsCard {
+                f: vec![SeedKeysPreview {
+                    name: "Alice".to_string(),
+                    multisigner: MultiSigner::Sr25519(
+                        Public::try_from(
+                            hex::decode(
+                                "46ebddef8cd9bb167dc30878d7113b7e168e6f0646beffd77d69d39bad76b47a",
+                            )
+                            .unwrap()
+                            .as_ref(),
+                        )
+                        .unwrap(),
+                    ),
+                    derived_keys: vec![DerivedKeyPreview {
+                        address: "5HGiBcFgEBMgT6GEuo9SA98sBnGgwHtPKDXiUukT6aqCrKEx".to_string(),
+                        derivation_path: Some(derivation_path.to_string()),
+                        encryption: Encryption::Sr25519,
+                        genesis_hash: polkadot_genesis,
+                        identicon: Identicon::Dots {
+                            identity: alice_sr_westend_0(),
+                        },
+                        has_pwd: None,
+                        network_title: Some("Polkadot".to_string()),
                         status: DerivedKeyStatus::Importable,
                     }],
                 }],
@@ -2801,7 +2937,7 @@ fn parse_dd_transaction_1() {
             assert_eq!(actions.len(), 1);
             assert_eq!(content, &content_known);
             assert_eq!(author_info, &author_info_known);
-            assert_eq!(network_info, &network_info_known);
+            assert_eq!(network_info.get_network_spec(), Some(network_info_known));
             assert_eq!(*has_pwd, false)
         } else {
             panic!("Wrong action {:?}", output)
@@ -3140,7 +3276,7 @@ fn parse_dd_transaction_2() {
             assert_eq!(actions.len(), 1);
             assert_eq!(content, &content_known);
             assert_eq!(author_info, &author_info_known);
-            assert_eq!(network_info, &network_info_known);
+            assert_eq!(network_info.get_network_spec(), Some(network_info_known));
             assert!(!has_pwd, "Expected no password");
         } else {
             panic!("Wrong action {:?}", action)
@@ -3319,7 +3455,7 @@ fn parse_dd_transaction_3() {
             assert_eq!(content, &content_known);
             assert_eq!(author_info, &author_info_known);
             assert!(!has_pwd, "Expected no password");
-            assert_eq!(network_info, &network_info_known);
+            assert_eq!(network_info.get_network_spec(), Some(network_info_known));
         } else {
             panic!("Wrong action {:?}", output)
         }

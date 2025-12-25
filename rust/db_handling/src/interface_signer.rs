@@ -15,7 +15,7 @@ use definitions::{
     crypto::Encryption,
     helpers::{
         make_identicon_from_multisigner, multisigner_to_public, pic_meta,
-        print_multisigner_as_base58_or_eth,
+        print_multisigner_as_base58_or_eth_address,
     },
     keyring::{AddressKey, NetworkSpecsKey, VerifierKey},
     navigation::{
@@ -173,7 +173,7 @@ pub fn keys_by_seed_name(database: &sled::Db, seed_name: &str) -> Result<MKeysNe
         // TODO: root always prefix 42 for substrate.
         let address_key = hex::encode(AddressKey::new(root.0.clone(), None).key());
         MAddressCard {
-            base58: print_multisigner_as_base58_or_eth(&root.0, None, root.1.encryption),
+            base58: print_multisigner_as_base58_or_eth_address(&root.0, None, root.1.encryption),
             address_key,
             address,
         }
@@ -186,7 +186,7 @@ pub fn keys_by_seed_name(database: &sled::Db, seed_name: &str) -> Result<MKeysNe
 
             let identicon =
                 make_identicon_from_multisigner(&multisigner, address_details.identicon_style());
-            let base58 = print_multisigner_as_base58_or_eth(
+            let base58 = print_multisigner_as_base58_or_eth_address(
                 &multisigner,
                 Some(network_specs.specs.base58prefix),
                 network_specs.specs.encryption,
@@ -297,9 +297,9 @@ pub fn first_network(database: &sled::Db) -> Result<Option<OrderedNetworkSpecs>>
 /// Prepare export key screen struct [`MKeyDetails`].
 ///
 /// For QR code the address information is put in format
-/// `substrate:{public key as base58}:0x{network genesis hash}`
+/// `substrate:{address as base58}:0x{network genesis hash}`
+/// `ethereum:{address as hex}:0x{network genesis hash}`
 /// transformed into bytes, to be compatible with `polkadot-js` interface.
-///
 /// Note that no [`Encryption`](definitions::crypto::Encryption) algorithm
 /// information is contained in the QR code. If there are multiple `Encryption`
 /// algorithms supported by the network, the only visible difference in exports
@@ -330,7 +330,7 @@ pub fn export_key(
             real_seed_name: address_details.seed_name,
         });
     }
-    let base58 = print_multisigner_as_base58_or_eth(
+    let base58 = print_multisigner_as_base58_or_eth_address(
         multisigner,
         Some(network_specs.base58prefix),
         network_specs.encryption,
@@ -345,6 +345,7 @@ pub fn export_key(
             } else {
                 "substrate"
             };
+
             QrData::Regular {
                 data: format!(
                     "{}:{}:0x{}",
@@ -501,7 +502,7 @@ fn dynamic_path_check_unhexed(
                     ..Default::default()
                 },
                 Ok(DerivationCheck::NoPassword(Some((multisigner, address_details)))) => {
-                    let address_base58 = print_multisigner_as_base58_or_eth(
+                    let address_base58 = print_multisigner_as_base58_or_eth_address(
                         &multisigner,
                         Some(ordered_network_specs.specs.base58prefix),
                         address_details.encryption,

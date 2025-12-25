@@ -3,9 +3,12 @@ plugins {
 	id 'kotlin-android'
 	id 'org.mozilla.rust-android-gradle.rust-android'
 	id 'idea'
+	// Add the Google services Gradle plugin
+	id 'com.google.gms.google-services'
 }
 
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
 	defaultConfig {
@@ -54,7 +57,7 @@ android {
 	}
 	compileSdk 35
 	ndkVersion '24.0.8215888'
-    namespace 'io.parity.signer'
+	namespace 'io.parity.signer'
 }
 
 android.applicationVariants.all { variant ->
@@ -92,7 +95,7 @@ task buildDB (type: Exec) {
 }
 
 dependencies {
-	implementation "androidx.core:core-ktx:1.12.0"
+	implementation "androidx.core:core-ktx:1.17.0"
 	implementation 'androidx.appcompat:appcompat:1.6.1'
 	implementation 'com.google.android.material:material:1.11.0'
 	implementation 'androidx.activity:activity-compose:1.8.2'
@@ -132,6 +135,8 @@ dependencies {
 	androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 	androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_libs_version"
 	debugImplementation "androidx.compose.ui:ui-tooling:$compose_libs_version"
+	// Import the Firebase BoM
+	implementation platform('com.google.firebase:firebase-bom:33.12.0')
 }
 
 preBuild.dependsOn "cargoBuild","buildDB"
