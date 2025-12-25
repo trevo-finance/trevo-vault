@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.wifi.WifiManager
 import android.provider.Settings
+import io.parity.signer.BuildConfig
 import io.parity.signer.domain.backend.UniffiInteractor
 import io.parity.signer.uniffi.historyAcknowledgeWarnings
 import io.parity.signer.uniffi.historyGetWarnings
@@ -97,6 +98,12 @@ class NetworkExposedStateKeeper(
 	}
 
 	private fun updateGeneralAirgapState() {
+		// Skip airgap blocking in debug builds to allow online testing.
+		if (BuildConfig.DEBUG) {
+			_airGapModeState.value = NetworkState.None
+			return
+		}
+
 		if (isCurentlyBreached) {
 			if (airGapModeState.value != NetworkState.Active) {
 				_airGapModeState.value = NetworkState.Active
