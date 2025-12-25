@@ -18,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import io.parity.signer.BuildConfig
 import io.parity.signer.domain.Callback
 import io.parity.signer.domain.NetworkState
 import io.parity.signer.domain.isDbCreatedAndOnboardingPassed
@@ -44,7 +45,7 @@ fun NavGraphBuilder.enableEachStartAppFlow(globalNavController: NavHostControlle
 					EachStartSubgraphScreenSteps.ROOT_EXPOSED
 				} else if (!viewModel.isAuthPossible(context)) {
 					EachStartSubgraphScreenSteps.SET_SCREEN_LOCK_BLOCKER
-				} else if (viewModel.networkState.value == NetworkState.Active || !context.isDbCreatedAndOnboardingPassed()){
+				} else if (!BuildConfig.DEBUG && (viewModel.networkState.value == NetworkState.Active || !context.isDbCreatedAndOnboardingPassed())){
 					EachStartSubgraphScreenSteps.AIR_GAP
 				} else {
 					goToNextFlow()
