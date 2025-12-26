@@ -17,8 +17,8 @@ android {
 		applicationId "finance.trevo.vault"
 		minSdk 23
 		targetSdk 35
-		versionCode 9
-		versionName "1.0.5"
+		versionCode 10
+		versionName "1.0.6"
 		ndk {
 			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
 		}
@@ -59,7 +59,8 @@ android {
 	}
 	// Compile with API 36 to satisfy androidx.core 1.17.0 requirements.
 	compileSdk 36
-	ndkVersion '24.0.8215888'
+	// NDK 28 for 16KB page-size support on newer devices.
+	ndkVersion '28.2.13676358'
 	namespace 'io.parity.signer'
 }
 
