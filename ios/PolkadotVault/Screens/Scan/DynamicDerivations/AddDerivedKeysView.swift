@@ -46,7 +46,6 @@ struct AddDerivedKeysView: View {
         }
     }
 
-    @ViewBuilder
     func errorsSection() -> some View {
         LazyVStack(spacing: Spacing.extraSmall) {
             ForEach(
@@ -60,7 +59,6 @@ struct AddDerivedKeysView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Localizable.AddDerivedKeys.Label.title.text
@@ -76,7 +74,6 @@ struct AddDerivedKeysView: View {
         .padding(.bottom, Spacing.medium)
     }
 
-    @ViewBuilder
     func keySets() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(
@@ -113,7 +110,6 @@ struct AddDerivedKeysView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func derivedKey(for key: AddDerivedKeyDerivedKeyData) -> some View {
         HStack(alignment: .center, spacing: 0) {
             NetworkIdenticon(
@@ -141,7 +137,6 @@ struct AddDerivedKeysView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func qrCodeSection() -> some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             // Header

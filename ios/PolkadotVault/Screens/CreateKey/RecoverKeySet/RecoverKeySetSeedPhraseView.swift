@@ -65,8 +65,8 @@ struct RecoverKeySetSeedPhraseView: View {
                             case .input:
                                 recoveryTextInput(scrollViewProxy)
                                     .onAppear {
-                                        /// #2088 In order to make sure that we don't try to focus textfield
-                                        /// before it actually renders, we need to trigger it with delay
+                                        // #2088 In order to make sure that we don't try to focus textfield
+                                        // before it actually renders, we need to trigger it with delay
                                         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.viewAnimationDelay) {
                                             focus = true
                                         }
@@ -87,7 +87,7 @@ struct RecoverKeySetSeedPhraseView: View {
                     .containerBackground(CornerRadius.small)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        /// #2065 Enable to focus `recoveryTextInput` when tapping anywhere within input rectangle
+                        // #2065 Enable to focus `recoveryTextInput` when tapping anywhere within input rectangle
                         focus = true
                     }
                     .padding(.horizontal, Spacing.large)
@@ -149,7 +149,6 @@ struct RecoverKeySetSeedPhraseView: View {
         }
     }
 
-    @ViewBuilder
     func seedPhraseCapsule(_ element: SeedPhraseElement) -> some View {
         HStack(alignment: .center, spacing: Spacing.extraExtraSmall) {
             Text(element.position)
@@ -170,15 +169,14 @@ struct RecoverKeySetSeedPhraseView: View {
         .padding(.trailing, Spacing.extraExtraSmall)
     }
 
-    @ViewBuilder
     func recoveryTextInput(_ scrollViewProxy: ScrollViewProxy) -> some View {
         TextField(
             "",
             text: $viewModel.userInput,
             onEditingChanged: { isEditing in
                 guard isEditing else { return }
-                /// #2088 Autoscroll to make guess words visible when textfield is focused
-                /// (i.e. after user tapped return and then tapped textfield again)
+                // #2088 Autoscroll to make guess words visible when textfield is focused
+                // (i.e. after user tapped return and then tapped textfield again)
                 DispatchQueue.main.asyncAfter(deadline: .now() + Constants.keyboardAnimationDelay) {
                     scrollViewProxy.scrollTo(Constants.capsuleContainerID, anchor: .bottom)
                 }
@@ -194,7 +192,6 @@ struct RecoverKeySetSeedPhraseView: View {
         .padding(.trailing, Spacing.extraExtraSmall)
     }
 
-    @ViewBuilder
     func guessCapsule(_ guess: String, scrollViewProxy: ScrollViewProxy) -> some View {
         Text(guess)
             .foregroundColor(.accentPink300)
@@ -205,9 +202,9 @@ struct RecoverKeySetSeedPhraseView: View {
             .clipShape(Capsule())
             .onTapGesture {
                 viewModel.onGuessTap(guess)
-                /// #2088 As tapping on guess words updates view, we need to do autoscroll with minor delay
-                /// This handles edge case if user would tap guess word when it's not fully visible,
-                /// We should still autoscroll then
+                // #2088 As tapping on guess words updates view, we need to do autoscroll with minor delay
+                // This handles edge case if user would tap guess word when it's not fully visible,
+                // We should still autoscroll then
                 DispatchQueue.main.asyncAfter(deadline: .now() + Constants.tapCapsuleGestureDelay) {
                     scrollViewProxy.scrollTo(Constants.capsuleContainerID, anchor: .bottom)
                 }

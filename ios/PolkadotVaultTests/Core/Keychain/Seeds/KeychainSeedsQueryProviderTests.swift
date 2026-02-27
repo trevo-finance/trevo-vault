@@ -17,7 +17,7 @@ final class KeychainSeedsQueryProviderTests: XCTestCase {
         subject = KeychainSeedsQueryProvider()
     }
 
-    func test_query_fetch_returnsExpectedValues() {
+    func test_query_fetch_returnsExpectedValues() throws {
         // Given
         let queryType: KeychainSeedsQuery = .fetch
         let expectedSecClass = kSecClassGenericPassword
@@ -26,28 +26,28 @@ final class KeychainSeedsQueryProviderTests: XCTestCase {
         let expectedReturnData = false
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, expectedMatchLimit)
-        XCTAssertEqual(result[kSecReturnAttributes] as! Bool, expectedReturnAttributes)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, expectedReturnData)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, expectedMatchLimit)
+        XCTAssertEqual(result[kSecReturnAttributes] as? Bool, expectedReturnAttributes)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, expectedReturnData)
     }
 
-    func test_query_deleteAll_returnsExpectedValues() {
+    func test_query_deleteAll_returnsExpectedValues() throws {
         // Given
         let queryType: KeychainSeedsQuery = .deleteAll
         let expectedSecClass = kSecClassGenericPassword
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
     }
 
-    func test_query_check_returnsExpectedValues() {
+    func test_query_check_returnsExpectedValues() throws {
         // Given
         let queryType: KeychainSeedsQuery = .check
         let expectedSecClass = kSecClassGenericPassword
@@ -55,15 +55,15 @@ final class KeychainSeedsQueryProviderTests: XCTestCase {
         let expectedReturnData = true
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, expectedMatchLimit)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, expectedReturnData)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, expectedMatchLimit)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, expectedReturnData)
     }
 
-    func test_query_search_returnsExpectedValues() {
+    func test_query_search_returnsExpectedValues() throws {
         // Given
         let seedName = "account"
         let queryType: KeychainSeedsQuery = .search(seedName: seedName)
@@ -72,30 +72,30 @@ final class KeychainSeedsQueryProviderTests: XCTestCase {
         let expectedReturnData = true
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, expectedMatchLimit)
-        XCTAssertEqual(result[kSecAttrAccount] as! String, seedName)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, expectedReturnData)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, expectedMatchLimit)
+        XCTAssertEqual(result[kSecAttrAccount] as? String, seedName)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, expectedReturnData)
     }
 
-    func test_query_delete_returnsExpectedValues() {
+    func test_query_delete_returnsExpectedValues() throws {
         // Given
         let seedName = "account"
         let expectedSecClass = kSecClassGenericPassword
         let queryType: KeychainSeedsQuery = .delete(seedName: seedName)
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
-        XCTAssertEqual(result[kSecAttrAccount] as! String, seedName)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
+        XCTAssertEqual(result[kSecAttrAccount] as? String, seedName)
     }
 
-    func test_query_restoreQuery_returnsExpectedValues() {
+    func test_query_restoreQuery_returnsExpectedValues() throws {
         // Given
         let seedName = "account"
         let finalSeedPhrase: Data! = "account".data(using: .utf8)
@@ -109,13 +109,13 @@ final class KeychainSeedsQueryProviderTests: XCTestCase {
             accessControl: expectedAccessControl
         )
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, expectedSecClass)
-        XCTAssertTrue(result[kSecAttrAccessControl] as! SecAccessControl === expectedAccessControl)
-        XCTAssertEqual(result[kSecAttrAccount] as! String, seedName)
+        XCTAssertEqual(result[kSecClass] as? CFString, expectedSecClass)
+        XCTAssertTrue(try XCTUnwrap(result[kSecAttrAccessControl] as? SecAccessControl) === expectedAccessControl)
+        XCTAssertEqual(result[kSecAttrAccount] as? String, seedName)
         XCTAssertEqual(result[kSecValueData] as? Data, finalSeedPhrase)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, expectedReturnData)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, expectedReturnData)
     }
 }

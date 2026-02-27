@@ -25,10 +25,10 @@ final class DevicePincodeRequiredViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func testOnOpenTap_WhenURLCanBeOpened_opensURL() {
+    func testOnOpenTap_WhenURLCanBeOpened_opensURL() throws {
         // Given
         mockURLOpener.canOpenURLReturnValue = true
-        let settingsUrl = URL(string: UIApplication.openSettingsURLString)!
+        let settingsUrl = try XCTUnwrap(URL(string: UIApplication.openSettingsURLString))
 
         // When
         viewModel.onOpenTap()

@@ -34,7 +34,9 @@ final class DatabaseMediator: DatabaseMediating {
     private let bundle: BundleProtocol
     private let fileManager: FileManagingProtocol
 
-    var databaseName: String { databasePath }
+    var databaseName: String {
+        databasePath
+    }
 
     private var databasePath: String {
         let documentsURL = try? fileManager.url(

@@ -43,13 +43,13 @@ public final class BlockiesIdenticonGenerator {
         colorGenerator = PseudoRandomColorGenerator(randomNumberGenerator: randomNumberGenerator)
     }
 
-    /// Creates a block-style identicon image from a seed string.
-    ///
-    /// - Parameters:
-    ///   - seed: The seed string to be used for generating the identicon.
-    ///   - customScale: An optional scaling factor for the size of the blocks.
-    ///
-    /// - Returns: The generated block-style identicon image.
+    // Creates a block-style identicon image from a seed string.
+    //
+    // - Parameters:
+    //   - seed: The seed string to be used for generating the identicon.
+    //   - customScale: An optional scaling factor for the size of the blocks.
+    //
+    // - Returns: The generated block-style identicon image.
 
     public func createImage(seed: String, customScale: Int = 1) -> PlatformImage? {
         randomNumberGenerator.loadSeed(from: seed)

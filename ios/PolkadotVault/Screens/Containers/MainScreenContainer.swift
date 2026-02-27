@@ -45,6 +45,16 @@ struct MainScreenContainer: View {
 }
 
 extension MainScreenContainer {
+    protocol DeviceStatusReporting {
+        func deviceBecameOnline()
+        func deviceWentOffline()
+    }
+
+    struct NoopDeviceStatusMediator: DeviceStatusReporting {
+        func deviceBecameOnline() {}
+        func deviceWentOffline() {}
+    }
+
     enum ViewState: Equatable, Hashable {
         case authenticated
         case deviceLocked
@@ -59,7 +69,7 @@ extension MainScreenContainer {
         private let passwordProtectionStatePublisher: PasswordProtectionStatePublisher
         private let databaseVersionMediator: DatabaseVersionMediator
         private let appLaunchMediator: AppLaunchMediating
-        private let deviceStatusMediator: DeviceStatusMediating
+        private let deviceStatusMediator: DeviceStatusReporting
         private let airgapMediator: AirgapMediating
 
         private let cancelBag = CancelBag()
@@ -71,7 +81,7 @@ extension MainScreenContainer {
         init(
             authenticationStateMediator: AuthenticatedStateMediator = ServiceLocator.authenticationStateMediator,
             onboardingMediator: OnboardingMediating = ServiceLocator.onboardingMediator,
-            deviceStatusMediator: DeviceStatusMediating = DeviceStatusMediator(),
+            deviceStatusMediator: DeviceStatusReporting = NoopDeviceStatusMediator(),
             passwordProtectionStatePublisher: PasswordProtectionStatePublisher = PasswordProtectionStatePublisher(),
             databaseVersionMediator: DatabaseVersionMediator = DatabaseVersionMediator(),
             appLaunchMediator: AppLaunchMediating = AppLaunchMediator(),
@@ -120,9 +130,9 @@ private extension MainScreenContainer.ViewModel {
                 case .invalidVersion:
                     self.viewState = .updateRequired
                 case let .error(serviceError):
-                    /// If DB version check was unavailable, assume user needs to update
-                    /// If that's not the case (i.e. there is no newer version), app restart will fix it so should
-                    /// be ok
+                    // If DB version check was unavailable, assume user needs to update
+                    // If that's not the case (i.e. there is no newer version), app restart will fix it so should
+                    // be ok
                     self.viewState = .updateRequired
                     self.presentableError = .alertError(message: serviceError.localizedDescription)
                     self.isPresentingError = true

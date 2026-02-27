@@ -54,7 +54,6 @@ struct BackupSelectKeyView: View {
         }
     }
 
-    @ViewBuilder
     func seedNameView(_ seedName: String) -> some View {
         HStack(alignment: .center) {
             Text(seedName)

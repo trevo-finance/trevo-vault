@@ -62,7 +62,6 @@ struct EnterKeySetNameView: View {
         }
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Localizable.NewSeed.Name.Label.title.text

@@ -66,7 +66,6 @@ struct CreateKeysForNetworksView: View {
         }
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(viewModel.title())
@@ -82,13 +81,11 @@ struct CreateKeysForNetworksView: View {
         .padding(.bottom, Spacing.medium)
     }
 
-    @ViewBuilder
     func footer() -> some View {
         TransparentHelpBox(text: Localizable.CreateKeysForNetwork.Label.footer.string)
             .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func networkSelection() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(
@@ -106,7 +103,6 @@ struct CreateKeysForNetworksView: View {
         .padding(.bottom, Spacing.medium)
     }
 
-    @ViewBuilder
     func item(for network: MmNetwork) -> some View {
         HStack(alignment: .center, spacing: 0) {
             NetworkLogoIcon(networkName: network.logo)
@@ -130,7 +126,6 @@ struct CreateKeysForNetworksView: View {
         }
     }
 
-    @ViewBuilder
     func selectAllNetworks() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Localizable.CreateKeysForNetwork.Action.selectAll.text
@@ -184,7 +179,7 @@ extension CreateKeysForNetworksView {
         // Error presentatation
         @Published var isPresentingError: Bool = false
         @Published var errorViewModel: ErrorBottomModalViewModel!
-        // Confirmation presentation
+        /// Confirmation presentation
         @Published var isPresentingConfirmation: Bool = false
 
         var step: Int {

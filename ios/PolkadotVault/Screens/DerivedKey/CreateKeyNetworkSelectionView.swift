@@ -85,7 +85,6 @@ struct CreateKeyNetworkSelectionView: View {
         }
     }
 
-    @ViewBuilder
     func footer() -> some View {
         TransparentHelpBox(text: Localizable.CreateDerivedKey.Label.Footer.network.string)
             .onTapGesture {
@@ -93,7 +92,6 @@ struct CreateKeyNetworkSelectionView: View {
             }
     }
 
-    @ViewBuilder
     func networkSelection() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(
@@ -110,7 +108,6 @@ struct CreateKeyNetworkSelectionView: View {
         .containerBackground()
     }
 
-    @ViewBuilder
     func item(for network: MmNetwork) -> some View {
         HStack(alignment: .center, spacing: 0) {
             NetworkLogoIcon(networkName: network.logo)
@@ -152,7 +149,7 @@ extension CreateKeyNetworkSelectionView {
         @Published var networks: [MmNetwork] = []
         @Published var networkSelection: MmNetwork?
 
-        // Tutorial
+        /// Tutorial
         @Published var isNetworkTutorialPresented: Bool = false
 
         // Error handling

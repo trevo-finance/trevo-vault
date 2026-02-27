@@ -78,7 +78,6 @@ struct SignSpecsListView: View {
         }
     }
 
-    @ViewBuilder
     func rawKeyRow(_ rawKey: MRawKey) -> some View {
         HStack(alignment: .center, spacing: Spacing.small) {
             NetworkIdenticon(

@@ -67,7 +67,6 @@ struct ExportKeysSelectionModal: View {
         )
     }
 
-    @ViewBuilder
     func item(for key: DerivedKeyRowModel) -> some View {
         HStack(alignment: .center, spacing: Spacing.small) {
             NetworkIdenticon(
@@ -115,7 +114,6 @@ struct ExportKeysSelectionModal: View {
             Text(viewModel.path)
     }
 
-    @ViewBuilder
     func itemsList() -> some View {
         LazyVStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
@@ -146,14 +144,12 @@ struct ExportKeysSelectionModal: View {
     var selectionTitle: String {
         let localizable = Localizable.KeyDetails.Overlay.Label.self
         let itemsCount = viewModel.selectedKeys.count + 1
-        let result: String =
-            switch itemsCount {
-            case 1:
-                localizable.title(String(itemsCount), localizable.Key.single.string)
-            default:
-                localizable.title(String(itemsCount), localizable.Key.plural.string)
-            }
-        return result
+        return switch itemsCount {
+        case 1:
+            localizable.title(String(itemsCount), localizable.Key.single.string)
+        default:
+            localizable.title(String(itemsCount), localizable.Key.plural.string)
+        }
     }
 }
 

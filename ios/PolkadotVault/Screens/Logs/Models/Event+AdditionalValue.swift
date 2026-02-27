@@ -8,5 +8,7 @@
 import Foundation
 
 extension Event {
-    var additionalValue: String? { nil }
+    var additionalValue: String? {
+        nil
+    }
 }

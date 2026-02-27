@@ -383,7 +383,7 @@ final class DatabaseMediatorMock: DatabaseMediating {
     var recreateDatabaseFileReturnValue = false
     var wipeDatabaseReturnValue = false
 
-    // Implementations of protocol methods
+    /// Implementations of protocol methods
     var databaseName: String {
         databaseNameCallsCount += 1
         return databaseNameReturnValue
@@ -433,7 +433,7 @@ final class KeychainAccessAdapterMock: KeychainSeedsAccessAdapting {
     var checkIfSeedPhraseAlreadyExistsReturnValue: Result<Bool, KeychainError> = .failure(.checkError)
     var removeAllSeedsReturnValue: Bool = false
 
-    // Implementations of protocol methods
+    /// Implementations of protocol methods
     func fetchSeedNames() -> Result<FetchSeedsPayload, KeychainError> {
         fetchSeedNamesCallsCount += 1
         return fetchSeedNamesReturnValue

@@ -25,14 +25,18 @@ final class RuntimePropertiesProvider: RuntimePropertiesProviding {
     enum Properties: String, CustomStringConvertible {
         case testConfiguration = "XCTestConfigurationFilePath"
 
-        var description: String { rawValue }
+        var description: String {
+            rawValue
+        }
     }
 
     private enum PropertiesValues: String, CustomStringConvertible {
         case `true`
         case `false`
 
-        var description: String { rawValue }
+        var description: String {
+            rawValue
+        }
     }
 
     private let appInformationContainer: ApplicationInformationContaining.Type

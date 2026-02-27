@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 @testable import PolkadotIdenticon
 import XCTest
 

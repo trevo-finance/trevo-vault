@@ -74,7 +74,6 @@ struct BananaSplitModalView: View {
         }
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Localizable.BananaSplitBackup.Label.title.text
@@ -117,7 +116,6 @@ struct BananaSplitModalView: View {
         .padding(.bottom, Spacing.medium)
     }
 
-    @ViewBuilder
     func passphraseView() -> some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             HStack(alignment: .center, spacing: 0) {
@@ -150,7 +148,6 @@ struct BananaSplitModalView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func infoView() -> some View {
         HStack(alignment: .center, spacing: Spacing.medium) {
             Localizable.BananaSplitBackup.Label.Passphrase.info.text

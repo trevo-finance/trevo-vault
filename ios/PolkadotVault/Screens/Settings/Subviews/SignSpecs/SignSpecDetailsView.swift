@@ -61,7 +61,6 @@ struct SignSpecDetails: View {
         }
     }
 
-    @ViewBuilder
     func signatureSection() -> some View {
         VStack(alignment: .leading, spacing: Spacing.small) {
             VStack(alignment: .leading, spacing: 0) {
@@ -102,7 +101,6 @@ struct SignSpecDetails: View {
         .containerBackground(CornerRadius.small, state: .standard)
     }
 
-    @ViewBuilder
     private func signatureDetails() -> some View {
         VStack(alignment: .leading, spacing: Spacing.minimal) {
             if !viewModel.content.authorInfo.address.displayablePath.isEmpty {

@@ -37,7 +37,6 @@ private extension HashGenerator {
         data.withUnsafeBytes {
             _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest)
         }
-        let hashString = digest.map { String(format: "%02hhx", $0) }.joined()
-        return hashString
+        return digest.map { String(format: "%02hhx", $0) }.joined()
     }
 }

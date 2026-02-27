@@ -197,8 +197,10 @@ final class SeedsMediator: SeedsMediating {
 
     func removeAllSeeds() -> Bool {
         // Fetch seeds first, as this will trigger authentication if passcode is not cached
-        guard case .success = keychainAccessAdapter.retrieveSeeds(with: Set(seedNamesSubject.value)) else {
-            return false
+        if !seedNamesSubject.value.isEmpty {
+            guard case .success = keychainAccessAdapter.retrieveSeeds(with: Set(seedNamesSubject.value)) else {
+                return false
+            }
         }
         guard keychainAccessAdapter.removeAllSeeds() else { return false }
         seedNamesSubject.send([])

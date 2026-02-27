@@ -202,12 +202,18 @@ final class KeychainSeedsAccessAdapterTests: XCTestCase {
         }
     }
 
-    func testRetrieveSeeds_Successful() {
+    func testRetrieveSeeds_Successful() throws {
         // Given
         let seedNamesToFetch = Set(["Seed1", "Seed2"])
-        let seedData: [[String: Any]] = [
-            [kSecAttrAccount as String: "Seed1", kSecValueData as String: "seedPhrase1".data(using: .utf8)!],
-            [kSecAttrAccount as String: "Seed2", kSecValueData as String: "seedPhrase2".data(using: .utf8)!]
+        let seedData: [[String: Any]] = try [
+            [
+                kSecAttrAccount as String: "Seed1",
+                kSecValueData as String: XCTUnwrap("seedPhrase1".data(using: .utf8))
+            ],
+            [
+                kSecAttrAccount as String: "Seed2",
+                kSecValueData as String: XCTUnwrap("seedPhrase2".data(using: .utf8))
+            ]
         ]
         keychainService.copyMatchingReturnValue = errSecSuccess
         keychainService.copyMatchingData = seedData as CFTypeRef?

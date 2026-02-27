@@ -42,7 +42,6 @@ struct TCDerivations: View {
         })
     }
 
-    @ViewBuilder
     func singleKey(_ keySet: DerivedKeysSetRenderable) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             // Root key
@@ -81,7 +80,6 @@ struct TCDerivations: View {
         .containerBackground()
     }
 
-    @ViewBuilder
     func derivedKey(_ preview: DerivedKeysSetRenderable.DerivedKeyRenderable) -> some View {
         VStack(alignment: .leading, spacing: Spacing.extraSmall) {
             HStack(alignment: .center, spacing: Spacing.extraSmall) {
@@ -108,7 +106,6 @@ struct TCDerivations: View {
         .padding(Spacing.medium)
     }
 
-    @ViewBuilder
     func errorStates() -> some View {
         VStack(spacing: Spacing.extraSmall) {
             if viewModel.isKeySetMissing {

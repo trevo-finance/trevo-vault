@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension KeyDetailsView {
-    @ViewBuilder
     func derivedKeysList() -> some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -36,7 +35,6 @@ extension KeyDetailsView {
         }
     }
 
-    @ViewBuilder
     private func derivedKeys() -> some View {
         LazyVStack(spacing: 0) {
             // List of derived keys

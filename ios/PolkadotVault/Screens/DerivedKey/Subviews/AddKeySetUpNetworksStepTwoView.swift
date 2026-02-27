@@ -72,7 +72,6 @@ struct AddKeySetUpNetworksStepTwoView: View {
         }
     }
 
-    @ViewBuilder
     func pointCircle(_ number: String) -> some View {
         ZStack(alignment: .center) {
             Circle()
@@ -84,7 +83,6 @@ struct AddKeySetUpNetworksStepTwoView: View {
         }
     }
 
-    @ViewBuilder
     func sectionOne() -> some View {
         HStack(alignment: .top, spacing: Spacing.small) {
             pointCircle("1")
@@ -106,7 +104,6 @@ struct AddKeySetUpNetworksStepTwoView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func sectionTwo() -> some View {
         HStack(alignment: .center, spacing: Spacing.small) {
             pointCircle("2")
@@ -120,7 +117,6 @@ struct AddKeySetUpNetworksStepTwoView: View {
         .padding(.horizontal, Spacing.medium)
     }
 
-    @ViewBuilder
     func sectionThree() -> some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             HStack(alignment: .top, spacing: Spacing.small) {

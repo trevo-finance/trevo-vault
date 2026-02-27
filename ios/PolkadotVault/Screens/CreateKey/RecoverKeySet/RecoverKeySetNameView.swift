@@ -53,7 +53,6 @@ struct RecoverKeySetNameView: View {
         }
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Localizable.RecoverSeedName.Label.title.text

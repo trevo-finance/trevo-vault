@@ -69,7 +69,6 @@ struct ManageKeySetsView: View {
         )
     }
 
-    @ViewBuilder
     func item(for keySet: SeedNameCard) -> some View {
         HStack(alignment: .center, spacing: Spacing.small) {
             IdenticonView(
@@ -105,7 +104,6 @@ struct ManageKeySetsView: View {
         }
     }
 
-    @ViewBuilder
     func itemsList() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(

@@ -165,7 +165,6 @@ struct NetworkSettingsDetails: View {
 }
 
 private extension NetworkSettingsDetails {
-    @ViewBuilder
     func networkSpecs() -> some View {
         VStack(alignment: .leading, spacing: Spacing.small) {
             rowWrapper(
@@ -205,7 +204,6 @@ private extension NetworkSettingsDetails {
         }
     }
 
-    @ViewBuilder
     func metadata(_ metadata: MMetadataRecord) -> some View {
         VStack(alignment: .leading, spacing: Spacing.small) {
             rowWrapper(
@@ -262,7 +260,6 @@ private extension NetworkSettingsDetails {
         }
     }
 
-    @ViewBuilder
     func verticalRowWrapper(
         _ key: String,
         _ value: String,
@@ -332,7 +329,10 @@ extension NetworkSettingsDetails {
         private let cancelBag = CancelBag()
         private let networkDetailsService: ManageNetworkDetailsServicing
         private var metadataToDelete: MMetadataRecord?
-        var dismissViewRequest: AnyPublisher<Void, Never> { dismissRequest.eraseToAnyPublisher() }
+        var dismissViewRequest: AnyPublisher<Void, Never> {
+            dismissRequest.eraseToAnyPublisher()
+        }
+
         private let dismissRequest = PassthroughSubject<Void, Never>()
         private let onCompletion: (OnCompletionAction) -> Void
 

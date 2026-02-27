@@ -20,7 +20,7 @@ struct NetworkLogoIcon: View {
     }
 
     var body: some View {
-        let image = UIImage(named: networkName)
+        let image = UIImage(named: networkName) ?? UIImage(named: "NetworkLogo-Default")
         Group {
             if let image {
                 Image(uiImage: image)

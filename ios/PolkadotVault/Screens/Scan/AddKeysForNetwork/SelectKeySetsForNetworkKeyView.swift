@@ -59,7 +59,6 @@ struct SelectKeySetsForNetworkKeyView: View {
         }
     }
 
-    @ViewBuilder
     func mainContent() -> some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             Text(Localizable.SelectKeySetsForNetworkKey.Label.title(viewModel.networkName))
@@ -73,7 +72,6 @@ struct SelectKeySetsForNetworkKeyView: View {
         .padding(.vertical, Spacing.medium)
     }
 
-    @ViewBuilder
     func seedsSelection() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(
@@ -91,7 +89,6 @@ struct SelectKeySetsForNetworkKeyView: View {
         .padding(.bottom, Spacing.medium)
     }
 
-    @ViewBuilder
     func item(for seedName: String) -> some View {
         HStack(alignment: .center, spacing: 0) {
             Text(seedName.capitalized)
@@ -113,7 +110,6 @@ struct SelectKeySetsForNetworkKeyView: View {
         }
     }
 
-    @ViewBuilder
     func selectAllSeeds() -> some View {
         HStack(alignment: .center, spacing: 0) {
             Localizable.SelectKeySetsForNetworkKey.Action.selectAll.text

@@ -54,7 +54,6 @@ extension KeyDetailsView {
         }
     }
 
-    @ViewBuilder
     func listHeader() -> some View {
         HStack {
             Localizable.KeyDetails.Label.derived.text

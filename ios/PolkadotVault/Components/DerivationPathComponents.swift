@@ -12,7 +12,9 @@ enum DerivationPathComponent: String, CustomStringConvertible, CaseIterable {
     case hard = "//"
     case passworded = "///"
 
-    var description: String { rawValue }
+    var description: String {
+        rawValue
+    }
 }
 
 extension String {

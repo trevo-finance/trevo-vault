@@ -27,7 +27,7 @@ struct DerivedKeyRowViewModel: Equatable {
     let path: String
     let hasPassword: Bool
     let base58: String
-    // for Keys Export
+    /// for Keys Export
     let rootKeyName: String
 
     init(_ key: MKeyAndNetworkCard) {

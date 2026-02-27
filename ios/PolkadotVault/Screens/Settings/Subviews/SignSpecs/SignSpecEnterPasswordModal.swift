@@ -80,7 +80,6 @@ struct SignSpecEnterPasswordModal: View {
         }
     }
 
-    @ViewBuilder
     func keyComponent() -> some View {
         HStack {
             VStack(alignment: .leading, spacing: Spacing.extraExtraSmall) {

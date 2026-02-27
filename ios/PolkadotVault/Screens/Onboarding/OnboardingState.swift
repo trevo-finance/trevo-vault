@@ -73,7 +73,9 @@ final class OnboardingStateMachine: ObservableObject {
     }
 
     func onScreenshotNextTap() {
-        currentState = .setUpNetworksIntro
+        // Trevo is already the sole default network in the cold release database,
+        // so we skip the Set Up Networks screens entirely.
+        finishOnboarding()
     }
 
     func onSetUpNetworksIntroNext() {
@@ -93,6 +95,7 @@ final class OnboardingStateMachine: ObservableObject {
     }
 
     func finishOnboarding() {
+        print("[OnboardingStateMachine] finishOnboarding() called")
         onboardingMediator.onboard(verifierRemoved: false)
     }
 }

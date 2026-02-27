@@ -143,7 +143,7 @@ final class AirgapMediatingMock: AirgapMediating {
         startMonitoringAirgapCallsCount += 1
     }
 
-    // Helper methods to simulate updates
+    /// Helper methods to simulate updates
     func simulateIsConnected(_ isConnected: Bool) {
         isConnectedSubject.send(isConnected)
     }

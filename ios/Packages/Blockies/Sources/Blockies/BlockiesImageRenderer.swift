@@ -52,7 +52,7 @@ public class BlockiesImageRenderer {
 
         #if os(iOS) || os(tvOS) || os(watchOS)
             let renderer = UIGraphicsImageRenderer(size: CGSize(width: finalSize, height: finalSize))
-            let image = renderer.image { rendererContext in
+            return renderer.image { rendererContext in
                 var context = rendererContext.cgContext
                 fill(
                     context: &context,
@@ -65,7 +65,6 @@ public class BlockiesImageRenderer {
                     scalingFactor: scalingFactor
                 )
             }
-            return image
 
         #elseif os(OSX)
             let colorSpace = CGColorSpaceCreateDeviceRGB()

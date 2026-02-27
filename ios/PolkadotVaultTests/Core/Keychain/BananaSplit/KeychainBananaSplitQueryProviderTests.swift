@@ -26,59 +26,59 @@ final class KeychainBananaSplitQueryProviderTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_query_fetchBananaSplit_returnsExpectedValues() {
+    func test_query_fetchBananaSplit_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let queryType = KeychainBananaSplitQuery.fetch(seedName: seedName)
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, kSecMatchLimitOne)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, kSecMatchLimitOne)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.bananaSplitSuffix
         )
-        XCTAssertEqual(result[kSecReturnData] as! Bool, true)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, true)
     }
 
-    func test_query_checkBananaSplit_returnsExpectedValues() {
+    func test_query_checkBananaSplit_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let queryType = KeychainBananaSplitQuery.check(seedName: seedName)
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, kSecMatchLimitOne)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, kSecMatchLimitOne)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.bananaSplitSuffix
         )
-        XCTAssertEqual(result[kSecReturnData] as! Bool, false)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, false)
     }
 
-    func test_query_deleteBananaSplit_returnsExpectedValues() {
+    func test_query_deleteBananaSplit_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let queryType = KeychainBananaSplitQuery.delete(seedName: seedName)
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.bananaSplitSuffix
         )
     }
 
-    func test_query_saveBananaSplit_returnsExpectedValues() {
+    func test_query_saveBananaSplit_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let bananaSplit = BananaSplitBackup(qrCodes: [[10]])
@@ -86,53 +86,53 @@ final class KeychainBananaSplitQueryProviderTests: XCTestCase {
         let expectedData = try? jsonEncoder.encode(bananaSplit)
 
         // When
-        let result = subject.query(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.query(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.bananaSplitSuffix
         )
         XCTAssertEqual(result[kSecValueData] as? Data, expectedData)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, false)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, false)
     }
 
-    func test_query_fetchPassphrase_returnsExpectedValues() {
+    func test_query_fetchPassphrase_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let queryType = KeychainBananaSplitPassphraseQuery.fetch(seedName: seedName)
 
         // When
-        let result = subject.passhpraseQuery(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.passhpraseQuery(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
-        XCTAssertEqual(result[kSecMatchLimit] as! CFString, kSecMatchLimitOne)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecMatchLimit] as? CFString, kSecMatchLimitOne)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.passphraseSuffix
         )
-        XCTAssertEqual(result[kSecReturnData] as! Bool, true)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, true)
     }
 
-    func test_query_deletePassphrase_returnsExpectedValues() {
+    func test_query_deletePassphrase_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let queryType = KeychainBananaSplitPassphraseQuery.delete(seedName: seedName)
 
         // When
-        let result = subject.passhpraseQuery(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.passhpraseQuery(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.passphraseSuffix
         )
     }
 
-    func test_query_savePassphrase_returnsExpectedValues() {
+    func test_query_savePassphrase_returnsExpectedValues() throws {
         // Given
         let seedName = "testSeed"
         let passphrase = BananaSplitPassphrase(passphrase: "dummyPassphrase")
@@ -146,16 +146,16 @@ final class KeychainBananaSplitQueryProviderTests: XCTestCase {
         let expectedData = try? jsonEncoder.encode(passphrase)
 
         // When
-        let result = subject.passhpraseQuery(for: queryType) as! [CFString: Any]
+        let result = try XCTUnwrap(subject.passhpraseQuery(for: queryType) as? [CFString: Any])
 
         // Then
-        XCTAssertEqual(result[kSecClass] as! CFString, kSecClassGenericPassword)
+        XCTAssertEqual(result[kSecClass] as? CFString, kSecClassGenericPassword)
         XCTAssertEqual(
-            result[kSecAttrAccount] as! String,
+            result[kSecAttrAccount] as? String,
             seedName + KeychainBananaSplitQueryProvider.Constants.passphraseSuffix
         )
         XCTAssertEqual(result[kSecValueData] as? Data, expectedData)
-        XCTAssertTrue(result[kSecAttrAccessControl] as! SecAccessControl === expectedAccessControl)
-        XCTAssertEqual(result[kSecReturnData] as! Bool, false)
+        XCTAssertTrue(try XCTUnwrap(result[kSecAttrAccessControl] as? SecAccessControl) === expectedAccessControl)
+        XCTAssertEqual(result[kSecReturnData] as? Bool, false)
     }
 }

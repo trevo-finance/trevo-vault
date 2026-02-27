@@ -58,7 +58,6 @@ struct TransactionPreview: View {
         }
     }
 
-    @ViewBuilder
     func singleTransaction(content: MTransaction) -> some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             if !content.transactionIssuesCards().isEmpty {
@@ -139,7 +138,6 @@ struct TransactionPreview: View {
         }
     }
 
-    @ViewBuilder
     func actions(_ transactionType: TransactionType?) -> some View {
         VStack {
             switch transactionType {
@@ -246,7 +244,10 @@ extension TransactionPreview {
         private let scanService: ScanTabService
         private let seedsMediator: SeedsMediating
         private let importKeysService: ImportDerivedKeysService
-        var dismissViewRequest: AnyPublisher<Void, Never> { dismissRequest.eraseToAnyPublisher() }
+        var dismissViewRequest: AnyPublisher<Void, Never> {
+            dismissRequest.eraseToAnyPublisher()
+        }
+
         private let dismissRequest = PassthroughSubject<Void, Never>()
         private let onCompletion: (OnCompletionAction) -> Void
 

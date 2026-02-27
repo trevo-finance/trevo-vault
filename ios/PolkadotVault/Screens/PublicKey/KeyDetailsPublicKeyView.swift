@@ -134,7 +134,6 @@ struct KeyDetailsPublicKeyView: View {
 }
 
 private extension KeyDetailsPublicKeyView {
-    @ViewBuilder
     func keyDetails() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 0) {

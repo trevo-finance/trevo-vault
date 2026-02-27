@@ -152,7 +152,6 @@ struct DerivationPathNameView: View {
         }
     }
 
-    @ViewBuilder
     func quickActions() -> some View {
         HStack(spacing: Spacing.extraExtraSmall) {
             Localizable.CreateDerivedKey.Modal.Path.Action.softPath.text

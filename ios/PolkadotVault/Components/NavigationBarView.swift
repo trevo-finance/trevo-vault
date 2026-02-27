@@ -141,7 +141,6 @@ struct NavigationBarView: View {
         }
     }
 
-    @ViewBuilder
     func titleView(_ title: NavigationBarTitle) -> some View {
         HStack(alignment: .center, spacing: 0) {
             Spacer()
@@ -170,7 +169,6 @@ struct NavigationBarView: View {
         }
     }
 
-    @ViewBuilder
     func progressView(_ current: Int, upTo: Int) -> some View {
         ForEach(Array(0 ..< upTo).indices, id: \.self) { index in
             progressViewElement(isActive: index < current)
@@ -178,7 +176,6 @@ struct NavigationBarView: View {
         }
     }
 
-    @ViewBuilder
     func progressViewElement(isActive: Bool) -> some View {
         RoundedRectangle(cornerRadius: CornerRadius.extraLarge)
             .frame(width: Heights.navigationBarProgressViewWidth, height: Heights.navigationBarProgressViewHeight)

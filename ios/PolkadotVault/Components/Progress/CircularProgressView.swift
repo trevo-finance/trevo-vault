@@ -33,22 +33,12 @@ struct CircularCountdownViewModel {
 }
 
 struct CircularCountdownModel {
-    // For how many seconds countdown should go
+    /// For how many seconds countdown should go
     let counter: CGFloat
     /// View model for circular countdown
     let viewModel: CircularCountdownViewModel
     /// Action that should get triggered on countdown completion
     let onCompletion: () -> Void
-
-    init(
-        counter: CGFloat,
-        viewModel: CircularCountdownViewModel,
-        onCompletion: @escaping () -> Void
-    ) {
-        self.counter = counter
-        self.viewModel = viewModel
-        self.onCompletion = onCompletion
-    }
 }
 
 struct CircularProgressView: View {

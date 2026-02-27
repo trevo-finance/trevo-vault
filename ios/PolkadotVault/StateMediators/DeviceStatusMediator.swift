@@ -5,7 +5,7 @@ protocol DeviceStatusMediating {
     func deviceWentOffline()
 }
 
-// Class is designed to track and log once device became online
+/// Class is designed to track and log once device became online
 final class DeviceStatusMediator {
     enum State {
         case notReported

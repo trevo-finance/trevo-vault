@@ -71,7 +71,6 @@ struct TransactionSummaryView: View {
         }
     }
 
-    @ViewBuilder
     private func signatureDetails(_ signature: TransactionSignatureRenderable) -> some View {
         VStack(alignment: .leading, spacing: Spacing.minimal) {
             renderablePath(for: signature)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-struct WrappingHStack<Model, V>: View where Model: Hashable & Identifiable, V: View {
+struct WrappingHStack<Model: Hashable & Identifiable, V: View>: View {
     typealias ViewGenerator = (Model) -> V
 
     var models: [Model]

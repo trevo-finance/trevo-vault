@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension KeyDetailsView {
-    @ViewBuilder
     func emptyKeysList() -> some View {
         VStack(spacing: 0) {
             // Main key cell
@@ -22,7 +21,6 @@ extension KeyDetailsView {
         }
     }
 
-    @ViewBuilder
     private func emptyState() -> some View {
         VStack(spacing: 0) {
             Localizable.KeyDetails.Label.EmptyState.header.text

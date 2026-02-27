@@ -14,20 +14,6 @@ struct DerivedKeyOverviewViewModel: Equatable, Identifiable {
     let hasPassword: Bool
     let network: String
     let networkLogo: String
-
-    init(
-        identicon: Identicon,
-        path: String,
-        hasPassword: Bool,
-        network: String,
-        networkLogo: String
-    ) {
-        self.identicon = identicon
-        self.path = path
-        self.hasPassword = hasPassword
-        self.network = network
-        self.networkLogo = networkLogo
-    }
 }
 
 extension DerivedKeyOverviewViewModel {

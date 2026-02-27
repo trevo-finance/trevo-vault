@@ -237,7 +237,7 @@ extension CameraView {
         @Published var isPresentingError: Bool = false
         @Published var isInTransactionProgress: Bool = false
 
-        // Banana split flow
+        /// Banana split flow
         @Published var isPresentingEnterBananaSplitPassword: Bool = false
 
         // Create Keys for network
@@ -246,7 +246,7 @@ extension CameraView {
         @Published var isPresentingKeySetSelection: Bool = false
         var networkName: String!
 
-        // Dynamic Derived Keys
+        /// Dynamic Derived Keys
         @Published var isPresentingAddDerivedKeys: Bool = false
 
         // Data models for modals

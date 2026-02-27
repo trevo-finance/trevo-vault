@@ -103,7 +103,6 @@ struct NoAirgapView: View {
         }
     }
 
-    @ViewBuilder
     func cell(_ component: AirgapComponent, isChecked: Bool) -> some View {
         HStack(alignment: .center, spacing: Spacing.medium) {
             Group {

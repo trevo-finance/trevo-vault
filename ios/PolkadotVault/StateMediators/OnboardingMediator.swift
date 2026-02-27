@@ -44,11 +44,20 @@ final class OnboardingMediator: OnboardingMediating {
     }
 
     func onboard(verifierRemoved: Bool) {
-        guard seedsMediator.removeAllSeeds() else { return }
-        databaseMediator.recreateDatabaseFile()
-        navigationInitialisationService.initialiseNavigation(verifierRemoved: verifierRemoved) { [weak self] _ in
-            guard let self else { return }
+        print("[OnboardingMediator] onboard() called")
+        let removeResult = seedsMediator.removeAllSeeds()
+        print("[OnboardingMediator] removeAllSeeds result: \(removeResult)")
+        guard removeResult else { return }
+        let dbResult = databaseMediator.recreateDatabaseFile()
+        print("[OnboardingMediator] recreateDatabaseFile result: \(dbResult)")
+        navigationInitialisationService.initialiseNavigation(verifierRemoved: verifierRemoved) { [weak self] result in
+            print("[OnboardingMediator] initialiseNavigation completion: \(result)")
+            guard let self else {
+                print("[OnboardingMediator] self is nil in completion")
+                return
+            }
             seedsMediator.refreshSeeds()
+            print("[OnboardingMediator] sending onboardingDone = true")
             onboardingDoneSubject.send(true)
         }
     }

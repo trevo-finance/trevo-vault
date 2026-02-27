@@ -72,7 +72,7 @@ extension KeyDetailsView {
         var snackbarViewModel: SnackbarViewModel = .init(title: "")
         @Published var isSnackbarPresented: Bool = false
 
-        // Derive New Key
+        /// Derive New Key
         @Published var isPresentingDeriveNewKey: Bool = false
 
         var keysExportModalViewModel: (() -> ExportMultipleKeysModalViewModel)?

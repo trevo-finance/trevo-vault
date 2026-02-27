@@ -56,7 +56,6 @@ struct SettingsBackupModal: View {
         )
     }
 
-    @ViewBuilder
     func seedPhraseContent() -> some View {
         VStack(alignment: .center, spacing: Spacing.medium) {
             // Seed phrase
