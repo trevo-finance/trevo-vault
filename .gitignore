@@ -9,7 +9,6 @@ test/.jest/
 
 # NDK
 NDK/
-rust/.cargo
 *.apk
 
 # rust output file
