@@ -55,7 +55,9 @@ pub fn make_data_packs(input: &[u8], chunk_size: u16) -> Result<Vec<QrData>, &'s
 fn make_qr_codes(data: Vec<QrData>) -> Result<Vec<QrCode>, Box<dyn std::error::Error>> {
     let mut out: Vec<QrCode> = Vec::new();
     for x in data.iter() {
-        let new = QrCode::encode_binary(x.data(), QrCodeEcc::Low)?;
+        // TREVO: Raised from QrCodeEcc::Low (~7%) to QrCodeEcc::Medium (~15%)
+        // for better readability with low-res cameras. Original: QrCodeEcc::Low. See issue #144.
+        let new = QrCode::encode_binary(x.data(), QrCodeEcc::Medium)?;
         out.push(new);
     }
     Ok(out)

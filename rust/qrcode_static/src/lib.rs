@@ -16,7 +16,9 @@ fn prepare_qr_png_data(input: &[u8]) -> anyhow::Result<QrContent> {
     if input.len() > 2953 {
         return Err(anyhow!("Data too large to make static qr code."));
     } // 2953 is bytes limit for qr codes having 8-bit binary data
-    let qr_code = match QrCode::encode_binary(input, QrCodeEcc::Low) {
+    // TREVO: Raised from QrCodeEcc::Low (~7%) to QrCodeEcc::Medium (~15%) for better
+    // readability with low-resolution cameras. Original: QrCodeEcc::Low. See issue #144.
+    let qr_code = match QrCode::encode_binary(input, QrCodeEcc::Medium) {
         Ok(x) => x,
         Err(e) => return Err(anyhow!("Error making qr code. {}", e)),
     };
