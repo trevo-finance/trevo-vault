@@ -141,7 +141,7 @@ Note - old x86 is not supported. Just use x86_64 emulator image.
 
 **6.** Open the project from the root directory.
 
-**7.** Install NDK. Currently specific version 24.0.8215888 is required.
+**7.** Install NDK. Currently specific version 28.2.13676358 is required.
 
 Android Studio -> SDK Manager -> SDK Tools tab. Find NDK there.
 Enable "Show package details" checkmark to select specific version.

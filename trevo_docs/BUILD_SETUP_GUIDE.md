@@ -76,8 +76,8 @@ which python3        # /opt/homebrew/bin/python3
 
 ### android/local.properties
 ```properties
-sdk.dir=/Users/dmitry/Library/Android/sdk
-ndk.dir=/Users/dmitry/Library/Android/sdk/ndk/24.0.8215888
+sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
+ndk.dir=/Users/YOUR_USERNAME/Library/Android/sdk/ndk/28.2.13676358
 rust.pythonCommand=python3
 rust.cargoCommand=/Users/dmitry/.cargo/bin/cargo
 rust.uniffiBindgenCommand=/Users/dmitry/.cargo/bin/uniffi-bindgen

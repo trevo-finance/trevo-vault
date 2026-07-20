@@ -51,7 +51,7 @@ android-studio
 Создайте/обновите файл `android/local.properties`:
 ```properties
 sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
-ndk.dir=/Users/YOUR_USERNAME/Library/Android/sdk/ndk/24.0.8215888
+ndk.dir=/Users/YOUR_USERNAME/Library/Android/sdk/ndk/28.2.13676358
 rust.pythonCommand=python3
 rust.cargoCommand=/Users/YOUR_USERNAME/.cargo/bin/cargo
 rust.uniffiBindgenCommand=/Users/YOUR_USERNAME/.cargo/bin/uniffi-bindgen
@@ -65,7 +65,7 @@ rust.uniffiBindgenCommand=/Users/YOUR_USERNAME/.cargo/bin/uniffi-bindgen
 ls ~/Library/Android/sdk/ndk/
 
 # Если пусто, установите через Android Studio:
-# SDK Manager -> SDK Tools -> NDK (Side by side) -> версия 24.0.8215888
+# SDK Manager -> SDK Tools -> NDK (Side by side) -> версия 28.2.13676358
 ```
 
 #### Python не найден
