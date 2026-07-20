@@ -31,7 +31,7 @@ Usage: fastlane asc_status
 [bundle exec] fastlane ios provisioning_profiles
 ```
 
-Fetch/refresh the App Store provisioning profile and install it
+Fetch and install the existing App Store provisioning profile
 
 Usage: fastlane provisioning_profiles
 

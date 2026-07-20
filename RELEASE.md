@@ -155,14 +155,28 @@ cargo test --locked --workspace --exclude qr_reader_pc --no-fail-fast
 cd ..
 ```
 
-Expected: **138 passed, 55 failed**. The 55 failures are inherited upstream fixtures for networks
-this fork does not ship (Polkadot/Kusama/Westend), which `defaults::metadata()` rejects as
-`OrphanMetadata`. The test that matters — `defaults::can_get_release_metadata`, which parses Trevo's
-actual shipped metadata — passes.
+Expected: **158 passed, 118 failed**. Every failure is the same cause — the fork dropped
+Polkadot/Kusama/Westend from the network list but the inherited upstream tests/fixtures still
+reference them, so any test that loads `defaults::test_metadata()` panics with `OrphanMetadata` (103)
+/ `NetworkSpecsNotFound` (3), with 9 downstream assertion failures on top. None involve Trevo code.
+The count is deterministic and independent of `rust/database` (these tests build in-memory DBs). The
+test that matters — `defaults::can_get_release_metadata`, which parses Trevo's actual shipped
+metadata — **passes**.
 
-**Stop only if the failure count climbs above 55**, or one of these all-passing crates starts
-failing: `constants`, `definitions`, `parser`, `printing_balance`, `qr_reader_phone`, `signer`,
-`transaction_parsing`, `transaction_signing`.
+The 12 failing test targets, and their counts:
+
+| Target | pass / fail |
+|---|---|
+| `db_handling --test tests` | 15 / 35 |
+| `defaults --lib` | 2 / 2 |
+| `generate_message` integration (`add_specs`, `load_metadata`, `load_types`, `make`, `remove`, `show`, `unwasm`) | 0 / 10 |
+| `navigator --lib` | 1 / 8 |
+| `transaction_parsing --lib` | 9 / 42 |
+| `transaction_signing --lib` | 9 / 21 |
+
+**Stop only if the failure count climbs above 118**, or one of the all-passing crates starts
+failing: `constants`, `definitions`, `generate_message --lib`, `parser`, `printing_balance`,
+`qr_reader_phone`, `signer`, `qrcode_rtx`, `qrcode_static` (and all doc-tests).
 
 > `qr_reader_pc` is excluded because it depends on `opencv`/`libclang` and is not part of either
 > mobile app. Do **not** test a single crate with `-p` — `resolver = "1"` drops feature unification
@@ -247,10 +261,12 @@ The two platforms version independently.
 
 Store rules that decide the numbers:
 
-- **Play rejects a `versionCode` it has already accepted.** It must exceed the latest on any track
-  (check §6d). Production is on **13** → next is **14**.
+- **Play rejects a `versionCode` it has already accepted.** It must exceed the highest already
+  uploaded to **any** track — list them with the API check in §6d and increment.
 - **App Store Connect rejects a build number it has already seen.** It must exceed the latest on
   TestFlight — check with `cd ios && bundle exec fastlane asc_status`.
+
+The `sed` examples below use `13 → 14` and build `5 → 6`; substitute the actual current values.
 
 ```bash
 # Android — edit by hand: versionCode 13 -> 14, versionName "1.0.9" -> "1.0.10"
@@ -388,13 +404,9 @@ Successfully validated the upload to Google Play
 
 Then publish: **Play Console → Testing → Internal testing → review and roll out.**
 
-Current track state (read with the API; `play_status` verifies credentials):
-
-| Track | Version |
-|---|---|
-| production | **13 (1.0.9)** ← live |
-| alpha | 8 (1.0.4) |
-| internal | 4 (1.0.0) |
+Track state is a moving target — read the live values with the API (`play_status` verifies the
+credentials; the JWT snippet in §6d lists tracks). A recent snapshot: production **13 (1.0.9)** is
+live, with a **14 (1.0.10)** draft sitting on the internal track.
 
 ---
 
