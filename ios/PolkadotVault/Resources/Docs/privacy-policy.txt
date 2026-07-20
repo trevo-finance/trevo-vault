@@ -2,9 +2,9 @@
 
 Last updated: 3 November 2023 
 
-TRAIT TECH PTE. LTD. (“**Trait Tech**”, “**we**”, “**our**”, “**us**”) receives, collects, stores, and manages user personal data according to the following Privacy Policy. We take pride in treating our users’ privacy the way we would like to be treated ourselves. We make sure we comply with the applicable personal data protection laws and regulations. 
+TREVO LTD. (“**Trevo**”, “**we**”, “**our**”, “**us**”) receives, collects, stores, and manages user personal data according to the following Privacy Policy. We take pride in treating our users’ privacy the way we would like to be treated ourselves. We make sure we comply with the applicable personal data protection laws and regulations. 
 
-By visiting our website https\://trait.tech/ (“**Website**”), and/or sharing any personal information as described below, and/or using any of Trait Tech’s products and services (the “**Services**”), you agree to the terms of this Privacy Policy. 
+By visiting our website https\://trevo.finance/ (“**Website**”), and/or sharing any personal information as described below, and/or using any of Trevo’s products and services (the “**Services**”), you agree to the terms of this Privacy Policy. 
 
 **1. Data Collected** 
 
@@ -78,7 +78,7 @@ without storing any credit card information. 
 
 **1.5 Web beacons and similar technologies** 
 
-1.5.1 Apart from cookies, we use other similar technologies, like web beacons, to monitor traffic, deliver and communicate with cookies, improve site performance. Similar to cookies you may opt out from web beacons at any time. If you wish to opt out of this processing activity, please contact us at token\@trait.tech with the subject named “Privacy Policy”. 
+1.5.1 Apart from cookies, we use other similar technologies, like web beacons, to monitor traffic, deliver and communicate with cookies, improve site performance. Similar to cookies you may opt out from web beacons at any time. If you wish to opt out of this processing activity, please contact us at support\@trevo.finance with the subject named “Privacy Policy”. 
 
 **1.6 Data from third party sources**
 
@@ -106,7 +106,7 @@ without storing any credit card information. 
 
 3.1.2 to promote the use of our Services to you; 
 
-3.1.3 to analyze and improve Trait Tech Services; 
+3.1.3 to analyze and improve Trevo Services; 
 
 3.1.4 to send you informational and promotional content that you may subscribe to or unsubscribe; 
 
@@ -144,7 +144,7 @@ without storing any credit card information. 
 
 4.1.4 Otherwise protect our property, legal rights, or that of others. 
 
-4.2 Trait Tech is operated from the Republic of Singapore. If you are visiting the Website or Services from outside of Singapore, you agree to any processing of any personal information you provide us according to this policy. 
+4.2 Trevo is operated from the Republic of Singapore. If you are visiting the Website or Services from outside of Singapore, you agree to any processing of any personal information you provide us according to this policy. 
 
 4.3 We don't share your personal information with third parties, except for people and other entities that perform certain tasks on our behalf and who are under our control (our “Service Providers”). We may need to share personal information with our Service Providers in order to provide products or services to you. Unless we tell you differently, our Service Providers do not have any right to use Personal Information or other information we share with them beyond what is necessary to assist us. You hereby consent to our sharing of personal information with our Service Providers. Our Service Providers are:
 
@@ -165,7 +165,7 @@ without storing any credit card information. 
 
 ****
 
-4.4 Only aggregated, anonymized data is periodically transmitted to external services to help us improve the Website and Services. To receive the current list of external services that we use for this purpose, please email at token\@trait.tech. 
+4.4 Only aggregated, anonymized data is periodically transmitted to external services to help us improve the Website and Services. To receive the current list of external services that we use for this purpose, please email at support\@trevo.finance. 
 
 **5. Safeguarding your Personal Data** 
 
@@ -197,7 +197,7 @@ without storing any credit card information. 
 
 6.1.5 access information we hold about you.
 
-6.2 If you request us to view, change and remove your data associated with your account, please contact us at token\@trait.tech. We will process your request within 15 business days. In accordance with the applicable laws, additional fees may be applied. 
+6.2 If you request us to view, change and remove your data associated with your account, please contact us at support\@trevo.finance. We will process your request within 15 business days. In accordance with the applicable laws, additional fees may be applied. 
 
 **7. Changes to the Privacy Policy** 
 
@@ -205,7 +205,7 @@ without storing any credit card information. 
 
 **8. Merge of Company** 
 
-8.1 If Trait Tech merges with, or is acquired by, another company or organization, or sells all or a portion of its assets, your personal data may be disclosed to our advisers and any prospective purchaser or any prospective purchaser’s adviser and may be among the assets transferred. However, personal data will always remain subject to this Privacy Policy. 
+8.1 If Trevo merges with, or is acquired by, another company or organization, or sells all or a portion of its assets, your personal data may be disclosed to our advisers and any prospective purchaser or any prospective purchaser’s adviser and may be among the assets transferred. However, personal data will always remain subject to this Privacy Policy. 
 
 **9. Data Retention** 
 
@@ -215,4 +215,4 @@ without storing any credit card information. 
 
 **10. Contact us** 
 
-10.1 Should you have any questions or concerns, please email us at support\@trait.tech.
+10.1 Should you have any questions or concerns, please email us at support\@trevo.finance.

@@ -4,7 +4,7 @@
 	<string name="remove_key_confirm_text">This key will be removed for this network. Are you sure?</string>
 	<string name="remove_key_confirm_cta">Remove key</string>
 	<string name="remove_key_set_confirm_title">Forget this Key Set?</string>
-	<string name="remove_key_set_confirm_text">This Key Set will be removed for all networks. This cannot be reversed.  Are you sure you wish to proceed?</string>
+	<string name="remove_key_set_confirm_text">This Key Set will be removed for all networks. This cannot be reversed. Are you sure you wish to proceed?</string>
 	<string name="remove_key_set_confirm_cta">Remove</string>
 	<string name="generic_cancel">Cancel</string>
 	<string name="generic_done">Done</string>
@@ -141,7 +141,7 @@
 	<string name="settings_version">Trevo Vault version: %1$s</string>
 	<string name="button_next">Next</string>
 	<string name="new_key_set_backup_subtitle">Write down your Secret Recovery Phrase</string>
-	<string name="new_key_set_backup_warning_message">Write it down on a paper and keep  it in a safe place. </string>
+	<string name="new_key_set_backup_warning_message">Write it down on a paper and keep it in a safe place. </string>
 	<string name="new_key_set_backup_cta">Create Key Set</string>
 	<string name="new_key_set_backup_bottomsheet_title">Please confirm that you have written down your secret recovery phrase</string>
 	<string name="new_key_set_backup_bottomsheet_checkbox_written">I’ve written down my secret recovery phrase</string>
@@ -354,7 +354,7 @@
 	<string name="network_details_verifier_identicon_field">Identicon</string>
 	<string name="keys_backup_screen_title">Select Key Set</string>
 	<string name="keys_backup_screen_subtitle">Select a key set you want to Expose a Secret Recovery Phrase for</string>
-	<string name="seed_backup_countdown_message">Secret Recovery Phrase  will be hidden in</string>
+	<string name="seed_backup_countdown_message">Secret Recovery Phrase will be hidden in</string>
 	<string name="settings_backup">Backup Secret Phrase</string>
 	<string name="verifier_certificate_title">Verifier Certificate</string>
 	<string name="verifier_certificate_remove_cta">Remove Certificate</string>
