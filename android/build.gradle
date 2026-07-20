@@ -20,7 +20,11 @@ android {
 		versionCode 13
 		versionName "1.0.9"
 		ndk {
-			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+			// MUST stay in sync with the cargo { targets } block below. 32-bit x86 was
+			// listed here but is not a cargo target, so x86 splits shipped without
+			// libsigner.so and crashed on launch with UnsatisfiedLinkError. 32-bit x86
+			// Android is obsolete and Play has required 64-bit since 2019.
+			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
 		}
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,10 +33,30 @@ android {
 		}
 	}
 
+	// Release signing. Credentials come from ~/.gradle/gradle.properties (never commit them):
+	//   MYAPP_UPLOAD_STORE_FILE, MYAPP_UPLOAD_KEY_ALIAS,
+	//   MYAPP_UPLOAD_STORE_PASSWORD, MYAPP_UPLOAD_KEY_PASSWORD
+	// See RELEASE.md. Populate the config only when all four are present; the check that
+	// a release must never be built unsigned lives on the signing tasks below, so it is
+	// keyed on the actual artifact being produced rather than on command-line task names.
+	signingConfigs {
+		release {
+			def requiredProps = ['MYAPP_UPLOAD_STORE_FILE', 'MYAPP_UPLOAD_KEY_ALIAS',
+			                     'MYAPP_UPLOAD_STORE_PASSWORD', 'MYAPP_UPLOAD_KEY_PASSWORD']
+			if (requiredProps.every { project.hasProperty(it) }) {
+				storeFile file(MYAPP_UPLOAD_STORE_FILE)
+				storePassword MYAPP_UPLOAD_STORE_PASSWORD
+				keyAlias MYAPP_UPLOAD_KEY_ALIAS
+				keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+			}
+		}
+	}
+
 	buildTypes {
 		release {
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release
 		}
 	}
 	compileOptions {
@@ -87,11 +111,39 @@ cargo {
 	apiLevel = 24 //NDK API level, not SDK
 	profile = 'release'
 	extraCargoBuildArguments = ["--locked"]
+	// The plugin's linker wrapper shells out to this. It defaults to "python", which
+	// does not exist on macOS 12+ (only python3), making cargoBuild* fail at the link
+	// step with "python: command not found". See RELEASE.md troubleshooting.
+	pythonCommand = "python3"
 }
 
 tasks.matching { it.name.matches(/merge.*JniLibFolders/) }.configureEach {
 	it.inputs.dir(new File(buildDir, "rustJniLibs/android"))
 	it.dependsOn("cargoBuild")
+}
+
+// A release must never be produced unsigned or debug-signed. Assert on the tasks that
+// actually sign a release artifact (APK + AAB), so the check fires for `./gradlew build`
+// or `assemble` too -- not just when a task named "*release*" is on the command line --
+// and is NOT tripped by lint/unit-test tasks that merely have "release" in their name.
+// Capture the config in script scope: inside a task's doFirst the `signingConfigs`
+// name would resolve against the task, not the android extension.
+def releaseSigningConfig = android.signingConfigs.release
+tasks.matching { it.name in ['packageRelease', 'signReleaseBundle', 'packageReleaseUniversalApk'] }.configureEach {
+	it.doFirst {
+		def sf = releaseSigningConfig.storeFile
+		if (sf == null) {
+			throw new GradleException(
+				"Release signing is not configured. Set MYAPP_UPLOAD_STORE_FILE, " +
+				"MYAPP_UPLOAD_KEY_ALIAS, MYAPP_UPLOAD_STORE_PASSWORD and MYAPP_UPLOAD_KEY_PASSWORD " +
+				"in ~/.gradle/gradle.properties. See RELEASE.md section 6.")
+		}
+		if (!sf.exists()) {
+			throw new GradleException(
+				"Release keystore not found at ${sf}. MYAPP_UPLOAD_STORE_FILE points at a " +
+				"file that does not exist. See RELEASE.md.")
+		}
+	}
 }
 
 task buildDB (type: Exec) {
