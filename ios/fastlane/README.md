@@ -15,45 +15,75 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios asc_status
+
+```sh
+[bundle exec] fastlane ios asc_status
+```
+
+Verify the App Store Connect API key and show the latest TestFlight build number
+
+Usage: fastlane asc_status
+
+### ios provisioning_profiles
+
+```sh
+[bundle exec] fastlane ios provisioning_profiles
+```
+
+Fetch/refresh the App Store provisioning profile and install it
+
+Usage: fastlane provisioning_profiles
+
+### ios build_testflight
+
+```sh
+[bundle exec] fastlane ios build_testflight
+```
+
+Archive and export the App Store IPA (no upload)
+
+Usage: fastlane build_testflight [clean:true]
+
+### ios upload_testflight
+
+```sh
+[bundle exec] fastlane ios upload_testflight
+```
+
+Upload the built IPA to TestFlight
+
+Usage: fastlane upload_testflight
+
+### ios release_testflight
+
+```sh
+[bundle exec] fastlane ios release_testflight
+```
+
+Build and upload to TestFlight
+
+Usage: fastlane release_testflight [clean:true]
+
 ### ios build_simulator
 
 ```sh
 [bundle exec] fastlane ios build_simulator
 ```
 
-Build debug for iOS Simulator (no code signing required)
+Build debug for the iOS Simulator (no code signing)
 
-Usage: fastlane build_simulator [device:'iPhone 15']
+Usage: fastlane build_simulator [device:'iPhone 16']
 
-### ios build_device
-
-```sh
-[bundle exec] fastlane ios build_device
-```
-
-Build debug for physical device using Xcode automatic signing
-
-Usage: fastlane build_device
-
-### ios run_tests
+### ios unit_tests
 
 ```sh
-[bundle exec] fastlane ios run_tests
+[bundle exec] fastlane ios unit_tests
 ```
 
-Run unit tests on simulator
+Run unit tests on the simulator
 
-Usage: fastlane run_tests [device:'iPhone 16']
-
-### ios register_app
-
-```sh
-[bundle exec] fastlane ios register_app
-```
-
-Register App ID in Apple Developer Portal (one-time)
-
-Usage: fastlane register_app
+Usage: fastlane unit_tests [device:'iPhone 16']
 
 ----
 

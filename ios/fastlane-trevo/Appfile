@@ -1,4 +1,0 @@
-# Trevo Vault — standalone fastlane config
-# Credentials from trait-wallet project
-
-app_identifier  "finance.trevo.vault"

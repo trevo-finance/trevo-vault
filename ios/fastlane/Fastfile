@@ -1,101 +1,210 @@
+# Trevo Vault — iOS release lanes
+#
+# Run from the `ios/` directory:
+#
+#   bundle exec fastlane asc_status              # check API key + show current TestFlight builds
+#   bundle exec fastlane build_testflight        # archive + export the IPA, no upload
+#   bundle exec fastlane upload_testflight       # upload an already-built IPA
+#   bundle exec fastlane release_testflight      # build + upload  <-- the usual one
+#   bundle exec fastlane build_simulator         # local sanity build
+#
+# Authentication is the App Store Connect API key in ~/dev/secure/trevo-wallet-signing/.
+# There is deliberately no Apple ID login anywhere in this file -- see `asc_api_key`.
+#
+# See RELEASE.md section 7.
+
 opt_out_usage
 default_platform(:ios)
 
 ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
 ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 
+IOS_DIR   = File.expand_path("..", __dir__)
+BUILD_DIR = File.join(IOS_DIR, "build")
+
+APP_IDENTIFIER = "finance.trevo.vault"
+TEAM_ID        = "9NMWDV6M74" # TRAIT TECH PTE LTD
+
+MAIN_TARGET = "PolkadotVault"
+XCODEPROJ   = "PolkadotVault.xcodeproj"
+DEV_SCHEME  = "PolkadotVault-Dev"
+PROD_SCHEME = "PolkadotVault"
+XCARGS      = "-skipPackagePluginValidation -skipMacroValidation"
+
+APPSTORE_PROFILE = "TrevoVault_AppStore"
+
+# App Store Connect API key -- shared with the Trevo Wallet app (same Apple team).
+# Override the directory with TREVO_SIGNING_DIR if it lives elsewhere.
+SECURE_DIR    = File.expand_path(ENV.fetch("TREVO_SIGNING_DIR", "~/dev/secure/trevo-wallet-signing"))
+ASC_KEY_ID    = "X2TZ9NDANA"
+ASC_ISSUER_ID = "9ece21cf-d6e0-413a-89fb-84f5b3acaa0b"
+ASC_KEY_PATH  = File.join(SECURE_DIR, "AuthKey_#{ASC_KEY_ID}.p8")
+
+# Memoised so we mint one token per run rather than one per action.
+def asc_api_key
+  @asc_api_key ||= begin
+    unless File.exist?(ASC_KEY_PATH)
+      UI.user_error!(
+        "App Store Connect API key not found at #{ASC_KEY_PATH}.\n" \
+        "Restore ~/dev/secure/trevo-wallet-signing/, or set TREVO_SIGNING_DIR to wherever it lives.\n" \
+        "Apple will NOT let you re-download a .p8 -- if it is lost, revoke it in App Store Connect " \
+        "and mint a new one. See RELEASE.md."
+      )
+    end
+    app_store_connect_api_key(
+      key_id: ASC_KEY_ID,
+      issuer_id: ASC_ISSUER_ID,
+      key_filepath: ASC_KEY_PATH,
+      duration: 1200,
+      in_house: false
+    )
+  end
+end
+
 platform :ios do
-  # imports
-  import ("lanes/lane_tests.rb")
-  import ("lanes/lane_build.rb")
-  import ("lanes/lane_testflight.rb")
-  import ("lanes/lane_appstore.rb")
-  import ("lanes/lane_firebase.rb")
-
-  # shared variables
-  main_target = "PolkadotVault"
-
-  test_scheme = "PolkadotVault-Dev"
-
-  distribution_scheme = "PolkadotVault"
-  distribution_configuration = "Release"
-
-  distribution_qa_scheme = "PolkadotVault-QA"
-  distribution_qa_configuration = "QA"
-
-  desc "Runs unit tests for development scheme"
-  desc "Example usage: fastlane run_unit_tests"
-  lane :run_unit_tests do
-    test_build(
-      scheme:test_scheme
+  # ────────────────────────────────────────────────────────────
+  # DIAGNOSTICS
+  # ────────────────────────────────────────────────────────────
+  desc "Verify the App Store Connect API key and show the latest TestFlight build number"
+  desc "Usage: fastlane asc_status"
+  lane :asc_status do
+    latest = latest_testflight_build_number(
+      api_key: asc_api_key,
+      app_identifier: APP_IDENTIFIER,
+      initial_build_number: 0
     )
+    UI.success "App Store Connect API key works (key #{ASC_KEY_ID})."
+    UI.success "Latest TestFlight build number for #{APP_IDENTIFIER}: #{latest}"
+    UI.important "The next upload needs CURRENT_PROJECT_VERSION greater than #{latest}."
   end
 
-  desc "Build iOS QA"
-  desc "Example usage: fastlane build_qa"
-  lane :build_qa do
-    load_asc_api_key
-    prepare_code_signing(
-    	type: "adhoc"
+  # ────────────────────────────────────────────────────────────
+  # SIGNING
+  # ────────────────────────────────────────────────────────────
+  desc "Fetch and install the existing App Store provisioning profile"
+  desc "Usage: fastlane provisioning_profiles"
+  lane :provisioning_profiles do
+    # readonly: true -- only download the existing TrevoVault_AppStore profile, never
+    # create or regenerate it. Regenerating would invalidate the profile installed on
+    # this machine mid-release. If the profile is missing or expired, this fails loudly;
+    # renew it deliberately in the Apple Developer portal (or a one-off readonly:false run)
+    # rather than having a routine build silently mint a new one.
+    sigh(
+      api_key: asc_api_key,
+      app_identifier: APP_IDENTIFIER,
+      team_id: TEAM_ID,
+      provisioning_name: APPSTORE_PROFILE,
+      filename: "#{APPSTORE_PROFILE}.mobileprovision",
+      output_path: "sign/",
+      platform: "ios",
+      readonly: true
     )
-    build_release(
-      scheme:distribution_qa_scheme,
-      target:main_target,
-      configuration:distribution_qa_configuration,
-      profile_name:"match AdHoc io.parity.NativeSigner",
-      export_method: "ad-hoc"
-    )
+    UI.success "Provisioning profile #{APPSTORE_PROFILE} fetched and installed."
   end
-  
-  desc "Distribute new iOS QA build through Firebase"
-  desc "Example usage: fastlane distribute_qa_firebase"
-  lane :distribute_qa_firebase do
-    load_asc_api_key
-    prepare_code_signing(
-    	type: "adhoc"
+
+  # ────────────────────────────────────────────────────────────
+  # BUILD
+  # ────────────────────────────────────────────────────────────
+  desc "Archive and export the App Store IPA (no upload)"
+  desc "Usage: fastlane build_testflight [clean:true]"
+  lane :build_testflight do |options|
+    provisioning_profiles
+
+    # The project is set to automatic signing; force manual signing with our explicit
+    # AppStore profile so the archive is reproducible instead of depending on whatever
+    # Xcode happens to pick.
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: XCODEPROJ,
+      targets: [MAIN_TARGET],
+      build_configurations: ["Release"],
+      bundle_identifier: APP_IDENTIFIER,
+      team_id: TEAM_ID,
+      profile_name: APPSTORE_PROFILE,
+      # "Apple Distribution" is the current identity name. The old "iPhone Distribution"
+      # spelling does not match the certificate in the login Keychain.
+      code_sign_identity: "Apple Distribution"
     )
-    build_release(
-      scheme:distribution_qa_scheme,
-      target:main_target,
-      configuration:distribution_qa_configuration,
-      profile_name:"match AdHoc io.parity.NativeSigner",
-      export_method: "ad-hoc"
+
+    gym(
+      scheme: PROD_SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: { APP_IDENTIFIER => APPSTORE_PROFILE }
+      },
+      output_directory: BUILD_DIR,
+      output_name: "TrevoVault.ipa",
+      archive_path: File.join(BUILD_DIR, "TrevoVault.xcarchive"),
+      clean: options[:clean] ? true : false,
+      xcargs: XCARGS
     )
-    upload_firebase
+
+    UI.success "IPA built: #{File.join(BUILD_DIR, 'TrevoVault.ipa')}"
   end
-  
-  desc "Distribute new iOS production build through TestFlight"
-  desc "Example usage: fastlane distribute_production_testflight"
-  lane :distribute_production_testflight do
-    load_asc_api_key
-    prepare_code_signing(
-    	type: "appstore"
+
+  # ────────────────────────────────────────────────────────────
+  # UPLOAD
+  # ────────────────────────────────────────────────────────────
+  desc "Upload the built IPA to TestFlight"
+  desc "Usage: fastlane upload_testflight"
+  lane :upload_testflight do
+    ipa = File.join(BUILD_DIR, "TrevoVault.ipa")
+    UI.user_error!("No IPA at #{ipa}. Run `fastlane build_testflight` first.") unless File.exist?(ipa)
+
+    upload_to_testflight(
+      api_key: asc_api_key,
+      app_identifier: APP_IDENTIFIER,
+      ipa: ipa,
+      # Do not block on Apple's processing, and do not auto-distribute: a human adds
+      # the build to a tester group once it has processed.
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false
     )
-    build_release(
-      scheme:distribution_scheme,
-      target:main_target,
-      configuration:distribution_configuration,
-      profile_name:"match AppStore io.parity.NativeSigner",
-      export_method: "app-store"
-    )
+
+    UI.success "Uploaded to TestFlight."
+    UI.message "App Store Connect -> Trevo Vault -> TestFlight: wait for processing, then add to a group."
+  end
+
+  desc "Build and upload to TestFlight"
+  desc "Usage: fastlane release_testflight [clean:true]"
+  lane :release_testflight do |options|
+    build_testflight(clean: options[:clean])
     upload_testflight
   end
 
-  desc "Distribute new iOS QA build through TestFlight"
-  desc "Example usage: fastlane distribute_qa_testflight"
-  lane :distribute_qa_testflight do
-    load_asc_api_key
-    prepare_code_signing(
-      type: "appstore"
+  # ────────────────────────────────────────────────────────────
+  # LOCAL BUILDS / TESTS
+  # ────────────────────────────────────────────────────────────
+  desc "Build debug for the iOS Simulator (no code signing)"
+  desc "Usage: fastlane build_simulator [device:'iPhone 16']"
+  lane :build_simulator do |options|
+    device = options[:device] || "iPhone 16"
+    xcodebuild(
+      scheme: DEV_SCHEME,
+      configuration: "Debug",
+      destination: "platform=iOS Simulator,name=#{device}",
+      xcargs: "#{XCARGS} CODE_SIGNING_ALLOWED=NO",
+      build: true
     )
-    build_release(
-      scheme:distribution_qa_scheme,
-      target:main_target,
-      configuration:distribution_qa_configuration,
-      profile_name:"match AppStore io.parity.NativeSigner",
-      export_method: "app-store"
-    )
-    upload_testflight
+    UI.success "Simulator build succeeded: #{device}"
   end
-  
+
+  desc "Run unit tests on the simulator"
+  desc "Usage: fastlane unit_tests [device:'iPhone 16']"
+  lane :unit_tests do |options|
+    device = options[:device] || "iPhone 16"
+    scan(
+      scheme: DEV_SCHEME,
+      device: device,
+      xcargs: XCARGS,
+      output_directory: File.join(BUILD_DIR, "test_output")
+    )
+  end
+
+  error do |lane, exception|
+    UI.error "Lane #{lane} failed: #{exception.message}"
+  end
 end
