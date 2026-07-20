@@ -102,3 +102,8 @@ target/
 # development mess
 rust/transaction_parsing/src/main.rs
 rust/transaction_signing/src/main.rs
+
+# Ruby gems (bundle install --path vendor/bundle)
+vendor/
+ios/fastlane/builds/
+ios/build/
