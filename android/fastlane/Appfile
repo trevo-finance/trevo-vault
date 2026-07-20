@@ -1,0 +1,7 @@
+# Trevo Vault — Android / Google Play
+#
+# The service account JSON lives outside the repo so it can never be committed.
+# Override with PLAY_JSON_KEY if you keep it elsewhere.
+json_key_file(ENV["PLAY_JSON_KEY"] || File.expand_path("~/.gradle/google-play-credentials.json"))
+
+package_name("finance.trevo.vault")

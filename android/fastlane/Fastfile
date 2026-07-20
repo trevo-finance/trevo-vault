@@ -1,0 +1,185 @@
+# Trevo Vault — Android release lanes
+#
+# Run from the `android/` directory:
+#
+#   bundle exec fastlane release_internal                  # build + verify + upload (draft)
+#   bundle exec fastlane release_internal validate_only:true   # full dry run, publishes nothing
+#   bundle exec fastlane build_release                     # build + verify only
+#   bundle exec fastlane upload_internal                   # upload an already-built AAB
+#
+# See RELEASE.md for the whole process. The verification in `verify_aab` encodes bugs that
+# have actually shipped -- do not weaken it.
+
+opt_out_usage
+default_platform(:android)
+
+# fastlane runs with cwd = android/ (the dir containing fastlane/).
+ANDROID_DIR = File.expand_path("..", __dir__)
+REPO_ROOT   = File.expand_path("..", ANDROID_DIR)
+AAB_PATH    = File.join(ANDROID_DIR, "build/outputs/bundle/release/android-release.aab")
+DB_ASSETS   = File.join(ANDROID_DIR, "src/main/assets/Database")
+
+# Must stay in sync with `cargo { targets }` and `abiFilters` in android/build.gradle.
+EXPECTED_ABIS = %w[arm64-v8a armeabi-v7a x86_64].freeze
+
+# SHA-256 of the Play upload certificate (my-upload-key.keystore, alias my-key-alias).
+# Cross-check against Play Console -> App integrity -> App signing -> Upload key certificate.
+# verify_aab asserts the bundle is signed with THIS key -- `jarsigner -verify` alone only
+# proves a bundle is self-consistently signed, not that the right key was used.
+EXPECTED_UPLOAD_SHA256 = "3F:B7:39:C3:FF:F7:B4:B8:B2:A9:0F:AD:C8:B7:E7:AD:F0:5E:E0:F2:9D:18:94:40:70:09:BF:E8:2B:98:C1:D2".freeze
+
+platform :android do
+  # ────────────────────────────────────────────────────────────
+  # COLD DATABASE
+  # ────────────────────────────────────────────────────────────
+  desc "Regenerate the cold chain database baked into the app"
+  desc "Usage: fastlane prepare_database"
+  lane :prepare_database do
+    # This is the single most dangerous step to forget: the DB is gitignored, the
+    # gradle `buildDB` task is not a dependency of `assemble`/`bundle`, and an app
+    # built without it ships stale or missing chain metadata. That surfaces as
+    # undecodable transactions -- i.e. users signing what they cannot verify.
+    UI.message "Regenerating cold database from rust/defaults/release_metadata/ ..."
+    sh("cd #{ANDROID_DIR.shellescape} && ./generate_database.sh")
+
+    db_file = File.join(DB_ASSETS, "db")
+    UI.user_error!("Cold database missing at #{db_file}") unless File.exist?(db_file)
+    size = File.size(db_file)
+    UI.user_error!("Cold database at #{db_file} is suspiciously small (#{size} bytes)") if size < 1024
+
+    metadata = Dir.glob(File.join(REPO_ROOT, "rust/defaults/release_metadata/*")).map { |f| File.basename(f) }
+    UI.user_error!("Expected exactly one file in rust/defaults/release_metadata/, found: #{metadata}") if metadata.length != 1
+    UI.success "Cold database rebuilt from #{metadata.first} (#{size} bytes)"
+  end
+
+  # ────────────────────────────────────────────────────────────
+  # VERIFY
+  # ────────────────────────────────────────────────────────────
+  desc "Verify the built AAB: signature, ABI coverage, native lib, embedded database"
+  desc "Usage: fastlane verify_aab"
+  lane :verify_aab do
+    UI.user_error!("No AAB at #{AAB_PATH}. Run `fastlane build_release` first.") unless File.exist?(AAB_PATH)
+
+    listing = sh("unzip -l #{AAB_PATH.shellescape}", log: false)
+
+    # 1. Signed?
+    verify = sh("jarsigner -verify #{AAB_PATH.shellescape}", log: false)
+    UI.user_error!("AAB is NOT signed -- Play will reject it. Check signingConfigs in android/build.gradle.") unless verify.include?("jar verified")
+
+    # 1b. Signed with the RIGHT key? `jarsigner -verify` passes any self-consistent
+    #     signature (wrong key, rotated key, even a debug key), so assert the signer
+    #     certificate fingerprint equals the known Play upload key.
+    certs = sh("keytool -printcert -jarfile #{AAB_PATH.shellescape}", log: false)
+    fingerprints = certs.scan(/SHA256:\s*([0-9A-F:]+)/i).flatten.map(&:upcase)
+    unless fingerprints.include?(EXPECTED_UPLOAD_SHA256.upcase)
+      UI.user_error!("AAB is signed with an UNEXPECTED key.\n" \
+                     "  expected SHA-256: #{EXPECTED_UPLOAD_SHA256}\n" \
+                     "  found:            #{fingerprints.empty? ? '(none)' : fingerprints.join(', ')}\n" \
+                     "Play will reject an upload signed with the wrong key. See EXPECTED_UPLOAD_SHA256.")
+    end
+
+    # 2. ABI list matches the cargo targets exactly.
+    abis = listing.scan(%r{base/lib/([^/]+)/}).flatten.uniq.sort
+    unless abis == EXPECTED_ABIS.sort
+      UI.user_error!("ABI mismatch. Expected #{EXPECTED_ABIS.sort}, got #{abis}. " \
+                     "Keep `abiFilters` and `cargo { targets }` in sync in android/build.gradle.")
+    end
+
+    # 3. EVERY ABI carries the Rust core. An ABI folder without libsigner.so installs
+    #    fine and then crashes on launch with UnsatisfiedLinkError -- this shipped in
+    #    production build 13 for x86.
+    EXPECTED_ABIS.each do |abi|
+      unless listing.include?("base/lib/#{abi}/libsigner.so")
+        UI.user_error!("base/lib/#{abi}/libsigner.so is MISSING. That ABI would crash on launch.")
+      end
+    end
+
+    # 4. Cold database actually made it into the bundle.
+    unless listing.include?("base/assets/Database/db")
+      UI.user_error!("Cold database not embedded in the AAB. Run `fastlane prepare_database` and rebuild.")
+    end
+
+    UI.success "AAB verified: signed with the upload key, ABIs #{abis.join(', ')}, libsigner.so present in all, database embedded"
+    UI.success "#{AAB_PATH} (#{(File.size(AAB_PATH) / 1024.0 / 1024).round(1)} MB)"
+  end
+
+  # ────────────────────────────────────────────────────────────
+  # BUILD
+  # ────────────────────────────────────────────────────────────
+  desc "Build the signed release AAB (regenerates the database first, then verifies)"
+  desc "Usage: fastlane build_release [clean:true]"
+  lane :build_release do |options|
+    prepare_database
+
+    # gradlew lives at the repo root and the module is `:android` (not `:app`).
+    gradle(task: "clean", project_dir: REPO_ROOT) if options[:clean]
+    gradle(task: ":android:bundleRelease", project_dir: REPO_ROOT)
+
+    verify_aab
+  end
+
+  # ────────────────────────────────────────────────────────────
+  # UPLOAD
+  # ────────────────────────────────────────────────────────────
+  desc "Upload an already-built AAB to the Play internal testing track"
+  desc "Usage: fastlane upload_internal [validate_only:true] [rollout:true]"
+  lane :upload_internal do |options|
+    verify_aab
+
+    validate_only = options[:validate_only].to_s == "true"
+    # Default to a draft: the build lands in the track but is NOT rolled out until a
+    # human publishes it in Play Console. Correct default for a self-custodial wallet.
+    status = options[:rollout].to_s == "true" ? "completed" : "draft"
+
+    if validate_only
+      UI.important "VALIDATE ONLY -- Google will check the upload and then discard it. Nothing is published."
+    else
+      UI.important "Uploading to the internal testing track with release_status=#{status}."
+    end
+
+    upload_to_play_store(
+      track: "internal",
+      aab: AAB_PATH,
+      release_status: status,
+      validate_only: validate_only,
+      # This repo does not manage store listing copy via fastlane; never let supply
+      # overwrite the live listing with empty local metadata.
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      skip_upload_apk: true
+    )
+
+    if validate_only
+      UI.success "Validation passed -- the real upload would succeed."
+    else
+      UI.success "Uploaded to internal testing (#{status})."
+      UI.message "Publish it: Play Console -> Testing -> Internal testing -> review the draft."
+    end
+  end
+
+  # ────────────────────────────────────────────────────────────
+  # BUILD + UPLOAD
+  # ────────────────────────────────────────────────────────────
+  desc "Build, verify and upload to Play internal testing"
+  desc "Usage: fastlane release_internal [clean:true] [validate_only:true] [rollout:true]"
+  lane :release_internal do |options|
+    build_release(clean: options[:clean])
+    upload_internal(validate_only: options[:validate_only], rollout: options[:rollout])
+  end
+
+  # ────────────────────────────────────────────────────────────
+  # DIAGNOSTICS
+  # ────────────────────────────────────────────────────────────
+  desc "Check the Play service-account credentials and show current track state"
+  desc "Usage: fastlane play_status"
+  lane :play_status do
+    validate_play_store_json_key
+    UI.success "Play credentials OK for #{CredentialsManager::AppfileConfig.try_fetch_value(:package_name)}"
+  end
+
+  error do |lane, exception|
+    UI.error "Lane #{lane} failed: #{exception.message}"
+  end
+end

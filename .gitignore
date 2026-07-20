@@ -107,3 +107,4 @@ rust/transaction_signing/src/main.rs
 vendor/
 ios/fastlane/builds/
 ios/build/
+android/fastlane/report.xml
